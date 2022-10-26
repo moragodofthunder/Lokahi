@@ -22,17 +22,17 @@ def get_user_by_id(user_id):
     return User.query.filter(User.user_id == user_id).first()
 
 def create_trip(trip_name, trip_country, trip_city, start_date, 
-                end_date):
+                end_date, user_id):
     """Create trip and return trip."""
 
     trip = Trip(trip_name=trip_name, trip_country=trip_country,
             trip_city=trip_city, start_date=start_date, 
-            end_date=end_date)
+            end_date=end_date, user_id=user_id)
 
     return trip
 
 def get_trip_by_id(trip_id):
-    return Trip.query.filter(Trip.trip_id == trip_id).first()
+    return Trip.query.get(trip_id)
 
 
 if __name__ == '__main__':

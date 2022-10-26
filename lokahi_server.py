@@ -37,7 +37,7 @@ def login_user():
         flash("This email doesn't match anything in our system.")
         return redirect("/login")
     else:
-        session["user_email"]=match.email
+        session["user_id"]=match.user_id
         return redirect(f"/user_profile/{match.user_id}")
 
 
@@ -89,29 +89,38 @@ def create_new_trip():
     end_date = request.form.get("end-date")
 
     trip = crud.create_trip(trip_name, trip_country, trip_city, 
-    start_date, end_date)
-    cowsay.dragon(trip)
+    start_date, end_date, session['user_id'])
     db.session.add(trip)
     db.session.commit()
-    cowsay.dragon(trip)
+    
     session['trip_id'] = trip.trip_id
+
+    trip_id = trip.trip_id
     
+    return redirect(f"/trip_planner/{trip_id}")
 
-    return redirect("/trip_planner")
+# @app.route('/trip_planner', methods=['POST'])
+# def show_trip_planner():
+#     """Return render template for blank_trip_planner.html 
+#     without specific trip"""
 
+#     return render_template('blank_trip_planner.html')
 
-@app.route('/trip_planner', methods=['POST'])
-def show_trip_planner():
-    """Return render template to user_profile.html"""
+@app.route('/trip_planner/<trip_id>')
+def show_trip_planner_with_trip(trip_id):
+    """Return render template to trip_planner.html for specific trip"""
 
-    # trip = crud.get_trip_by_id(int(session['trip_id']))
-    # print(type(session['trip_id']))
+    trip = crud.get_trip_by_id(trip_id)
+    trip_name = trip.trip_name
+    trip_city = trip.trip_city
+    trip_country = trip.trip_country
+    start_date = trip.start_date
+    end_date = trip.end_date
     
-    return render_template('trip_planner.html'), 
-    # trip_name=trip.trip_name, trip_city=trip.trip_city,
-    # trip_country=trip.trip_country, start_date=trip.start_date,
-    # end_date=trip.end_date)
-
+    return render_template('trip_planner.html', 
+    trip_name=trip_name, trip_city=trip_city,
+    trip_country=trip_country, start_date=start_date,
+    end_date=end_date)
 
 
 if __name__ == "__main__":
