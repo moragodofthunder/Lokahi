@@ -17,8 +17,8 @@
     </h2>
 </div>
 
-<div class="trip-place">
-    <h3>
+<div>
+    <h3 id="trip-place">
         {{ trip_city }}, {{ trip_country }}
     </h3>
 </div>
@@ -29,7 +29,7 @@
 
 <div class="map" id="map">
     Map goes here</div>
-<script src="/static/js/planner_map.js"></script>
+<script src="/static/js/map.js"></script>
 <script async defer 
 src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&callback=initMap&v=beta&libraries=marker">
 </script>

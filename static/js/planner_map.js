@@ -92,6 +92,6 @@ function initMap() {
       });
   
       marker.addListener('click', () => {
-        infoWindow.open(basicMap, marker);
+        infoWindow.open(tokyoMap, donQMarker);
       });
     }
