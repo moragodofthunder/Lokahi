@@ -5,9 +5,11 @@ from model import connect_to_db, db
 import crud
 from jinja2 import StrictUndefined
 import cowsay
+import os
 
 app = Flask(__name__)
-app.secret_key = "dev"
+app.secret_key = os.environ['app_secret_key']
+api_key = os.environ['YOUR_API_KEY']
 app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
@@ -120,7 +122,7 @@ def show_trip_planner_with_trip(trip_id):
     return render_template('trip_planner.html', 
     trip_name=trip_name, trip_city=trip_city,
     trip_country=trip_country, start_date=start_date,
-    end_date=end_date)
+    end_date=end_date, YOUR_API_KEY=api_key)
 
 
 if __name__ == "__main__":

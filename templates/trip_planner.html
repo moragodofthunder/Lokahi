@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Trip Planner{% endblock %}
-
+{% block head %}
+<link rel="stylesheet" href="/static/css/maps.css">
+{% endblock %}
 {% block body %}
 
 <div class="planner-title">
@@ -17,7 +19,7 @@
 
 <div class="trip-place">
     <h3>
-        {{ trip_city }} , {{ trip_country }}
+        {{ trip_city }}, {{ trip_country }}
     </h3>
 </div>
 
@@ -25,9 +27,13 @@
     {{ start_date }} - {{ end_date }}
 </div>
 
-<div class="map-box">
-    Map goes here
-</div>
+<div class="map" id="map">
+    Map goes here</div>
+<script src="/static/js/planner_map.js"></script>
+<script async defer 
+src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&callback=initMap&v=beta&libraries=marker">
+</script>
+
 
 <div class="saved-places">
     Saved Places table goes here
