@@ -1,16 +1,15 @@
 'use strict';
 
 function initMap() {
-    const map = new google.maps.Map(document.querySelector('#map'), {
+    const plannerMap = new google.maps.Map(document.querySelector('#map'), {
       center: {
         lat: 37.601773,
         lng: -122.20287,
       },
       zoom: 11,
     });
-  // Ask user to enter a location. Geocode the location to get its coordinates
-  // and drop a marker onto the map.
-  
+
+  // Get coordinates from place user entered when creating new trip:
     const userAddress = document.querySelector('#trip-place').innerText;
 
     const geocoder = new google.maps.Geocoder();
@@ -20,10 +19,10 @@ function initMap() {
         const userLocation = results[0].geometry.location;
 
         // // Create a marker
-        // new google.maps.Marker({
-        //   position: userLocation,
-        //   map,
-        // });
+        new google.maps.Marker({
+          position: userLocation,
+          map,
+        });
 
         // Zoom in on the geolocated location
         map.setCenter(userLocation);

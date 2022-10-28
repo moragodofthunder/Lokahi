@@ -48,8 +48,10 @@ def show_user_profile(user_id):
     """Return render template to user_profile.html"""
 
     user = crud.get_user_by_id(user_id)
+    user_trips = user.trips
 
-    return render_template('user_profile.html', first_name=user.fname)
+    return render_template('user_profile.html', first_name=user.fname, 
+    user_trips = user_trips)
 
 
 @app.route('/user_profile', methods=['POST'])
@@ -123,6 +125,23 @@ def show_trip_planner_with_trip(trip_id):
     trip_name=trip_name, trip_city=trip_city,
     trip_country=trip_country, start_date=start_date,
     end_date=end_date, YOUR_API_KEY=api_key)
+
+@app.route('/trip_details/<trip_id>')
+def show_trip_details(trip_id):
+    """Return render template to trip_planner.html for specific trip"""
+
+    trip = crud.get_trip_by_id(trip_id)
+    trip_name = trip.trip_name
+    trip_city = trip.trip_city
+    trip_country = trip.trip_country
+    start_date = trip.start_date
+    end_date = trip.end_date
+    activities = trip.activities
+    
+    return render_template('trip_details.html', 
+    trip_name=trip_name, trip_city=trip_city,
+    trip_country=trip_country, start_date=start_date,
+    end_date=end_date, activities=activities)
 
 
 if __name__ == "__main__":

@@ -24,7 +24,14 @@
 </div>
 
 <div class="trip-dates">
-    {{ start_date }} - {{ end_date }}
+    <h4>
+        {{ start_date.strftime('%b %d %Y') }} - {{ end_date.strftime('%b %d %Y') }}
+    </h4>
+</div>
+<div class="search-bar">
+    <label for="search-bar">Search for a place:</label>
+    <input type="text" id="place-search" name="place-search">
+    <input type="submit" value="Search"> 
 </div>
 
 <div class="map" id="map">

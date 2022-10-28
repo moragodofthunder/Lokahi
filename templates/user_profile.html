@@ -14,7 +14,16 @@
 
 <div>
     <h2>Upcoming Trips:</h2>
-
+    <ul>
+        {% for trip in user_trips %}
+        <li> 
+            <a href="/trip_planner/{{ trip.trip_id }}">
+                {{ trip.trip_name }}
+            </a>
+            ({{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }})
+        </li>
+        {% endfor %}
+    </ul>
 </div>
 
 <div>
