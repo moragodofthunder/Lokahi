@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Trip Planner{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/maps.css">
+{% endblock %}
+{% block body %}
+
+<div class="planner-title">
+    <h1>
+        Trip Planner
+    </h1>
+</div>
+
+<div class="trip-name">
+    <h2>
+       {{ trip_name }} 
+    </h2>
+</div>
+
+<div>
+    <h3 id="trip-place">
+        {{ trip_city }}, {{ trip_country }}
+    </h3>
+</div>
+
+<div class="trip-dates">
+    <h4>
+        {{ start_date.strftime('%b %d %Y') }} - {{ end_date.strftime('%b %d %Y') }}
+    </h4>
+</div>
+<div class="search-bar">
+    <label for="search-bar">Search for a place:</label>
+    <input type="text" id="place-search" name="place-search">
+    <input type="submit" value="Search"> 
+</div>
+<script src="/static/js/country_codes.js"></script>
+<div class="map" id="map">
+    Map goes here</div>
+<script src="/static/js/map.js"></script>
+<script async defer 
+src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&callback=initMap&v=beta&libraries=marker">
+</script>
+
+
+<div class="saved-places">
+    Saved Places table goes here
+</div>
+
+<div class="itinerary">
+    Itinerary tables by day goes here
+</div>
+
+{% endblock %}
