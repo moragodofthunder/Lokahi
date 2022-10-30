@@ -18,6 +18,7 @@ def homepage():
 
     return render_template('homepage.html')
 
+###----------------------------LOGIN---------------------------------###
 
 @app.route('/login')
 def show_login_page():
@@ -43,6 +44,7 @@ def login_user():
         return redirect(f"/user_profile/{match.user_id}")
 
 
+###----------------------------USER-PROFILE----------------------------###
 @app.route('/user_profile/<user_id>')
 def show_user_profile(user_id):
     """Return render template to user_profile.html"""
@@ -76,6 +78,7 @@ def create_new_user():
         return render_template("user_profile.html", first_name=fname)
 
 
+###----------------------------NEW-TRIP------------------------------###
 @app.route('/new_trip')
 def show_new_trip_form():
     """Show blank new trip form"""
@@ -103,13 +106,8 @@ def create_new_trip():
     
     return redirect(f"/trip_planner/{trip_id}")
 
-# @app.route('/trip_planner', methods=['POST'])
-# def show_trip_planner():
-#     """Return render template for blank_trip_planner.html 
-#     without specific trip"""
 
-#     return render_template('blank_trip_planner.html')
-
+###-----------------------------TRIP-PLANNER----------------------------###
 @app.route('/trip_planner/<trip_id>')
 def show_trip_planner_with_trip(trip_id):
     """Return render template to trip_planner.html for specific trip"""
@@ -126,6 +124,8 @@ def show_trip_planner_with_trip(trip_id):
     trip_country=trip_country, start_date=start_date,
     end_date=end_date, YOUR_API_KEY=api_key)
 
+
+###-----------------------------TRIP-DETAILS----------------------------###
 @app.route('/trip_details/<trip_id>')
 def show_trip_details(trip_id):
     """Return render template to trip_planner.html for specific trip"""
@@ -142,6 +142,9 @@ def show_trip_details(trip_id):
     trip_name=trip_name, trip_city=trip_city,
     trip_country=trip_country, start_date=start_date,
     end_date=end_date, activities=activities)
+
+
+###-----------------------------PLACE-SEARCH----------------------------###
 
 
 if __name__ == "__main__":

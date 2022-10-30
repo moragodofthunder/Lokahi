@@ -332,3 +332,40 @@ function initMap() {
 //Submit event listener I don't want to lose:
 document.querySelector('#search-bar').addEventListener('submit', (evt) =>
         evt.preventDefault());
+
+// Geocoder that puts purple marker on map of location user searches for:
+//Put inside of "initMap" but after green pin is placed.
+
+document.querySelector('#submit-search').addEventListener('click', () => {
+
+  const userSearch = document.querySelector('#place-search').value;
+  console.log("Searched");
+  console.log(userSearch);
+
+  if (userSearch) {
+    const geocoder2 = new google.maps.Geocoder();
+    geocoder2.geocode({ address: userSearch }, (results, status) => {
+      if (status === 'OK') {
+        console.log("Result", results);
+        // Get the coordinates of the search user's location
+        const userSearchLocation = results[0].geometry.location;
+        console.log(userSearchLocation);
+        
+        const userMarker = new google.maps.Marker({
+            position: userSearchLocation,
+            map,
+            icon: {
+              url: "/static/img/purple_pin.png",
+              scaledSize: new google.maps.Size(25, 43)
+            }
+        });  
+        
+        map.setCenter(userSearchLocation);
+        map.setZoom(12);
+      }
+      else {
+        alert(`Geocode was unsuccessful for the following reason: ${status}`);
+      }
+    });
+  }
+});
