@@ -23,7 +23,15 @@
 <div class="search-bar">
     <label for="search-bar">Search for a place:</label>
     <input type="text" id="place-search" name="place-search">
-    <input type="submit" id="submit-search" value="Search"> 
+    <input type="submit" id="submit-search" value="Search">
+    <script src="/static/js/place_search.js"></script>
+    <script async defer 
+src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&libraries=places&callback=initMap&v=beta&libraries=marker">
+</script>
+</div>
+
+<div class="place-results">
+
 </div>
 
 <div class="map" id="map">
