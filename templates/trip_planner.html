@@ -6,30 +6,30 @@
 {% block body %}
 
 <div class="planner-title">
-    <h1>Trip Planner: <span class="trip-name">{{ trip_name }} </span></h1>
+    <h1>Trip Planner: <span class="trip-name">{{ trip.trip_name }} </span></h1>
 </div>
 
 <div id="trip-place">
     <h3>
-        {{ trip_city }}, {{ trip_country }}
+        {{ trip.trip_city }}, {{ trip.trip_country }}
     </h3>
 </div>
 
 <div class="trip-dates">
     <h4>
-        {{ start_date.strftime('%b %d %Y') }} - {{ end_date.strftime('%b %d %Y') }}
+        {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
     </h4>
 </div>
+
+<input type="hidden" id="trip-id" value="{{ trip.trip_id }}">
+
 <div class="search-bar">
     <label for="search-bar">Search for a place:</label>
     <input type="text" id="place-search" name="place-search">
     <input type="submit" id="submit-search" value="Search">
-    <script src="/static/js/place_search.js"></script>
-    <script async defer 
-src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&libraries=places&callback=initMap&v=beta&libraries=marker">
-</script>
-<span class="place-data"></span>
 </div>
+
+<div class="place-data"></div>
 
 <div class="place-results">
 
@@ -38,8 +38,9 @@ src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&libraries=pl
 <div class="map" id="map">
     Map goes here</div>
 <script src="/static/js/map.js"></script>
-<script async defer 
-src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&callback=initMap&v=beta&libraries=marker">
+<!-- <script src="/static/js/place_search.js"></script> -->
+<script async 
+src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&libraries=places&callback=initMap&v=beta&libraries=marker">
 </script>
 
 

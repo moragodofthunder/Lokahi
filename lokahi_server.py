@@ -6,6 +6,7 @@ import crud
 from jinja2 import StrictUndefined
 import cowsay
 import os
+import requests
 
 app = Flask(__name__)
 app.secret_key = os.environ['app_secret_key']
@@ -120,9 +121,7 @@ def show_trip_planner_with_trip(trip_id):
     end_date = trip.end_date
     
     return render_template('trip_planner.html', 
-    trip_name=trip_name, trip_city=trip_city,
-    trip_country=trip_country, start_date=start_date,
-    end_date=end_date, YOUR_API_KEY=api_key)
+    trip=trip, YOUR_API_KEY=api_key)
 
 
 ###-----------------------------TRIP-DETAILS----------------------------###
@@ -149,20 +148,33 @@ def show_trip_details(trip_id):
 def get_place_info():
     """Get place info for place user searches for from Places API"""
 
-    user_place = request.args.get('#place-search').value
-    trip_place = request.args.get('#trip-place')
+    user_place = request.args.get('userSearch')
+    # trip_id = request.args.get('tripId')
+    user_loc = request.args.get('userLocation')
+    print(f"This is the user_place {user_place}")
+    print(f"This is the type of user_place: {type(user_place)}")
+    # print(f"This is the trip_place {trip_id}")
+    # print(f"This is the type of trip_place: {type(trip_id)}")
+    print(f"This is the user_loc {user_loc}")
+    print(f"This is the type of user_loc: {type(user_loc)}")
 
-    url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
+    # place = crud.get_place_by_id(place_id)
+
+    #Get trip place id, look up place in db, use latitude/long from trip place object
+
+    url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
 
     payload = {
+        'location' : user_loc[1:-1],
         'name' : f"{user_place}",
         'radius' : 20000,
-        'key' : 'YOUR_API_KEY'
+        'key' : api_key
         }
     headers = {}
 
-    response = requests.request(url, params=payload).json()
-    print(jsonify(response))
+    response = requests.get(url, params=payload).json()
+    print(response)
+    return jsonify(response)
 
 
 

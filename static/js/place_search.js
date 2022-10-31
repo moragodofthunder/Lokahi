@@ -7,15 +7,22 @@
 // let service = new google.maps.places.PlacesService(map);
 // service.getDetails(request, callback);
 
-const userSearch = document.querySelector('#place-search').value;
+
 
 document.querySelector('#submit-search').addEventListener('click', () => {
-    const queryString = new URLSearchParams({userSearch:userSearch}).toString();
-    const url = `'/api/place-search?${queryString}`;
+    const userSearch = document.querySelector('#place-search').value;
+    console.log(userSearch)
+    const tripId = document.querySelector('#trip-id').value;
+    console.log(tripId)
+   // #get place Id, add to query String, in Python (see notes) 
+    const queryString = new URLSearchParams({userSearch:userSearch, tripId:tripId}).toString();
+    const url = `/api/place-search?${queryString}`;
 
     fetch(url)
     .then(result => result.json())
     .then(data => {
+        console.log('THIS IS THE DATE TYPE OF DATAAAAAAAA')
+        console.log(typeof data)
         console.log(data)
 
     for(const result of data.results) {

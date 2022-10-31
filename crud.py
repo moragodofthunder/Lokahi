@@ -34,6 +34,9 @@ def create_trip(trip_name, trip_country, trip_city, start_date,
 def get_trip_by_id(trip_id):
     return Trip.query.get(trip_id)
 
+def get_place_by_id(place_id):
+    return Place.query.get(place_id)
+
 
 if __name__ == '__main__':
     from lokahi_server import app
