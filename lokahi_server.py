@@ -6,7 +6,6 @@ import crud
 from jinja2 import StrictUndefined
 import cowsay
 import os
-import requests
 
 app = Flask(__name__)
 app.secret_key = os.environ['app_secret_key']
@@ -146,7 +145,7 @@ def show_trip_details(trip_id):
 
 
 ###-----------------------------PLACE-SEARCH----------------------------###
-@app.route('/trip_planner/<trip_id>/api/place-search')
+@app.route('/api/place-search')
 def get_place_info():
     """Get place info for place user searches for from Places API"""
 
@@ -156,7 +155,6 @@ def get_place_info():
     url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
 
     payload = {
-        'location' : f"{trip_place.latitude},{trip_place.longitude}",
         'name' : f"{user_place}",
         'radius' : 20000,
         'key' : 'YOUR_API_KEY'
