@@ -1,44 +1,67 @@
 {% extends 'base.html' %}
 {% block title %}Trip Planner{% endblock %}
+
 {% block head %}
-<link rel="stylesheet" href="/static/css/maps.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link href="/static/css/maps.css" rel="stylesheet">
 {% endblock %}
 {% block body %}
+<div class="container-fluid">
 
-<div class="planner-title">
-    <h1>Trip Planner: <span class="trip-name">{{ trip.trip_name }} </span></h1>
+    <!-- Title -->
+    <div class="row">
+        <div class="planner-title">
+            <h1>Trip Planner: <span class="trip-name">{{ trip.trip_name }} </span></h1>
+        </div> 
+    </div>
+    
+    <!-- Trip Place (city, country) -->
+    <div class="row">
+        <div id="trip-place">
+            <h3>
+                {{ trip.trip_city }}, {{ trip.trip_country }}
+            </h3>
+        </div>
+    </div>
+
+
+    <!-- Travel Dates -->
+    <div class="row">
+        <div class="trip-dates">
+            <h4>
+                {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+            </h4>
+        </div>
+    </div>
+    
+    <!-- Hidden value -->
+    <input type="hidden" id="trip-id" value="{{ trip.trip_id }}">
+    
+    
+    <!-- Search Bar and Map -->
+    <div class="row">
+        <div class="search-bar">
+            <label for="search-bar">Search for a place:</label>
+            <input type="text" id="place-search" name="place-search">
+            <input type="submit" id="submit-search" value="Search">   
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9">
+            <div class="map" id="map">Map goes here</div>
+        </div>
+        <div class="col-3">
+            <div class="place-data" id="place-data"></div>
+            <div class="place-results"></div> 
+        </div>             
+    </div>
+
+
+<!-- End fluid container -->
 </div>
 
-<div id="trip-place">
-    <h3>
-        {{ trip.trip_city }}, {{ trip.trip_country }}
-    </h3>
-</div>
-
-<div class="trip-dates">
-    <h4>
-        {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
-    </h4>
-</div>
-
-<input type="hidden" id="trip-id" value="{{ trip.trip_id }}">
-
-<div class="search-bar">
-    <label for="search-bar">Search for a place:</label>
-    <input type="text" id="place-search" name="place-search">
-    <input type="submit" id="submit-search" value="Search">
-</div>
-
-<div class="place-data"></div>
-
-<div class="place-results">
-
-</div>
-
-<div class="map" id="map">
-    Map goes here</div>
+<!-- Script Tags -->
 <script src="/static/js/map.js"></script>
-<!-- <script src="/static/js/place_search.js"></script> -->
 <script async 
 src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&libraries=places&callback=initMap&v=beta&libraries=marker">
 </script>

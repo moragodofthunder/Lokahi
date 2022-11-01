@@ -30,15 +30,10 @@ document.querySelector('#submit-search').addEventListener('click', () => {
             result.photo_url = "/static/img/green_pin.png";
         }
             document.querySelector("#place-data").innerHTML += `
-            <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="${result.photo_url}" alt="Card image cap"width="300" 
-            height="200">
-              <div class="card-body">
-                <h5 class="card-title">${result.name}</h5>
-                <input type="checkbox" id="${result.name}" name="rest-choice" value="${result.name}">
-                <label for="${result.name}">${result.name} (Rating: ${result.rating} stars)</label>
-              </div>
-          </div>`  
+            <h3>${result.name}</h3>
+            <img class="place-img" src="${result.photo_url}">      
+            <h4>(Rating: ${result.rating} stars)</h4>
+            `  
         };
     }); 
 })

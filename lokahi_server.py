@@ -183,6 +183,10 @@ def get_place_info():
             new_place_dict['name'] = item.get("name")
             new_place_dict['rating'] = item.get("rating")
             new_place_dict['place_id'] = item.get("place_id")
+            new_place_dict['vicinity'] = item.get("vicinity")
+            new_place_dict['opening_hours'] = item.get("opening_hours")
+            lat = item['geometry']['location']['lat']
+            long = item['geometry']['location']['lng']
             new_place_dict['types'] = item['types'][0]
             if 'photos' in item:
                 photo_ref = item['photos'][0]['photo_reference']

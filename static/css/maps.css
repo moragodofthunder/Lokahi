@@ -1,11 +1,13 @@
 html, body {
     margin: 20;
-    width: 85%;
-    height: 85%;
+    width: 100%;
+    height: 100%;
   }
   
   .map,
   #map {
     width: 100%;
-    height: 100%;
+    height: 650px; 
+    /* padding-top: 4em;
+    padding-bottom: 4em;
   }
