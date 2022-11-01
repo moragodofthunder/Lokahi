@@ -166,15 +166,31 @@ def get_place_info():
 
     payload = {
         'location' : user_loc[1:-1],
-        'name' : f"{user_place}",
+        'keyword' : f"{user_place}",
         'radius' : 20000,
         'key' : api_key
         }
     headers = {}
 
     response = requests.get(url, params=payload).json()
-    print(response)
-    return jsonify(response)
+    print(jsonify(response))
+
+    place_data = []
+
+    for item in response["results"]:
+        if item["business_status"] == "OPERATIONAL":
+            new_place_dict = {}
+            new_place_dict['name'] = item.get("name")
+            new_place_dict['rating'] = item.get("rating")
+            new_place_dict['place_id'] = item.get("place_id")
+            new_place_dict['types'] = item['types'][0]
+            if 'photos' in item:
+                photo_ref = item['photos'][0]['photo_reference']
+                photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference={photo_ref}&key={api_key}"
+                new_place_dict['photo_url'] = photo_url
+            place_data.append(new_place_dict)
+
+    return jsonify(results=place_data)
 
 
 

@@ -36,7 +36,7 @@ function initMap() {
         fetch(url)
         .then(result => result.json())
         .then(data => {
-            console.log('THIS IS THE DATE TYPE OF DATAAAAAAAA')
+            console.log('THIS IS THE DATA TYPE OF DATAAAAAAAA')
             console.log(typeof data)
             console.log(data)
     
