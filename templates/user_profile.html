@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Hey There!{% endblock %}
 
+{% include 'navbar-noprof.html' %}
+
 {% block body %}
 <div class="welcome">
     <h1>
-        Welcome, {{ first_name }}
+        Welcome, {{ first_name }}!
     </h1>
 </div>
 

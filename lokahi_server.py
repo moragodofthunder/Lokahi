@@ -42,20 +42,31 @@ def login_user():
         return redirect("/login")
     else:
         session["user_id"]=match.user_id
-        return redirect(f"/user_profile/{match.user_id}")
+        return redirect(f"/user_profile")
 
+###----------------------------LOG-OUT--------------------------------###
+@app.route('/logout')
+def logout_user():
+    """Log out user"""
+    
+    del session["user_id"]
+
+    return redirect("/login")
 
 ###----------------------------USER-PROFILE----------------------------###
-@app.route('/user_profile/<user_id>')
-def show_user_profile(user_id):
+@app.route('/user_profile')
+def show_user_profile():
     """Return render template to user_profile.html"""
 
-    user = crud.get_user_by_id(user_id)
-    user_trips = user.trips
+    if "user_id" in session:
+        user = crud.get_user_by_id(session["user_id"])
+        user_trips = user.trips
+        return render_template('user_profile.html', first_name=user.fname, 
+        user_trips = user_trips)
 
-    return render_template('user_profile.html', first_name=user.fname, 
-    user_trips = user_trips)
-
+    else:
+        flash("Please log in or create new account.")
+        return redirect("/login")
 
 @app.route('/user_profile', methods=['POST'])
 def create_new_user():

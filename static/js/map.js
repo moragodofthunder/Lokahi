@@ -1,4 +1,3 @@
-
 'use strict';
 
 function initMap() {
@@ -47,12 +46,19 @@ function initMap() {
             console.log(placeLatLng)
 
                 document.querySelector("#place-data").innerHTML += `
+                <style>
+                #place-data {
+                  border-style: solid;
+                  border-width: 2px;
+                  border-color: black;
+                } 
+                </style>
                 <h3>${result.name}</h3>
                 <h4>${result.types}</h4>
                 <h4>${result.vicinity}</h4>
                 <h4>(Rating: ${result.rating} stars)</h4>
                 <h5>(${result.lat}, ${result.lng})</h5>
-                <img class="place-img" src="${result.photo_url}">      
+                <img class="place-img" src="${result.photo_url}">       
                 `
                 const placeMarker = new google.maps.Marker({
                   position: placeLatLng,
@@ -69,39 +75,6 @@ function initMap() {
             };
         }); 
     })}
-      // document.querySelector('#submit-search').addEventListener('submit', (evt) => {
-      //   evt.preventDefault();
-        
-      //   const userSearch = document.querySelector('#place-search').value;
-      //   console.log(userSearch)
-      //   const tripPlace = document.querySelector('#trip-place').innerText;
-     
-      //   var payload = {
-      //     query: userSearch,
-      //     fields: ['name', 'geometry'],
-      //   };
-
-      //   var service = new google.maps.places.PlacesService(map);
-
-      //   service.findPlaceFromQuery(payload, function (results, status) {
-      //     console.log(results);
-      //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      //       for (var i = 0; i < results.length; i++) {
-      //         createMarker(results[i]);
-      //         const resultMarker = new google.maps.Marker({
-      //           position: userSearch,
-      //           map,
-      //           icon: {
-      //             url: "/static/img/green_pin.png",
-      //           }
-      //         });
-
-      //       }
-      //       map.setCenter(results[0].geometry.location);
-      //     }
-      //   })
-      // })
-
-    });
+  });
 }
   

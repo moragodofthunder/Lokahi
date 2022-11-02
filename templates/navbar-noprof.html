@@ -8,22 +8,13 @@
 
     <!-- NavBar -->
         <div class="nav-bar">
-            {% if 'user_id' in session %}
+
             <form action="/logout">
                 <input type="submit" value="Log Out" id="log-out"/>
             </form>
-            {% else %}
-            <form action="/login">
-                <input type="submit" value="Log In" id="log-in"/>
-            </form>
-            {% endif %}
 
             <a href="/"><img src="/static/img/lokahi-logo-rg.png" alt="Lōkahi" style="width:300px;height:auto;"></a>
 
-            <ul>
-                <li><a href="/user_profile">My Profile</a></li>
-                <li><a href="/new_trip">Create New Trip</a></li>   
-            </ul> 
         </div>
 
     </body>

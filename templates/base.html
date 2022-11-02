@@ -11,10 +11,19 @@
   </head>
   <body>
     {% for msg in get_flashed_messages() %}
-      <p class="flash-msg">
+    <style>
+      .flash-msg {
+    border-style: solid;
+    border-color:springgreen;
+    border-width: 2px;
+    display: inline;
+  }
+    </style>
+      <p class="flash-msg" id="flash-msg">
         {{ msg }}
       </p>
     {% endfor %}
+
 
     {% block body %}{% endblock %}
       <!-- JavaScript Bundle with Popper -->
