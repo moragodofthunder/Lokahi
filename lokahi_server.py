@@ -151,14 +151,13 @@ def get_place_info():
     user_place = request.args.get('userSearch')
     # trip_id = request.args.get('tripId')
     user_loc = request.args.get('userLocation')
-    print(f"This is the user_place {user_place}")
-    print(f"This is the type of user_place: {type(user_place)}")
+    # print(f"This is the user_place {user_place}")
+    # print(f"This is the type of user_place: {type(user_place)}")
     # print(f"This is the trip_place {trip_id}")
     # print(f"This is the type of trip_place: {type(trip_id)}")
-    print(f"This is the user_loc {user_loc}")
-    print(f"This is the type of user_loc: {type(user_loc)}")
+    # print(f"This is the user_loc {user_loc}")
+    # print(f"This is the type of user_loc: {type(user_loc)}")
 
-    # place = crud.get_place_by_id(place_id)
 
     #Get trip place id, look up place in db, use latitude/long from trip place object
 
@@ -175,6 +174,8 @@ def get_place_info():
     response = requests.get(url, params=payload).json()
     print(jsonify(response))
 
+    # return response
+
     place_data = []
 
     for item in response["results"]:
@@ -185,14 +186,17 @@ def get_place_info():
             new_place_dict['place_id'] = item.get("place_id")
             new_place_dict['vicinity'] = item.get("vicinity")
             new_place_dict['opening_hours'] = item.get("opening_hours")
-            lat = item['geometry']['location']['lat']
-            long = item['geometry']['location']['lng']
+            new_place_dict['lat'] = item['geometry']['location']['lat']
+            new_place_dict['lng'] = item['geometry']['location']['lng']
             new_place_dict['types'] = item['types'][0]
             if 'photos' in item:
                 photo_ref = item['photos'][0]['photo_reference']
                 photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference={photo_ref}&key={api_key}"
                 new_place_dict['photo_url'] = photo_url
             place_data.append(new_place_dict)
+
+    # last_item = response["results"][-1]
+    # print(last_item)
 
     return jsonify(results=place_data)
 

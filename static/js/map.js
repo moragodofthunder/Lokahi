@@ -36,21 +36,36 @@ function initMap() {
         fetch(url)
         .then(result => result.json())
         .then(data => {
-            console.log('THIS IS THE DATA TYPE OF DATAAAAAAAA')
-            console.log(typeof data)
             console.log(data)
     
         for(const result of data.results) {
             if (result.photo_url === undefined) {
                 result.photo_url = "/static/img/green_pin.png";
             }
+
+            const placeLatLng = {lat: result.lat, lng: result.lng}
+            console.log(placeLatLng)
+
                 document.querySelector("#place-data").innerHTML += `
                 <h3>${result.name}</h3>
                 <h4>${result.types}</h4>
                 <h4>${result.vicinity}</h4>
                 <h4>(Rating: ${result.rating} stars)</h4>
+                <h5>(${result.lat}, ${result.lng})</h5>
                 <img class="place-img" src="${result.photo_url}">      
-                `  
+                `
+                const placeMarker = new google.maps.Marker({
+                  position: placeLatLng,
+                  map,
+                  icon: {
+                    url: "/static/img/green_pin.png",
+                    scaledSize: new google.maps.Size(25, 43)
+                  }
+                });
+    
+                map.setCenter(placeLatLng);
+                map.setZoom(18);
+
             };
         }); 
     })}
