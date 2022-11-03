@@ -5,30 +5,43 @@
 
 {% block body %}
 
+<!-- PAGE TITLE -->
 <div class="trip-details-header">
     <h1>
         Trip Details
     </h1>
 </div>
 
+
+<!-- TRIP NAME -->
 <div class="trip-title">
     <h2>
-        {{ trip_name }}
+        {{ trip.trip_name }}
     </h2>
 </div>
 
+<!-- TRIP CITY, COUNTRY -->
 <div class="trip-place">
     <h3>
-        {{ trip_city }} , {{ trip_country }}
+        {{ trip.trip_city }} , {{ trip.trip_country }}
     </h3>
 </div>
 
+<!-- TRAVEL DATES -->
 <div class="trip-dates">
     <h4>
-        {{ start_date.strftime('%b %d %Y') }} - {{ end_date.strftime('%b %d %Y') }}
+        {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
     </h4>
 </div>
 
+<!-- LINK TO TRIP PLANNER FOR TRIP -->
+{% if upcoming == True %}
+<div class="edit-trip">
+    <a href="/trip_planner/{{ trip.trip_id }}">Edit trip in Trip Planner</a>
+ </div>
+ {% endif %}
+
+ <!-- ITINERARY TABLES -->
 <div class="itinerary">
     Itinerary tables by day goes here
     <ul>
@@ -40,15 +53,14 @@
     </ul>
 </div>
 
+<!-- SAVED PLACES TABLE -->
 <div class="saved-places">
     Saved Places table goes here
 </div>
 
-<div class="edit-trip">
-    <a href="/trip_planner">Edit trip in Trip Planner</a>
- </div>
 
-<div class="create-trip">
+<!-- MISC -->
+<!-- <div class="create-trip">
    <a href="/new_trip">Create a new trip</a>
-</div>
+</div> -->
 {% endblock %}

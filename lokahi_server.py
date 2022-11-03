@@ -7,6 +7,7 @@ from jinja2 import StrictUndefined
 import cowsay
 import os
 import requests
+from datetime import date
 
 app = Flask(__name__)
 app.secret_key = os.environ['app_secret_key']
@@ -60,9 +61,18 @@ def show_user_profile():
 
     if "user_id" in session:
         user = crud.get_user_by_id(session["user_id"])
-        user_trips = user.trips
+        user_trips = crud.get_trips_by_user_id(user.user_id)
+
+        upcoming = []
+        past = []
+        for trip in user_trips:
+            if trip.start_date >= date.today():
+                upcoming.append(trip)
+            else:
+                past.append(trip)
+
         return render_template('user_profile.html', first_name=user.fname, 
-        user_trips = user_trips)
+        user_trips=user_trips, upcoming=upcoming, past=past)
 
     else:
         flash("Please log in or create new account.")
@@ -147,11 +157,13 @@ def show_trip_details(trip_id):
     start_date = trip.start_date
     end_date = trip.end_date
     activities = trip.activities
+    if trip.start_date >= date.today():
+        upcoming = True
+    else:
+        upcoming = False
     
-    return render_template('trip_details.html', 
-    trip_name=trip_name, trip_city=trip_city,
-    trip_country=trip_country, start_date=start_date,
-    end_date=end_date, activities=activities)
+    return render_template('trip_details.html', trip=trip, 
+    activities=activities, upcoming=upcoming)
 
 
 ###-----------------------------PLACE-SEARCH----------------------------###
@@ -211,7 +223,7 @@ def get_place_info():
 
     return jsonify(results=place_data)
 
-
+###-----------------------------OTHER-STUFF----------------------------###
 
 if __name__ == "__main__":
     connect_to_db(app)

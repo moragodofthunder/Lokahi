@@ -37,6 +37,8 @@ def get_trip_by_id(trip_id):
 def get_place_by_id(place_id):
     return Place.query.get(place_id)
 
+def get_trips_by_user_id(user_id):
+    return Trip.query.filter(Trip.user_id == user_id).order_by(Trip.start_date).all()
 
 if __name__ == '__main__':
     from lokahi_server import app
