@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}Sign Up | Log In{% endblock %}
 <!-- {% block head %}<link rel="stylesheet" href="stylesheet.css">{% endblock %} -->
+
+<!-- NAVBAR -->
 {% include 'navbar-noprof.html' %}
 
 {% block body %}
 
+<!-- START BODY/FLUID CONTAINER -->
 <div class="container-fluid">
   
   <div class="row">
+    <!-- SIGN UP -->
     <div class="col-6">
       <div class="sign-up">
         <h2>Sign Up (if you're new)</h2>
@@ -32,8 +36,9 @@
               <input type="submit" value="Create Account">
             </p>
           </form> 
+      </div>
     </div>
-  </div>
+    <!-- SIGN UP -->
   <div class="col-6">
     <div class="sign-up">
       <div class="log-in">
@@ -53,9 +58,11 @@
       </form>
     </div>
   </div>
+
+<!-- END FLUID CONTAINER -->
 </div>
   
-
+<!-- JS SCRIPT TAGS -->
 
 {% endblock %}
 

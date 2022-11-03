@@ -1,13 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}Lōkahi Home{% endblock %}
 
+<!-- NAVBAR -->
 {% include 'navbar.html' %}
 
 {% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- WELCOME MESSAGE -->
+        <h1>Welcome to Lōkahi</h1>
+    </div>
+    
+    <div class="row">
+        <!-- GET STARTED BUTTON -->
+        <h3>
+            <a href="/login">Get Started</a>
+        </h3>
+    </div>
 
-    <h1>Welcome to Lōkahi</h1>
+<!-- END FLUID CONTAINER -->
+</div>
 
-    <ul>
-        <li><a href="/login">Get Started</a></li>
-    </ul>  
+
+<!-- JS SCRIPT TAGS -->
+
 {% endblock %}

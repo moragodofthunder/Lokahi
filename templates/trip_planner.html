@@ -6,19 +6,21 @@
 <link href="/static/css/maps.css" rel="stylesheet">
 {% endblock %}
 
+<!-- NAVBAR -->
 {% include 'navbar.html' %}
 
+<!-- BODY START/ FLUID CONTAINER START -->
 {% block body %}
 <div class="container-fluid">
 
-    <!-- Title -->
+    <!-- TITLE/TRIP NAME -->
     <div class="row">
-        <div class="planner-title">
+        <div id="planner-title">
             <h1>Trip Planner: <span class="trip-name">{{ trip.trip_name }} </span></h1>
         </div> 
     </div>
     
-    <!-- Trip Place (city, country) -->
+    <!-- TRIP CITY, COUNTRY -->
     <div class="row">
         <div id="trip-place">
             <h3>
@@ -28,22 +30,22 @@
     </div>
 
 
-    <!-- Travel Dates -->
+    <!-- TRAVEL DATES -->
     <div class="row">
-        <div class="trip-dates">
+        <div id="trip-dates">
             <h4>
                 {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
             </h4>
         </div>
     </div>
     
-    <!-- Hidden value -->
+    <!-- HIDDEN VALUE -->
     <input type="hidden" id="trip-id" value="{{ trip.trip_id }}">
     
     
-    <!-- Search Bar and Map -->
+    <!-- SEARCH BAR AND MAP -->
     <div class="row">
-        <div class="search-bar">
+        <div id="search-bar">
             <label for="search-bar">Search for a place:</label>
             <input type="text" id="place-search" name="place-search">
             <input type="submit" id="submit-search" value="Search">   
@@ -60,10 +62,10 @@
     </div>
 
 
-<!-- End fluid container -->
+<!-- END FLUID CONTAINER -->
 </div>
 
-<!-- Script Tags -->
+<!-- JS SCRIPT TAGS -->
 <script src="/static/js/map.js"></script>
 <script async 
 src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&libraries=places&callback=initMap&v=beta&libraries=marker">

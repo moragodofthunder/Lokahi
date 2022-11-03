@@ -1,66 +1,78 @@
 {% extends 'base.html' %}
 {% block title %}Trip Details{% endblock %}
 
+<!-- NAVBAR -->
 {% include 'navbar.html' %}
 
+
+<!-- START BODY/FLUID CONTAINER -->
 {% block body %}
+<div class="container-fluid">
 
-<!-- PAGE TITLE -->
-<div class="trip-details-header">
-    <h1>
-        Trip Details
-    </h1>
+    <!-- TITLE/TRIP NAME -->
+    <div class="row">
+        <div id="trip-details-header">
+            <h1>
+                Trip Details: <span class="trip-name">{{ trip.trip_name }}</span>
+            </h1>
+        </div>
+    </div>
+   
+    
+    <div class="row">
+        <!-- TRIP CITY, COUNTRY -->
+        <div id="trip-place">
+            <h2>
+                {{ trip.trip_city }} , {{ trip.trip_country }}
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- TRAVEL DATES -->
+        <div id="trip-dates">
+            <h3>
+                {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- LINK TO TRIP PLANNER FOR TRIP IF TRIP IS 'UPCOMING' -->
+        {% if upcoming == True %}
+        <div id="edit-trip">
+            <a href="/trip_planner/{{ trip.trip_id }}">Edit trip in Trip Planner</a>
+        </div>
+        {% endif %}
+    </div>
+  
+
+    <div class="row">
+        <div class="col">
+            <!-- ITINERARY TABLES -->
+            <div id="itinerary">
+                Itinerary tables by day goes here
+                <ul>
+                    {% for activity in activities %}
+                    <li> 
+                        {{ activity.place_id }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col">
+            <!-- SAVED PLACES TABLE -->
+            <div id="saved-places">
+                Saved Places table goes here
+            </div>
+        </div>
+    </div>
+
+<!-- END FLUID CONTAINER     -->
 </div>
 
 
-<!-- TRIP NAME -->
-<div class="trip-title">
-    <h2>
-        {{ trip.trip_name }}
-    </h2>
-</div>
+<!-- JS SCRIPT TAGS -->
 
-<!-- TRIP CITY, COUNTRY -->
-<div class="trip-place">
-    <h3>
-        {{ trip.trip_city }} , {{ trip.trip_country }}
-    </h3>
-</div>
-
-<!-- TRAVEL DATES -->
-<div class="trip-dates">
-    <h4>
-        {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
-    </h4>
-</div>
-
-<!-- LINK TO TRIP PLANNER FOR TRIP -->
-{% if upcoming == True %}
-<div class="edit-trip">
-    <a href="/trip_planner/{{ trip.trip_id }}">Edit trip in Trip Planner</a>
- </div>
- {% endif %}
-
- <!-- ITINERARY TABLES -->
-<div class="itinerary">
-    Itinerary tables by day goes here
-    <ul>
-        {% for activity in activities %}
-        <li> 
-            {{ activity.place_id }}
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-
-<!-- SAVED PLACES TABLE -->
-<div class="saved-places">
-    Saved Places table goes here
-</div>
-
-
-<!-- MISC -->
-<!-- <div class="create-trip">
-   <a href="/new_trip">Create a new trip</a>
-</div> -->
 {% endblock %}

@@ -1,38 +1,57 @@
 {% extends 'base.html' %}
 {% block title %}Create New Trip{% endblock %}
 
+<!-- NAVBAR -->
 {% include 'navbar.html' %}
 
+
+<!-- BODY/FLUID CONTAINER START -->
 {% block body %}
+<div class="container-fluid">
+  <div class="row">
+    
+    <!-- TITLE -->
+    <div id="new-trip">
+      <h1>Create New Trip:</h1>
+      <form action="/new_trip" method="POST">
 
-<div class="new-trip">
-    <h1>Create New Trip:</h1>
-    <form action="/new_trip" method="POST">
+          <!-- TRIP NAME -->
+          <p>
+            Trip Name <input type="trip-name" name="trip-name">
+          </p>
 
-        <p>
-          Trip Name <input type="trip-name" name="trip-name">
-        </p>
+          <!-- TRIP COUNTRY -->
+          <p>
+            Country <input type="trip-country" id="trip-country" name="trip-country">
+          </p>
+        
+          <!-- TRIP CITY -->
+          <p>
+            City <input type="trip-city" id="trip-country" name="trip-city">
+          </p>
+        
+          <!-- START DATE -->
+          <p>
+            Start Date <input type="date" id=start-date" name="start-date">
+          </p>
+        
+          <!-- END DATE -->
+          <p>
+            End Date <input type="date" id="end-date" name="end-date">
+          </p>
+        
+          <!-- SUBMIT FORM BUTTON -->
+          <p>
+            <input type="submit" value="Create Trip and Start Planning">
+          </p>
+        </form> 
+    </div>
+  </div>
 
-        <p>
-          Country <input type="trip-country" id="trip-country" name="trip-country">
-        </p>
-      
-        <p>
-          City <input type="trip-city" id="trip-country" name="trip-city">
-        </p>
-      
-        <p>
-          Start Date <input type="date" id=start-date" name="start-date">
-        </p>
-      
-        <p>
-          End Date <input type="date" id="end-date" name="end-date">
-        </p>
-      
-        <p>
-          <input type="submit" value="Create Trip and Start Planning">
-        </p>
-      </form> 
+ <!-- END FLUID CONTAINER  -->
 </div>
+
+<!-- JS SCRIPT TAGS -->
+
 
 {% endblock %}

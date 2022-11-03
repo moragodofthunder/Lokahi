@@ -14,13 +14,16 @@ app.secret_key = os.environ['app_secret_key']
 api_key = os.environ['YOUR_API_KEY']
 app.jinja_env.undefined = StrictUndefined
 
+
+###-----------------------------------HOMEPAGE--------------------------------###
 @app.route('/')
 def homepage():
     """"Return render template to homepage.html"""
 
     return render_template('homepage.html')
 
-###----------------------------LOGIN---------------------------------###
+
+###-----------------------------------LOGIN-PAGE--------------------------------###
 
 @app.route('/login')
 def show_login_page():
@@ -29,6 +32,7 @@ def show_login_page():
     return render_template('login.html')
 
 
+###----------------------------WHEN-USER-TRIES-TO-LOGIN-------------------------###
 @app.route('/login', methods=['POST'])
 def login_user():
     """Login to user account"""
@@ -45,6 +49,7 @@ def login_user():
         session["user_id"]=match.user_id
         return redirect(f"/user_profile")
 
+
 ###----------------------------LOG-OUT--------------------------------###
 @app.route('/logout')
 def logout_user():
@@ -54,7 +59,8 @@ def logout_user():
 
     return redirect("/login")
 
-###----------------------------USER-PROFILE----------------------------###
+
+###----------------------------USER-PROFILE-----------------------------###
 @app.route('/user_profile')
 def show_user_profile():
     """Return render template to user_profile.html"""
@@ -78,6 +84,8 @@ def show_user_profile():
         flash("Please log in or create new account.")
         return redirect("/login")
 
+
+###----------------------------ADDING-NEW-USER-TO-DB-------------------------###
 @app.route('/user_profile', methods=['POST'])
 def create_new_user():
     """Create new user account"""
@@ -100,13 +108,15 @@ def create_new_user():
         return render_template("user_profile.html", first_name=fname)
 
 
-###----------------------------NEW-TRIP------------------------------###
+###-------------------------------NEW-TRIP----------------------------------###
 @app.route('/new_trip')
 def show_new_trip_form():
     """Show blank new trip form"""
+
     return render_template("new_trip.html")
 
 
+###---------------------------ADDING-NEW-TRIP-TO-DB-------------------------###
 @app.route('/new_trip', methods=['POST'])
 def create_new_trip():
     """Create new trip and route to trip planner"""
@@ -135,11 +145,6 @@ def show_trip_planner_with_trip(trip_id):
     """Return render template to trip_planner.html for specific trip"""
 
     trip = crud.get_trip_by_id(trip_id)
-    trip_name = trip.trip_name
-    trip_city = trip.trip_city
-    trip_country = trip.trip_country
-    start_date = trip.start_date
-    end_date = trip.end_date
     
     return render_template('trip_planner.html', 
     trip=trip, YOUR_API_KEY=api_key)
@@ -151,12 +156,8 @@ def show_trip_details(trip_id):
     """Return render template to trip_planner.html for specific trip"""
 
     trip = crud.get_trip_by_id(trip_id)
-    trip_name = trip.trip_name
-    trip_city = trip.trip_city
-    trip_country = trip.trip_country
-    start_date = trip.start_date
-    end_date = trip.end_date
     activities = trip.activities
+
     if trip.start_date >= date.today():
         upcoming = True
     else:
@@ -172,17 +173,7 @@ def get_place_info():
     """Get place info for place user searches for from Places API"""
 
     user_place = request.args.get('userSearch')
-    # trip_id = request.args.get('tripId')
     user_loc = request.args.get('userLocation')
-    # print(f"This is the user_place {user_place}")
-    # print(f"This is the type of user_place: {type(user_place)}")
-    # print(f"This is the trip_place {trip_id}")
-    # print(f"This is the type of trip_place: {type(trip_id)}")
-    # print(f"This is the user_loc {user_loc}")
-    # print(f"This is the type of user_loc: {type(user_loc)}")
-
-
-    #Get trip place id, look up place in db, use latitude/long from trip place object
 
     url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
 
@@ -197,6 +188,7 @@ def get_place_info():
     response = requests.get(url, params=payload).json()
     print(jsonify(response))
 
+    #TO SEE ALL JSON OBJECT DATA:
     # return response
 
     place_data = []
@@ -218,10 +210,9 @@ def get_place_info():
                 new_place_dict['photo_url'] = photo_url
             place_data.append(new_place_dict)
 
-    # last_item = response["results"][-1]
-    # print(last_item)
-
+    #Comment out this last line if trying to see all of JSON Object data:
     return jsonify(results=place_data)
+
 
 ###-----------------------------OTHER-STUFF----------------------------###
 

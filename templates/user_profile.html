@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Hey There!{% endblock %}
 
+<!-- NAVBAR -->
 {% include 'navbar-noprof.html' %}
 
+<!-- BODY START/FLUID CONTAINER START -->
 {% block body %}
 <div class="welcome">
     <h1>
@@ -10,10 +12,12 @@
     </h1>
 </div>
 
+<!-- NEW TRIP LINK -->
 <div>
     <a href="/new_trip">Create new trip</a>
 </div>
 
+<!-- UPCOMING TRIPS LIST -->
 <div>
     <h2>Upcoming Trips:</h2>
     <ul>
@@ -28,6 +32,7 @@
     </ul>
 </div>
 
+<!-- PAST TRIPS LIST -->
 <div>
     <h2>Past Trips:</h2>
     <ul>
@@ -42,4 +47,7 @@
     </ul>
 </div>
 
+<!-- END FLUID CONTAINER -->
+
+<!-- JS SCRIPT TAGS -->
 {% endblock %}

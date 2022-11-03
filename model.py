@@ -4,6 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
+###----------------------------USER-CLASS---------------------------###
 class User(db.Model):
     """User data"""
 
@@ -25,6 +27,8 @@ class User(db.Model):
     def __repr__(self):
         return f"<User user_id={self.user_id} fname={self.fname}>"
 
+
+###----------------------------TRIP-CLASS---------------------------###
 class Trip(db.Model):
     """Trip data"""
 
@@ -51,6 +55,8 @@ class Trip(db.Model):
     def __repr__(self):
         return f"<Trip trip_id={self.trip_id} trip_name={self.trip_name} trip_city ={self.trip_city}>"
 
+
+###----------------------------PLACE-CLASS---------------------------###
 class Place(db.Model):
     """Saved place data"""
 
@@ -81,6 +87,8 @@ class Place(db.Model):
     def __repr__(self):
         return f"<Place place_id={self.place_id} place_name={self.place_name}>"
 
+
+###-------------------------ACTIVITY-CLASS---------------------------###
 class Activity(db.Model):
     """Activity data"""
 
@@ -101,7 +109,7 @@ class Activity(db.Model):
         return f"<Activity activity_id={self.activity_id} place_name={self.place.place_name}>"
 
 
-
+###---------------------------CONNECT-TO-DB--------------------------###
 def connect_to_db(flask_app, db_uri="postgresql:///lokahi", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
@@ -112,6 +120,8 @@ def connect_to_db(flask_app, db_uri="postgresql:///lokahi", echo=True):
 
     print("Connected to the db!")
 
+
+###----------------------------SERVER-STUFF--------------------------###
 if __name__ == "__main__":
     from lokahi_server import app
 

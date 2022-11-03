@@ -3,10 +3,9 @@
     <head>
     </head>
 
-    
     <body>
 
-    <!-- NavBar -->
+        <!-- LOG IN/LOG OUT BUTTON -->
         <div class="nav-bar">
             {% if 'user_id' in session %}
             <form action="/logout">
@@ -18,8 +17,10 @@
             </form>
             {% endif %}
 
+            <!-- LOKAHI LOGO -->
             <a href="/"><img src="/static/img/lokahi-logo-rg.png" alt="Lōkahi" style="width:300px;height:auto;"></a>
 
+            <!-- PROFILE AND CREATE NEW TRIP LINKS -->
             <ul>
                 <li><a href="/user_profile">My Profile</a></li>
                 <li><a href="/new_trip">Create New Trip</a></li>   
