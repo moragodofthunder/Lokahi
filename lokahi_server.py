@@ -57,6 +57,8 @@ def logout_user():
     
     del session["user_id"]
 
+    flash("A hui hou kākou!")
+
     return redirect("/login")
 
 
@@ -66,6 +68,7 @@ def show_user_profile():
     """Return render template to user_profile.html"""
 
     if "user_id" in session:
+        flash("Aloha 🤙")
         user = crud.get_user_by_id(session["user_id"])
         user_trips = crud.get_trips_by_user_id(user.user_id)
 
