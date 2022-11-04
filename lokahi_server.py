@@ -7,7 +7,7 @@ from jinja2 import StrictUndefined
 import cowsay
 import os
 import requests
-from datetime import date
+from datetime import date, timedelta, datetime
 
 app = Flask(__name__)
 app.secret_key = os.environ['app_secret_key']
@@ -148,9 +148,26 @@ def show_trip_planner_with_trip(trip_id):
     """Return render template to trip_planner.html for specific trip"""
 
     trip = crud.get_trip_by_id(trip_id)
+    start = trip.start_date
+    end = trip.end_date
+    travel_dates = [start.strftime('%b %d %Y')]
+
+    # while start <= end:
+    #     timedelta(days = 1)
+
+    delta = timedelta(days = 1)
+    while start <= end:
+        timedelta(days = 1)
+        start += delta
+        formatted_date = start.strftime('%b %d %Y')
+        travel_dates.append(formatted_date)
+
+    travel_dates.pop()
+
+    print(f"TRAVELLLLL DAAAAATTTTEEESSS: {travel_dates}")
     
     return render_template('trip_planner.html', 
-    trip=trip, YOUR_API_KEY=api_key)
+    trip=trip, YOUR_API_KEY=api_key, travel_dates=travel_dates)
 
 
 ###-----------------------------TRIP-DETAILS----------------------------###
