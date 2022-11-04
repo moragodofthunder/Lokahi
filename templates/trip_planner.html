@@ -40,10 +40,20 @@
 
     <!-- TRAVEL DATES -->
     <div class="row">
-        <div id="trip-dates">
-            <h4>
-                {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
-            </h4>
+        <div class="col-4">
+            <div id="trip-dates">
+                <h4>
+                    {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+                </h4>
+            </div> 
+        </div>
+        
+        <div class="col-6">
+            <div id="search-bar">
+                <label for="search-bar">Search for a place:</label>
+                <input type="text" id="place-search" name="place-search">
+                <input type="submit" id="submit-search" value="Search">   
+            </div>
         </div>
     </div>
     
@@ -51,14 +61,7 @@
     <input type="hidden" id="trip-id" value="{{ trip.trip_id }}">
     
     
-    <!-- SEARCH BAR AND MAP -->
-    <div class="row">
-        <div id="search-bar">
-            <label for="search-bar">Search for a place:</label>
-            <input type="text" id="place-search" name="place-search">
-            <input type="submit" id="submit-search" value="Search">   
-        </div>
-    </div>
+    <!-- MAP and PLACE INFO BOX-->
     <div class="row">
         <div class="col-9">
             <div class="map" id="map"></div>

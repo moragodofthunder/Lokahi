@@ -66,12 +66,12 @@ function initMap() {
 
                 } 
                 </style>
-                <h3>${result.name}</h3>
-                <h4>${result.types.replace("_", " ")}</h4>
-                <h4>${result.vicinity}</h4>
-                <h4>(Rating: ${result.rating} stars)</h4>
-                <h5>(${result.lat}, ${result.lng})</h5>
-                <img class="place-img" src="${result.photo_url}"> 
+                <h3 id="ps-name">${result.name}</h3>
+                <h5 id="ps-address">${result.vicinity}</h5>
+                <h5 id="google-cat">${result.types.replace("_", " ")}</h5>
+                <h6 id="google-rating">Rating: ${result.rating} stars</h6>
+                <h6 id="ps-latlng">(lat: ${result.lat}, lng: ${result.lng})</h6>
+                <img id="place-img" src="${result.photo_url}"> 
                 `
       
                 
@@ -79,8 +79,8 @@ function initMap() {
                   position: placeLatLng,
                   map,
                   icon: {
-                    url: "/static/img/rainbow_pin.png",
-                    scaledSize: new google.maps.Size(25, 43)
+                    url: "/static/img/rainbow-pin.png",
+                    scaledSize: new google.maps.Size(71, 107)
                   }
                 });
     
