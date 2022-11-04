@@ -150,7 +150,7 @@ def show_trip_planner_with_trip(trip_id):
     trip = crud.get_trip_by_id(trip_id)
     start = trip.start_date
     end = trip.end_date
-    travel_dates = [start.strftime('%b %d %Y')]
+    travel_dates = [start.strftime('%A, %B %d')]
 
     # while start <= end:
     #     timedelta(days = 1)
@@ -159,7 +159,7 @@ def show_trip_planner_with_trip(trip_id):
     while start <= end:
         timedelta(days = 1)
         start += delta
-        formatted_date = start.strftime('%b %d %Y')
+        formatted_date = start.strftime('%A, %B %d')
         travel_dates.append(formatted_date)
 
     travel_dates.pop()

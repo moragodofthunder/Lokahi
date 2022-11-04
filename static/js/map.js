@@ -49,13 +49,21 @@ function initMap() {
 
             while (placeData.firstChild) {
             placeData.removeChild(placeData.firstChild);
-            }
+            }   
+
                 document.querySelector("#place-data").innerHTML += `
                 <style>
                 #place-data {
-                  border-style: solid;
-                  border-width: 2px;
-                  border-color: black;
+                  border-left: 2px solid black;
+                  border-right: 2px solid black;
+                  border-top: 2px solid black;
+                }
+                #place-info-menu {
+                  display: block;
+                  border-bottom: 2px solid black;
+                  border-left: 2px solid black;
+                  border-right: 2px solid black;
+
                 } 
                 </style>
                 <h3>${result.name}</h3>
@@ -64,65 +72,14 @@ function initMap() {
                 <h4>(Rating: ${result.rating} stars)</h4>
                 <h5>(${result.lat}, ${result.lng})</h5>
                 <img class="place-img" src="${result.photo_url}"> 
-                
-                <div class="category-menu">
-                  <form>
-                      <select id="category" name="category">
-                          <option value="">Choose a place category</option>
-                          <option value="breaky">Breakfast spot</option>
-                          <option value="lunch">Lunch place</option>
-                          <option value="dinner">Dinner spot</option>
-                          <option value="streetfood">Street Food or Snack</option>
-                          <option value="dessert">Dessert place</option>
-                          <option value="cafe">Cafe</option>
-                          <option value="night">Nightlife</option>
-                          <option value="bar">Bar or pub</option>
-                          <option value="train">Train station</option>
-                          <option value="shop">Shopping</option>
-                          <option value="books">Bookstore or Library</option>
-                          <option value="museum">Museum</option>
-                          <option value="history">Historical landmark</option>
-                          <option value="photo">Photo spot</option>
-                          <option value="temple">Temple/shrine/worship</option>
-                          <option value="entertain">Entertainment</option>
-                          <option value="music">Music venue</option>
-                          <option value="bath">Sento/onsen/hotspring</option>
-                          <option value="beach">Beach</option>
-                          <option value="park">Park</option>
-                          <option value="workspace">Workspace</option>
-                          <option value="covid">COVID Testing center</option>
-                          <option value="misc">Miscellaneous</option>
-                      </select>       
-                  </form>
-              </div>
-
-              <div class="itinerary-menu">
-                <form>
-                    <select id="in_itinerary" name="in_itinerary">
-                        <option value="">Add to itinerary (optional)</option>
-                        {% for date in travel_dates %}
-                        <option value="{{ date }}">{{ date }}</option>
-                        {% endfor %}
-                    </select>        
-                </form>
-              </div>
-
-              <div class="notes">
-                <form>
-                    <label for="notes">Notes:</label>
-                    <input type="text" id="notes" name="notes">
-                </form>
-                <input type="submit" value="Save Place"> 
-              </div>
                 `
-              
+      
                 
-
                 const placeMarker = new google.maps.Marker({
                   position: placeLatLng,
                   map,
                   icon: {
-                    url: "/static/img/green_pin.png",
+                    url: "/static/img/rainbow_pin.png",
                     scaledSize: new google.maps.Size(25, 43)
                   }
                 });

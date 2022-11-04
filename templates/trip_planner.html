@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Trip Planner{% endblock %}
+{% block title %}🗺️ Trip Planner{% endblock %}
 
 {% block head %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -7,6 +7,9 @@
 <style>
     .place-img {
         width: 100%;
+    }
+    #place-info-menu {
+        display: none;
     }
 </style>
 {% endblock %}
@@ -62,6 +65,55 @@
         </div>
         <div class="col-3">
             <div class="place-data" id="place-data"></div>
+
+            <div id="place-info-menu" >
+                  <form>
+                    <!-- CATEGORY SELECTION -->
+                    <select id="category" name="category">
+                        <option value="">Choose a place category</option>
+                        <option value="breaky">Breakfast spot</option>
+                        <option value="lunch">Lunch place</option>
+                        <option value="dinner">Dinner spot</option>
+                        <option value="streetfood">Street Food or Snack</option>
+                        <option value="dessert">Dessert place</option>
+                        <option value="cafe">Cafe</option>
+                        <option value="night">Nightlife</option>
+                        <option value="bar">Bar or pub</option>
+                        <option value="train">Train station</option>
+                        <option value="shop">Shopping</option>
+                        <option value="books">Bookstore or Library</option>
+                        <option value="museum">Museum</option>
+                        <option value="history">Historical landmark</option>
+                        <option value="photo">Photo spot</option>
+                        <option value="temple">Temple/shrine/worship</option>
+                        <option value="entertain">Entertainment</option>
+                        <option value="music">Music venue</option>
+                        <option value="bath">Sento/onsen/hotspring</option>
+                        <option value="beach">Beach</option>
+                        <option value="park">Park</option>
+                        <option value="workspace">Workspace</option>
+                        <option value="covid">COVID Testing center</option>
+                        <option value="misc">Miscellaneous</option>
+                    </select> 
+
+                    <!-- SPECIAL NOTES -->
+                    <label for="notes">Notes:</label>
+                    <input type="text" id="notes" name="notes">
+
+                    <p>
+                    </p>
+                    <!-- ADD TO ITINERARY -->
+                    <select id="in_itinerary" name="in_itinerary">
+                        <option value="">Add to itinerary (optional)</option>
+                        {% for date in travel_dates %}
+                        <option value="{{ date }}">{{ date }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <!-- SUBMIT BUTTON -->
+                    <input type="submit" value="Save Place">
+                  </form>
+                </div>
             <div class="place-results"></div> 
         </div>             
     </div>
