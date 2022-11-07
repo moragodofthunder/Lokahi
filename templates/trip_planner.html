@@ -32,7 +32,11 @@
     <div class="row">
         <div id="trip-place">
             <h3>
-                {{ trip.trip_city }}, {{ trip.trip_country }}
+                <span id="trip-city">
+                    {{ trip.trip_city }}
+                </span>, <span id="trip-country">
+                    {{ trip.trip_country }}
+                </span>
             </h3>
         </div>
     </div>
@@ -70,7 +74,7 @@
             <div class="place-data" id="place-data"></div>
 
             <div id="place-info-menu" >
-                  <form>
+                  <form id="save-place-db" action="/save-place">
                     <!-- CATEGORY SELECTION -->
                     <select id="category" name="category">
                         <option value="">Choose a place category</option>
@@ -106,12 +110,15 @@
                     <p>
                     </p>
                     <!-- ADD TO ITINERARY -->
-                    <select id="in_itinerary" name="in_itinerary">
+                    <select id="in-itinerary" name="in-itinerary">
                         <option value="">Add to itinerary (optional)</option>
                         {% for date in travel_dates %}
                         <option value="{{ date }}">{{ date }}</option>
                         {% endfor %}
                     </select>
+
+                    <!-- HIDDEN ITEMS -->
+
                     
                     <!-- SUBMIT BUTTON -->
                     <input type="submit" value="Save Place">

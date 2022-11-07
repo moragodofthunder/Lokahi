@@ -55,6 +55,25 @@ def get_place_by_id(place_id):
 def get_trips_by_user_id(user_id):
     return Trip.query.filter(Trip.user_id == user_id).order_by(Trip.start_date).all()
 
+###-------------------------------SAVE-PLACE-TO-DB----------------------------###
+def save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, ps_itinerary, ps_lat, ps_lng, ps_city, ps_country):
+
+    if not ps_itinerary:
+        in_itinerary = False
+    else:
+        in_itinerary = True
+
+    if not ps_notes:
+        ps_notes = ""
+
+
+    saved_place = Place(user_id=user_id, trip_id=trip_id, category=ps_cat, place_name=ps_name, 
+    latitude=ps_lat, longitude=ps_lng, in_itinerary=in_itinerary, place_city = ps_city, 
+    place_country = ps_country)
+
+    return saved_place
+
+
 
 ###---------------------------------OTHER-STUFF-------------------------------###
 if __name__ == '__main__':

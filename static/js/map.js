@@ -63,7 +63,9 @@ function initMap() {
                   border-bottom: 2px solid black;
                   border-left: 2px solid black;
                   border-right: 2px solid black;
-
+                }
+                .place-img {
+                  width: 100%;
                 } 
                 </style>
                 <h3 id="ps-name">${result.name}</h3>
@@ -73,7 +75,6 @@ function initMap() {
                 <h6 id="ps-latlng">(lat: ${result.lat}, lng: ${result.lng})</h6>
                 <img id="place-img" src="${result.photo_url}"> 
                 `
-      
                 
                 const placeMarker = new google.maps.Marker({
                   position: placeLatLng,
@@ -88,8 +89,33 @@ function initMap() {
                 map.setZoom(18);
 
             };
+            
         }); 
     })}
   });
 }
-  
+
+document.querySelector("#save-place-db").addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const psFormInputs = {
+    psCategory: document.querySelector("#category").value,
+    psNotes: document.querySelector("#notes").value,
+    psItinerary: document.querySelector("#in-itinerary").value,
+    psCity: document.querySelector("#trip-city").innerText,
+    psCountry: document.querySelector("#trip-country").innerText,
+    psTripId: document.querySelector('#trip-id').value,
+  }
+
+  console.log(psFormInputs)
+
+  fetch('/save-place', {
+    method: 'POST',
+    body: JSON.stringify(psFormInputs),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((response) => {
+    console.log(response)
+  })
+})  

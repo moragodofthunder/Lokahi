@@ -12,12 +12,12 @@ function initMap() {
   
     const userAddress = document.querySelector('#trip-place').innerText;
 
-    // const userCountry = document.querySelector('#trip-country').innerText;
+    const userCountry = document.querySelector('#trip-country').innerText;
 
     // const userSearchPlace = document.querySelector("place-search").innerText;
 
-    // if (userCountry in countryCodes)
-    //     {const userCountryCode = countryCodes[userCountry]};
+    if (userCountry in countryCodes)
+        {const userCountryCode = countryCodes[userCountry]};
 
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: userAddress }, (results, status) => {

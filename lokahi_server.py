@@ -142,7 +142,7 @@ def create_new_trip():
     return redirect(f"/trip_planner/{trip_id}")
 
 
-###-----------------------------TRIP-PLANNER----------------------------###
+###-------------------TRIP-PLANNER-and-TRAVEL-DATE-LIST----------------###
 @app.route('/trip_planner/<trip_id>')
 def show_trip_planner_with_trip(trip_id):
     """Return render template to trip_planner.html for specific trip"""
@@ -152,9 +152,6 @@ def show_trip_planner_with_trip(trip_id):
     end = trip.end_date
     travel_dates = [start.strftime('%A, %B %d')]
 
-    # while start <= end:
-    #     timedelta(days = 1)
-
     delta = timedelta(days = 1)
     while start <= end:
         timedelta(days = 1)
@@ -163,8 +160,6 @@ def show_trip_planner_with_trip(trip_id):
         travel_dates.append(formatted_date)
 
     travel_dates.pop()
-
-    print(f"TRAVELLLLL DAAAAATTTTEEESSS: {travel_dates}")
     
     return render_template('trip_planner.html', 
     trip=trip, YOUR_API_KEY=api_key, travel_dates=travel_dates)
@@ -200,7 +195,7 @@ def get_place_info():
     payload = {
         'location' : user_loc[1:-1],
         'keyword' : f"{user_place}",
-        'radius' : 20000,
+        'radius' : 50000,
         'key' : api_key
         }
     headers = {}
@@ -230,9 +225,47 @@ def get_place_info():
                 new_place_dict['photo_url'] = photo_url
             place_data.append(new_place_dict)
 
+    session['ps-lat'] = new_place_dict['lat']
+    session['ps-lng'] = new_place_dict['lng']
+    session['ps-name'] = new_place_dict['name']
+    session['ps-addr'] = new_place_dict['vicinity']
+
+
     #Comment out this last line if trying to see all of JSON Object data:
     return jsonify(results=place_data)
 
+@app.route('/save-place', methods=['POST'])
+def save_place_data():
+    
+    ps_cat = request.json["psCategory"]
+    ps_notes = request.json["psNotes"]
+    ps_itinerary = request.json["psItinerary"]
+    ps_city = request.json["psCity"]
+    ps_country = request.json["psCountry"]
+    trip_id = request.json["psTripId"]
+
+    ps_name = session['ps-name']
+    ps_lat = session['ps-lat']
+    ps_lng = session['ps-lng']
+
+    user_id = session['user_id']
+    
+
+    saved_place = crud.save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, ps_itinerary, ps_lat, 
+    ps_lng, ps_city, ps_country)
+    db.session.add(saved_place)
+    db.session.commit()
+    #play with request getting values I want
+    #take the psFormInputs and session items and put them in crud function
+    #to put in db
+    
+    #then clear session objects
+    #then send back response with success message (in console log)
+    #movie rating see "update_ratings" route
+
+    print(saved_place)
+
+    return "Success"
 
 ###-----------------------------OTHER-STUFF----------------------------###
 
