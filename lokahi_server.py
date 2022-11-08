@@ -150,13 +150,13 @@ def show_trip_planner_with_trip(trip_id):
     trip = crud.get_trip_by_id(trip_id)
     start = trip.start_date
     end = trip.end_date
-    travel_dates = [start.strftime('%A, %B %d')]
+    travel_dates = [start.strftime('%A, %b %d %Y')]
 
     delta = timedelta(days = 1)
     while start <= end:
         timedelta(days = 1)
         start += delta
-        formatted_date = start.strftime('%A, %B %d')
+        formatted_date = start.strftime('%A, %b %d %Y')
         travel_dates.append(formatted_date)
 
     travel_dates.pop()
@@ -171,15 +171,28 @@ def show_trip_details(trip_id):
     """Return render template to trip_planner.html for specific trip"""
 
     trip = crud.get_trip_by_id(trip_id)
-    activities = trip.activities
+    start = trip.start_date
+    end = trip.end_date
+    travel_dates = [start.strftime('%A, %b %d %Y')]
 
-    if trip.start_date >= date.today():
+    delta = timedelta(days = 1)
+    while start <= end:
+        timedelta(days = 1)
+        start += delta
+        formatted_date = start.strftime('%A, %b %d %Y')
+        travel_dates.append(formatted_date)
+
+    travel_dates.pop()
+
+    if start >= date.today():
         upcoming = True
     else:
         upcoming = False
+
+    places = crud.get_places_in_itinerary(start)
     
     return render_template('trip_details.html', trip=trip, 
-    activities=activities, upcoming=upcoming)
+    upcoming=upcoming, travel_dates=travel_dates, places=places)
 
 
 ###-----------------------------PLACE-SEARCH----------------------------###
@@ -250,18 +263,10 @@ def save_place_data():
 
     user_id = session['user_id']
     
-
     saved_place = crud.save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, 
     ps_itinerary, ps_lat, ps_lng, ps_city, ps_country)
     db.session.add(saved_place)
     db.session.commit()
-    #play with request getting values I want
-    #take the psFormInputs and session items and put them in crud function
-    #to put in db
-    # session.pop()
-    #then clear session objects
-    #then send back response with success message (in console log)
-    #movie rating see "update_ratings" route
 
     print(saved_place)
 

@@ -1,5 +1,6 @@
 """CRUD operations."""
 from model import db, User, Trip, Place, connect_to_db
+from _datetime import datetime
 
 ###-----------------------------GET-USER-BY-EMAIL-------------------------###
 def get_user_by_email(email):
@@ -62,16 +63,26 @@ def save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, ps_itinerary, ps_lat
         in_itinerary = False
     else:
         in_itinerary = True
+        ps_itinerary = datetime.strptime(ps_itinerary,'%A, %b %d %Y').strftime('%Y-%m-%d')
 
     if not ps_notes:
         ps_notes = ""
 
-
     saved_place = Place(user_id=user_id, trip_id=trip_id, category=ps_cat, place_name=ps_name, 
-    latitude=ps_lat, longitude=ps_lng, in_itinerary=in_itinerary, place_city = ps_city, 
+    latitude=ps_lat, longitude=ps_lng, in_itinerary=in_itinerary, itinerary_dt=ps_itinerary, place_city = ps_city, 
     place_country = ps_country)
 
     return saved_place
+
+###-------------------------------GET-PLACE-FROM-DB----------------------------###
+def get_places_in_itinerary(itinerary_dt):
+
+    itinerary_dt = Place.query.filter(Place.itinerary_dt == itinerary_dt).order_by(Place.place_id).all()
+    places = Place.query.filter(Trip.places).all()
+    trip_id = Place.query.filter(Place.trip_id).first()
+
+    if trip_id in places:
+        return places
 
 
 

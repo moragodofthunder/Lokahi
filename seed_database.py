@@ -15,7 +15,8 @@ model.connect_to_db(lokahi_server.app)
 model.db.create_all()
 
 places = {"Budapest": "Hungary", "Tokyo": "Japan", "Mexico City": "Mexico",
-"Gdansk": "Poland", "London": "England", "Honolulu": "United States"}
+"Gdansk": "Poland", "London": "England", "Honolulu": "United States", "Istanbul": "Turkey",
+"Barcelona": "Spain", "Paris": "France", "Amsterdam": "Netherlands", "Glasgow": "Scotland"}
 
 # res = key, val = random.choice(list(places.items()))
 
@@ -37,13 +38,13 @@ for n in range(5):
 
 #Give each user 10 fake trips:
     for i in range(10):
-        trip_name = f"Trip # {i}"
         trip_city = choice(cities)
         trip_country = places[trip_city]
-        random_date = randint(8, 20)
-        start_date = f"2022-11-{random_date}"
-        random_end = random_date + 5
+        random_start = randint(8, 20)
+        start_date = f"2022-11-{random_start}"
+        random_end = random_start + 5
         end_date = f"2022-11-{random_end}"
+        trip_name = f"Trip #{i + 1}: {trip_city}, {trip_country}"
 
         trip = crud.create_trip(trip_name, trip_city, 
         trip_country, start_date, end_date, user.user_id)

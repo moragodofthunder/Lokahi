@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Trip Details{% endblock %}
 
+{% block head %}
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+{% endblock %}
+
 <!-- NAVBAR -->
 {% include 'navbar.html' %}
 
@@ -52,15 +60,31 @@
             <!-- ITINERARY TABLES -->
             <div id="itinerary">
                 Itinerary tables by day goes here
-                <ul>
-                    {% for activity in activities %}
-                    <li> 
-                        {{ activity.place_id }}
-                    </li>
-                    {% endfor %}
-                </ul>
+                
             </div>
         </div>
+
+        <div class="row">
+            {% for date in travel_dates %}
+            <div class="col">
+            <table>
+                <tr>
+                    <th>
+                        {{ date }}
+                    </th>
+                </tr>
+                {% for place in places %}
+                <tr>
+                    <td>
+                       {{ place.name }} 
+                    </td>   
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+            {% endfor %}
+        </div>
+
         <div class="col">
             <!-- SAVED PLACES TABLE -->
             <div id="saved-places">
