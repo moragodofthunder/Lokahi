@@ -31,7 +31,11 @@ function initMap() {
        // #get place Id, add to query String, in Python (see notes) 
         const queryString = new URLSearchParams({userSearch:userSearch, userLocation:userLocation}).toString();
         const url = `/api/place-search?${queryString}`;
-    
+        
+        document.querySelector("#category").value = ""
+        document.querySelector("#notes").value = ""
+        document.querySelector("#in-itinerary").value = ""
+
         fetch(url)
         .then(result => result.json())
         .then(data => {

@@ -1,5 +1,5 @@
 """CRUD operations."""
-from model import db, User, Trip, Place, Activity, connect_to_db
+from model import db, User, Trip, Place, connect_to_db
 
 ###-----------------------------GET-USER-BY-EMAIL-------------------------###
 def get_user_by_email(email):

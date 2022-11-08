@@ -251,14 +251,14 @@ def save_place_data():
     user_id = session['user_id']
     
 
-    saved_place = crud.save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, ps_itinerary, ps_lat, 
-    ps_lng, ps_city, ps_country)
+    saved_place = crud.save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, 
+    ps_itinerary, ps_lat, ps_lng, ps_city, ps_country)
     db.session.add(saved_place)
     db.session.commit()
     #play with request getting values I want
     #take the psFormInputs and session items and put them in crud function
     #to put in db
-    
+    # session.pop()
     #then clear session objects
     #then send back response with success message (in console log)
     #movie rating see "update_ratings" route
