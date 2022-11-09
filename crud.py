@@ -57,33 +57,36 @@ def get_trips_by_user_id(user_id):
     return Trip.query.filter(Trip.user_id == user_id).order_by(Trip.start_date).all()
 
 ###-------------------------------SAVE-PLACE-TO-DB----------------------------###
-def save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, ps_itinerary, ps_lat, ps_lng, ps_city, ps_country):
+def save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, new_ps_itin, ps_lat, ps_lng, ps_city, ps_country):
 
-    if not ps_itinerary:
+    if not new_ps_itin:
         in_itinerary = False
     else:
         in_itinerary = True
-        ps_itinerary = datetime.strptime(ps_itinerary,'%A, %b %d %Y').strftime('%Y-%m-%d')
 
     if not ps_notes:
         ps_notes = ""
 
     saved_place = Place(user_id=user_id, trip_id=trip_id, category=ps_cat, place_name=ps_name, 
-    latitude=ps_lat, longitude=ps_lng, in_itinerary=in_itinerary, itinerary_dt=ps_itinerary, place_city = ps_city, 
+    latitude=ps_lat, longitude=ps_lng, in_itinerary=in_itinerary, itinerary_dt=new_ps_itin, place_city = ps_city, 
     place_country = ps_country)
 
     return saved_place
 
 ###-------------------------------GET-PLACE-FROM-DB----------------------------###
-def get_places_in_itinerary(itinerary_dt):
+# def get_itinerary_activity(trip_id):
 
-    itinerary_dt = Place.query.filter(Place.itinerary_dt == itinerary_dt).order_by(Place.place_id).all()
-    places = Place.query.filter(Trip.places).all()
-    trip_id = Place.query.filter(Place.trip_id).first()
+#     # trip_id = Place.query.filter(Place.trip_id == trip_id).first()
+#     # it_datetime = Place.query.filter(Place.itinerary_dt == it_datetime).first()
+#     # name = Place.query.filter(Place.place_name == name).first()
 
-    if trip_id in places:
-        return places
+#     activity = Place(trip_id=trip_id, place_name=place_name, itinerary_dt=itinerary_dt)
 
+#     return activity
+
+###-------------------------------GET-PLACES-BY-TRIP----------------------------###
+def get_places_by_trip(trip_id):
+    return Place.query.filter(Place.trip == trip_id).order_by(Place.itinerary_dt).all()
 
 
 ###---------------------------------OTHER-STUFF-------------------------------###

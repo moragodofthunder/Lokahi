@@ -3,8 +3,15 @@
 
 {% block head %}
 <style>
-    table, th, td {
+    #date-tables {
         border: 1px solid black;
+    }
+    td,tr, tbody {
+        border: 1px solid black;
+    }
+    #place-name {
+        border: 1px solid black;
+        border-bottom: 1px solid black;
     }
 </style>
 {% endblock %}
@@ -67,19 +74,25 @@
         <div class="row">
             {% for date in travel_dates %}
             <div class="col">
-            <table>
-                <tr>
-                    <th>
-                        {{ date }}
-                    </th>
-                </tr>
-                {% for place in places %}
-                <tr>
-                    <td>
-                       {{ place.name }} 
-                    </td>   
-                </tr>
-                {% endfor %}
+            <table class="table  table-hover" id="date-tables">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            {{ date }}
+                        </th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="place-name" scope="row" style="border: 1px solid black;">
+                        {% if date in places_by_day %}
+                            {% for place in places_by_day[date] %}   
+                                    {{ place.place_name }}<br>  
+                            {% endfor %}   
+                        {% endif %}
+                        </td>
+                    </tr>
+                </tbody>                               
             </table>
             </div>
             {% endfor %}

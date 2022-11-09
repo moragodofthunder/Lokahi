@@ -68,8 +68,10 @@ function initMap() {
                   border-left: 2px solid black;
                   border-right: 2px solid black;
                 }
-                .place-img {
+                #place-img {
                   width: 100%;
+                  height: auto;
+                  border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
                 } 
                 </style>
                 <h3 id="ps-name">${result.name}</h3>

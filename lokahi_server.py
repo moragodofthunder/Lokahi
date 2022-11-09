@@ -174,25 +174,42 @@ def show_trip_details(trip_id):
     start = trip.start_date
     end = trip.end_date
     travel_dates = [start.strftime('%A, %b %d %Y')]
+    unformat_dates = [start]
 
     delta = timedelta(days = 1)
     while start <= end:
         timedelta(days = 1)
         start += delta
         formatted_date = start.strftime('%A, %b %d %Y')
+        unformat_date = start
         travel_dates.append(formatted_date)
+        unformat_dates.append(unformat_date)
 
     travel_dates.pop()
+    unformat_dates.pop()
 
     if start >= date.today():
         upcoming = True
     else:
         upcoming = False
 
-    places = crud.get_places_in_itinerary(start)
+    places_by_trip = crud.get_places_by_trip(trip)
+    print(f"THESE ARE THE PLACES BY TRIP: {places_by_trip}")
+
+    places_by_day= {}
+
+    for place in places_by_trip:
+        new_dt = place.itinerary_dt.strftime('%A, %b %d %Y')
+        if new_dt in places_by_day:
+            places_by_day[new_dt].append(place)
+        else:
+            places_by_day[new_dt] = [place]
+    
+    print(f"THESE ARE THE PLACES_BY_DAY: {places_by_day}")
     
     return render_template('trip_details.html', trip=trip, 
-    upcoming=upcoming, travel_dates=travel_dates, places=places)
+    upcoming=upcoming, travel_dates=travel_dates, 
+    places_by_day=places_by_day)
 
 
 ###-----------------------------PLACE-SEARCH----------------------------###
@@ -247,6 +264,8 @@ def get_place_info():
     #Comment out this last line if trying to see all of JSON Object data:
     return jsonify(results=place_data)
 
+
+###-----------------------------SAVE-PLACE-TO-DB----------------------------###
 @app.route('/save-place', methods=['POST'])
 def save_place_data():
     
@@ -262,13 +281,14 @@ def save_place_data():
     ps_lng = session['ps-lng']
 
     user_id = session['user_id']
+
+    new_ps_itin = datetime.strptime(ps_itinerary,'%A, %b %d %Y')
+    new_ps_itin = new_ps_itin.strftime('%Y-%m-%d')
     
     saved_place = crud.save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, 
-    ps_itinerary, ps_lat, ps_lng, ps_city, ps_country)
+    new_ps_itin, ps_lat, ps_lng, ps_city, ps_country)
     db.session.add(saved_place)
     db.session.commit()
-
-    print(saved_place)
 
     return "Success"
 
