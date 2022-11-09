@@ -66,8 +66,9 @@
         <div class="col">
             <!-- ITINERARY TABLES -->
             <div id="itinerary">
-                Itinerary tables by day goes here
-                
+                <h4>
+                    Itinerary
+                </h4>    
             </div>
         </div>
 
@@ -83,15 +84,15 @@
                     </tr> 
                 </thead>
                 <tbody>
-                    <tr>
-                        <td id="place-name" scope="row" style="border: 1px solid black;">
-                        {% if date in places_by_day %}
-                            {% for place in places_by_day[date] %}   
-                                    {{ place.place_name }}<br>  
-                            {% endfor %}   
-                        {% endif %}
-                        </td>
-                    </tr>
+                    {% if date in places_by_day %}
+                        {% for place in places_by_day[date] %}   
+                                <tr>
+                                    <td>
+                                        {{ place.place_name }}
+                                    </td>
+                                </tr>
+                        {% endfor %}   
+                    {% endif %}       
                 </tbody>                               
             </table>
             </div>
@@ -101,7 +102,27 @@
         <div class="col">
             <!-- SAVED PLACES TABLE -->
             <div id="saved-places">
-                Saved Places table goes here
+                <h4>
+                    Saved Places for {{ trip.trip_city }}
+                </h4>
+                <table id="saved-places-by-trip">
+                    {% for category in places_by_category %}
+                    <tr>
+                        
+                        <th>
+                            {{ category }}
+                        </th>
+                        
+                    </tr>
+                    {% for place in places_by_category[category] %}
+                    <tr>
+                        <td>
+                            {{ place.place_name }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                </table>
             </div>
         </div>
     </div>

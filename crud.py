@@ -88,8 +88,11 @@ def save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, new_ps_itin, ps_lat,
 def get_places_by_trip(trip_id):
     return Place.query.filter(Place.trip == trip_id).order_by(Place.itinerary_dt).all()
 
+###-------------------------------GET-PLACES-BY-CATEGORY-------------------------###
+def get_places_by_cat(trip_id):
+    return Place.query.filter(Place.trip == trip_id).order_by(Place.category).all()
 
-###---------------------------------OTHER-STUFF-------------------------------###
+###----------------------------------OTHER-STUFF---------------------------------###
 if __name__ == '__main__':
     from lokahi_server import app
     connect_to_db(app)

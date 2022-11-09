@@ -18,8 +18,6 @@ places = {"Budapest": "Hungary", "Tokyo": "Japan", "Mexico City": "Mexico",
 "Gdansk": "Poland", "London": "England", "Honolulu": "United States", "Istanbul": "Turkey",
 "Barcelona": "Spain", "Paris": "France", "Amsterdam": "Netherlands", "Glasgow": "Scotland"}
 
-# res = key, val = random.choice(list(places.items()))
-
 cities = []
 
 cities = list(places.keys())
@@ -46,8 +44,8 @@ for n in range(5):
         end_date = f"2022-11-{random_end}"
         trip_name = f"Trip #{i + 1}: {trip_city}, {trip_country}"
 
-        trip = crud.create_trip(trip_name, trip_city, 
-        trip_country, start_date, end_date, user.user_id)
+        trip = crud.create_trip(trip_name, trip_country, 
+        trip_city, start_date, end_date, user.user_id)
         model.db.session.add(trip)
 
 model.db.session.commit()

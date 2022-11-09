@@ -194,9 +194,10 @@ def show_trip_details(trip_id):
         upcoming = False
 
     places_by_trip = crud.get_places_by_trip(trip)
-    print(f"THESE ARE THE PLACES BY TRIP: {places_by_trip}")
+    places_by_cat = crud.get_places_by_cat(trip)
 
     places_by_day= {}
+    places_by_category= {}
 
     for place in places_by_trip:
         new_dt = place.itinerary_dt.strftime('%A, %b %d %Y')
@@ -205,11 +206,16 @@ def show_trip_details(trip_id):
         else:
             places_by_day[new_dt] = [place]
     
-    print(f"THESE ARE THE PLACES_BY_DAY: {places_by_day}")
+    for place in places_by_cat:
+        category = place.category
+        if category in places_by_category:
+            places_by_category[category].append(place)
+        else:
+            places_by_category[category] = [place]
     
     return render_template('trip_details.html', trip=trip, 
     upcoming=upcoming, travel_dates=travel_dates, 
-    places_by_day=places_by_day)
+    places_by_day=places_by_day, places_by_category=places_by_category)
 
 
 ###-----------------------------PLACE-SEARCH----------------------------###
