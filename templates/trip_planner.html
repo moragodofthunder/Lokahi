@@ -44,22 +44,28 @@
 
     <!-- TRAVEL DATES -->
     <div class="row">
-        <div class="col-4">
+        <div class="col">
             <div id="trip-dates">
                 <h4>
                     {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
                 </h4>
             </div> 
         </div>
-        
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <a href="/trip_details/{{ trip.trip_id }}">Back to Trip Details</a>
+        </div>
         <div class="col-6">
             <div id="search-bar">
                 <label for="search-bar">Search for a place:</label>
                 <input type="text" id="place-search" name="place-search">
                 <input type="submit" id="submit-search" value="Search">   
             </div>
-        </div>
+        </div> 
     </div>
+
     
     <!-- HIDDEN VALUE -->
     <input type="hidden" id="trip-id" value="{{ trip.trip_id }}">

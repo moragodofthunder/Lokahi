@@ -84,7 +84,7 @@ function initMap() {
                   position: placeLatLng,
                   map,
                   icon: {
-                    url: "/static/img/rainbow-pin.png",
+                    url: "/static/img/pins/rainbow-pin.png",
                     scaledSize: new google.maps.Size(71, 107)
                   }
                 });

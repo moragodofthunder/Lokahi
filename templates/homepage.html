@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 {% block title %}Lōkahi Home{% endblock %}
+{% block head %}
+<style>
+    #home-logo {
+        width: 700px;
+        height: auto;
+    }
+    #leaf-button {
+        width: 200px;
+        height: auto;
+        display: flex;
+        align-items: center;
+    }
+</style>
+{% endblock %}
 
 <!-- NAVBAR -->
 {% include 'navbar.html' %}
@@ -8,14 +22,20 @@
 <div class="container-fluid">
     <div class="row">
         <!-- WELCOME MESSAGE -->
-        <h1>Welcome to Lōkahi</h1>
+        <h1>Welcome to </h1><img src="/static/img/logos/lokahi-logo-3D.png" id="home-logo">
     </div>
     
     <div class="row">
         <!-- GET STARTED BUTTON -->
+        {% if 'user_id' in session %}
         <h3>
-            <a href="/login">Get Started</a>
+            <a href="/user_profile"><img src="/static/img/buttons/monstera-text.png" id="leaf-button"></a>
         </h3>
+        {% else %}
+        <h3>
+            <a href="/login"><img src="/static/img/buttons/monstera-text.png" id="leaf-button"></a>
+        </h3>
+        {% endif %}
     </div>
 
 <!-- END FLUID CONTAINER -->

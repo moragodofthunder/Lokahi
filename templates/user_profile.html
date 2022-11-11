@@ -1,53 +1,147 @@
 {% extends 'base.html' %}
 {% block title %}🤙 Aloha!{% endblock %}
+{% block head %}
+<style>
+    #default-profile-img {
+        border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
+        width: 200px;
+        height: auto; 
+    }
+    .card {
+        display: grid;
+        height: 250px;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        background-size: cover !important;
+        color: white;
+        position: relative;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('/static/img/logos/lokahi-logo-3D');
+    }
+    .user-avatar {
+        width: 30px;
+        height: auto;
+        border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
+    }
+    .card-user {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+    #trip-profile-img {
+        width: 60px;
+        height: auto;
+        border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
+        
+    }
+    .card-city {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 20px;
+    }
+    .card-dates {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+    }
+    .card-dates p {
+        font-size: 15px;
+    }
+    .card-link {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        z-index:2;
+        background: black;
+        opacity: 0;
+    }
+    .card-link:hover{
+        opacity: 0.1;
+    }
+</style>
+{% endblock %}
 
 <!-- NAVBAR -->
 {% include 'navbar-noprof.html' %}
 
 <!-- BODY START/FLUID CONTAINER START -->
 {% block body %}
-<div class="welcome">
-    <h1>
-        Welcome, {{ first_name }}!
-    </h1>
-</div>
+<div class="container-fluid">
 
-<!-- NEW TRIP LINK -->
-<div>
-    <a href="/new_trip">Create new trip</a>
-</div>
+    <!-- WELCOME AND PROFILE PIC     -->
+    <div class="row">
+        <div class="col">
+            <div class="welcome">
+                <h1>
+                    Welcome, {{ user.fname }}!
+                </h1>
+            </div>
+            <!-- NEW TRIP LINK --> 
+            <div>
+                <a href="/new_trip">Create new trip</a>
+            </div>
+        </div>
+        <div class="col">
+            {% if user.profile_img %}
+            <img src="{{ user.profile_url }}" id="profile-pic">
+            {% else %}
+            <img src="/static/img/avatars/aqua-profile.png" id="default-profile-img">
+            {% endif %}
+            <form action="/post-form-data" method="post" enctype="multipart/form-data">
+                <input type="file" id="profile-img-upload" name="profile-img">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+    </div>
+    
+    <!-- UPCOMING TRIPS LIST -->
+    <div class="row">
+        <h2>Upcoming Trips:</h2>
+    </div>
 
-<!-- UPCOMING TRIPS LIST -->
-<div>
-    <h2>Upcoming Trips:</h2>
-    <ul>
-        {% for trip in upcoming %}
-        <li> 
+    <div class="row">
+        {% for trip in upcoming %} 
+        <div class="col-xs-12 col-sm-4">
             <a href="/trip_details/{{ trip.trip_id }}">
-                {{ trip.trip_name }}
+            <div class="card">
+                <div class="card-city">
+                        {{ trip.trip_name }}
+                </div>
+                <div class="card-dates">
+                    <p>
+                        ({{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }})
+                    </p> 
+                </div>
+                <div class="user-avatar">
+                    <img class="card-user" src="/static/img/avatars/aqua-profile.png" id="trip-profile-img">
+                </div>
+                <div class="card-link">
+    
+                </div>
+            </div>
             </a>
-            ({{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }})
-        </li>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
+    
+    <!-- PAST TRIPS LIST -->
+    <div>
+        <h2>Past Trips:</h2>
+        <ul>
+            {% for trip in past %}
+            <li> 
+                <a href="/trip_details/{{ trip.trip_id }}">
+                    {{ trip.trip_name }}
+                </a>
+                ({{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }})
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+<!-- END FLUID CONTAINER --> 
 </div>
-
-<!-- PAST TRIPS LIST -->
-<div>
-    <h2>Past Trips:</h2>
-    <ul>
-        {% for trip in past %}
-        <li> 
-            <a href="/trip_details/{{ trip.trip_id }}">
-                {{ trip.trip_name }}
-            </a>
-            ({{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }})
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-
-<!-- END FLUID CONTAINER -->
 
 <!-- JS SCRIPT TAGS -->
 {% endblock %}

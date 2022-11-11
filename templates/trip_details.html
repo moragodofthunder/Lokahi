@@ -114,13 +114,13 @@
                         </th>
                         
                     </tr>
-                    {% for place in places_by_category[category] %}
-                    <tr>
-                        <td>
-                            {{ place.place_name }}
-                        </td>
-                    </tr>
-                    {% endfor %}
+                        {% for place in places_by_category[category] %}
+                        <tr>
+                            <td>
+                                {{ place.place_name }}
+                            </td>
+                        </tr>
+                        {% endfor %}
                     {% endfor %}
                 </table>
             </div>

@@ -4,6 +4,7 @@ from flask import (Flask, render_template, request, flash, session,
 from model import connect_to_db, db
 import crud
 from jinja2 import StrictUndefined
+import cloudinary.uploader
 import cowsay
 import os
 import requests
@@ -12,6 +13,10 @@ from datetime import date, timedelta, datetime
 app = Flask(__name__)
 app.secret_key = os.environ['app_secret_key']
 api_key = os.environ['YOUR_API_KEY']
+
+CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
+CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
+CLOUD_NAME = "lokahi-cloud"
 app.jinja_env.undefined = StrictUndefined
 
 
@@ -80,12 +85,29 @@ def show_user_profile():
             else:
                 past.append(trip)
 
-        return render_template('user_profile.html', first_name=user.fname, 
+        return render_template('user_profile.html', user=user, 
         user_trips=user_trips, upcoming=upcoming, past=past)
 
     else:
         flash("Please log in or create new account.")
         return redirect("/login")
+
+###----------------------------USER-PROFILE-PIC----------------------------###
+@app.route('/api/post-form-data', methods=['POST'])
+def upload_profile_img():
+    """Let users upload a photo for their profile image"""
+
+    profile_img = request.files['profile-img']
+
+    result = cloudinary.uploader.upload(profile_img, cloud_key=CLOUDINARY_KEY,
+    cloud_secret=CLOUDINARY_SECRET, cloud_name=CLOUD_NAME)
+
+    img_url = result['secure_url']
+    user = crud.get_user_by_id(session["user_id"])
+    user.profile_img = img_url
+    db.session.commit()
+
+    return flash("Profile image changed")
 
 
 ###----------------------------ADDING-NEW-USER-TO-DB-------------------------###
