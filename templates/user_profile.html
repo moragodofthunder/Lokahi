@@ -2,10 +2,10 @@
 {% block title %}🤙 Aloha!{% endblock %}
 {% block head %}
 <style>
-    #default-profile-img {
+    #profile-pic {
         border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
         width: 200px;
-        height: auto; 
+        height: 200px; 
     }
     .card {
         display: grid;
@@ -14,9 +14,10 @@
         background-size: cover !important;
         color: white;
         position: relative;
-        border-radius: 5px;
+        border-radius: 35px;
         margin-bottom: 20px;
-        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('/static/img/logos/lokahi-logo-3D');
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));
+        background-image: url('/static/img/avatars/purple-profile.png');
     }
     .user-avatar {
         width: 30px;
@@ -26,13 +27,12 @@
     .card-user {
         position: absolute;
         right: 10px;
-        top: 10px;
+        bottom: 10px;
     }
     #trip-profile-img {
         width: 60px;
         height: auto;
-        border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
-        
+        border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;    
     }
     .card-city {
         position: absolute;
@@ -59,6 +59,7 @@
     }
     .card-link:hover{
         opacity: 0.1;
+        border-radius: 35px;
     }
 </style>
 {% endblock %}
@@ -84,12 +85,10 @@
             </div>
         </div>
         <div class="col">
-            {% if user.profile_img %}
-            <img src="{{ user.profile_url }}" id="profile-pic">
-            {% else %}
-            <img src="/static/img/avatars/aqua-profile.png" id="default-profile-img">
-            {% endif %}
-            <form action="/post-form-data" method="post" enctype="multipart/form-data">
+            
+            <img src="{{ user.profile_img }}" id="profile-pic">
+            
+            <form action="/api/post-form-data" method="post" enctype="multipart/form-data">
                 <input type="file" id="profile-img-upload" name="profile-img">
                 <input type="submit" value="Upload">
             </form>
@@ -115,7 +114,7 @@
                     </p> 
                 </div>
                 <div class="user-avatar">
-                    <img class="card-user" src="/static/img/avatars/aqua-profile.png" id="trip-profile-img">
+                    <img class="card-user" src="{{ user.profile_img }}" id="trip-profile-img">
                 </div>
                 <div class="card-link">
     

@@ -29,8 +29,9 @@ for n in range(5):
     password = "1234"
     fname = "Fake"
     lname = f"Human{n}"
+    profile_img = "/static/img/avatars/purple-profile.png"
 
-    user = crud.create_user(email, password, fname, lname)
+    user = crud.create_user(email, password, fname, lname, profile_img)
     model.db.session.add(user)
     model.db.session.commit()
 

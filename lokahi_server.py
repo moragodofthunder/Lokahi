@@ -5,6 +5,7 @@ from model import connect_to_db, db
 import crud
 from jinja2 import StrictUndefined
 import cloudinary.uploader
+import cloudinary
 import cowsay
 import os
 import requests
@@ -98,16 +99,26 @@ def upload_profile_img():
     """Let users upload a photo for their profile image"""
 
     profile_img = request.files['profile-img']
+    print(f"THIS IS THE REQUUEEESST {profile_img}")
 
-    result = cloudinary.uploader.upload(profile_img, cloud_key=CLOUDINARY_KEY,
-    cloud_secret=CLOUDINARY_SECRET, cloud_name=CLOUD_NAME)
+    result = cloudinary.uploader.upload(profile_img, api_key=CLOUDINARY_KEY,
+    api_secret=CLOUDINARY_SECRET, cloud_name=CLOUD_NAME, gravity="auto", 
+    height=200, width=200, crop="fill")
 
+    print(f"THIS IS THE RESUUUULT: {result}")
+
+    print(f"THIS IS THE RESULTTTT {(result['secure_url'])}")
     img_url = result['secure_url']
+    print(f"THIS IS IMAGE URLLLLL: {img_url}")
+    # new_img_url = cloudinary.CloudinaryImage(img_url).image(gravity="auto", height=200, width=200, crop="crop", cloud_name=CLOUD_NAME)
+    # print(f"THIS IS NEW_URL_URL: {new_img_url}")
     user = crud.get_user_by_id(session["user_id"])
     user.profile_img = img_url
     db.session.commit()
 
-    return flash("Profile image changed")
+    flash("Profile image changed")
+
+    return redirect("/user_profile")
 
 
 ###----------------------------ADDING-NEW-USER-TO-DB-------------------------###

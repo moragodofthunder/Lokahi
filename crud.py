@@ -8,10 +8,11 @@ def get_user_by_email(email):
 
 
 ###--------------------------------CREATE-USER----------------------------###
-def create_user(email, password, fname, lname):
+def create_user(email, password, fname, lname, profile_img):
     """Create and return a new user."""
 
-    user = User(email=email, password=password, fname=fname, lname=lname)
+    user = User(email=email, password=password, fname=fname, lname=lname, 
+    profile_img=profile_img)
 
     return user  
 
