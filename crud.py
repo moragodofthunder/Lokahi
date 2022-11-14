@@ -34,12 +34,12 @@ def get_user_by_id(user_id):
 
 ###--------------------------------CREATE-TRIP-------------------------------###
 def create_trip(trip_name, trip_country, trip_city, start_date, 
-                end_date, user_id):
+                end_date, trip_img, user_id):
     """Create trip and return trip."""
 
     trip = Trip(trip_name=trip_name, trip_country=trip_country,
             trip_city=trip_city, start_date=start_date, 
-            end_date=end_date, user_id=user_id)
+            end_date=end_date, trip_img=trip_img, user_id=user_id)
 
     return trip
 

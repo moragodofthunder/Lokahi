@@ -112,7 +112,7 @@
             <h3>Your Profile Picture</h3>
             <img src="{{ user.profile_img }}" id="profile-pic">
             <p></p>
-            <form action="/api/post-form-data" method="post" enctype="multipart/form-data">
+            <form action="/api/profile_img" method="post" enctype="multipart/form-data">
                 <h5>New pic?</h5>
                 <input type="file" id="profile-img-upload" name="profile-img">
                 <input type="submit" value="Upload">

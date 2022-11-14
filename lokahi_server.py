@@ -94,24 +94,18 @@ def show_user_profile():
         return redirect("/login")
 
 ###----------------------------USER-PROFILE-PIC----------------------------###
-@app.route('/api/post-form-data', methods=['POST'])
+@app.route('/api/profile_img', methods=['POST'])
 def upload_profile_img():
     """Let users upload a photo for their profile image"""
 
     profile_img = request.files['profile-img']
-    print(f"THIS IS THE REQUUEEESST {profile_img}")
 
     result = cloudinary.uploader.upload(profile_img, api_key=CLOUDINARY_KEY,
     api_secret=CLOUDINARY_SECRET, cloud_name=CLOUD_NAME, gravity="auto", 
     height=200, width=200, crop="fill")
 
-    print(f"THIS IS THE RESUUUULT: {result}")
-
-    print(f"THIS IS THE RESULTTTT {(result['secure_url'])}")
     img_url = result['secure_url']
-    print(f"THIS IS IMAGE URLLLLL: {img_url}")
-    # new_img_url = cloudinary.CloudinaryImage(img_url).image(gravity="auto", height=200, width=200, crop="crop", cloud_name=CLOUD_NAME)
-    # print(f"THIS IS NEW_URL_URL: {new_img_url}")
+
     user = crud.get_user_by_id(session["user_id"])
     user.profile_img = img_url
     db.session.commit()
@@ -162,9 +156,10 @@ def create_new_trip():
     trip_city = request.form.get("trip-city")
     start_date = request.form.get("start-date")
     end_date = request.form.get("end-date")
+    trip_img = "/static/img/cards/suitcase.png"
 
     trip = crud.create_trip(trip_name, trip_country, trip_city, 
-    start_date, end_date, session['user_id'])
+    start_date, end_date, trip_img, session['user_id'])
     db.session.add(trip)
     db.session.commit()
     
