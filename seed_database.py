@@ -29,13 +29,12 @@ f_names = []
 
 f_names = list(names.keys())
 
-
 #Create 5 fake users
 for n in range(5):
+    i = randint(0, 6)
     email = f"user{n}@test.com"
     password = "1234"
-    get_name = sample(f_names, 1)
-    fname = "".join(get_name)
+    fname = f_names[i]
     print(f"THIS IS THE FIRST NAAAAAME: {fname}")
     lname = names[fname]
     profile_img = "/static/img/avatars/purple-profile.png"

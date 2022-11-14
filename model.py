@@ -4,6 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+friend = db.Table(
+    'friends',
+    db.Column('friend_id', db.Integer, primary_key=True),
+    db.Column('f1_id', db.Integer, db.ForeignKey('users.user_id')),
+    db.Column('f2_id', db.Integer, db.ForeignKey('users.user_id'))
+)
 
 ###----------------------------USER-CLASS---------------------------###
 class User(db.Model):
@@ -21,8 +27,15 @@ class User(db.Model):
     password = db.Column(db.String, nullable= False)
     profile_img = db.Column(db.String, nullable= True)
 
-    trips = db.relationship("Trip", back_populates="user")
+    trips = db.relationship("Trip", secondary="trip_users", back_populates="users")
     places = db.relationship("Place", back_populates="user")
+
+    following = db.relationship("User",         
+        secondary=friend,
+        primaryjoin=user_id == friend.c.f1_id,
+        secondaryjoin=user_id == friend.c.f2_id,
+        backref='followers'
+        )
 
     def __repr__(self):
         return f"<User user_id={self.user_id} fname={self.fname}>"
@@ -48,11 +61,19 @@ class Trip(db.Model):
     end_date = db.Column(db.Date, nullable= False)
     trip_img = db.Column(db.String, nullable= True)
 
-    user = db.relationship("User", back_populates="trips")
+    users = db.relationship("User", secondary="trip_users", back_populates="trips")
     places = db.relationship("Place", back_populates="trip")
 
     def __repr__(self):
         return f"<Trip trip_id={self.trip_id} trip_name={self.trip_name} trip_city ={self.trip_city}>"
+###----------------------------TRIP-OHANA---------------------------###
+class TripUser(db.Model):
+
+    __tablename__ = "trip_users"
+
+    trip_user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable= False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable= False)
 
 
 ###----------------------------PLACE-CLASS---------------------------###
