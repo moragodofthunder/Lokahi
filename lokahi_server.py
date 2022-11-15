@@ -157,15 +157,21 @@ def find_friends_of_user():
     return redirect("/user_profile")
 
 ###---------------------------ADDING-FRIEND-TO-TRIP--------------------------###
-@app.route('/add_friends_to_trip', methods=['POST'])
-def add_friends_to_trip():
+@app.route('/add_friends_to_trip/<trip_id>', methods=['POST'])
+def add_friends_to_trip(trip_id):
 
     user = crud.get_user_by_id(session["user_id"])
-    friends_in_ohana = crud.get_all_friends_from_ohana(user.user_id)
+    trip_bud = request.form.get("trip-buds")
+    trip = crud.get_trip_by_id(trip_id)
 
-    print(f"***THESE ARE ALL THE FRIENDS IN THE OHANA {friends_in_ohana}")
+    trip.users.append(trip_bud)
+    db.session.add(trip_bud)
+    db.session.commit()
+    flash(f"{trip_bud.fname} was added to your 'Ohana Traveling Lōkahi")
 
-    redirect("/trip_details")
+    print(f"++++++THIS IS YOUR TRIP BUUUUUUUUDDDD: {trip_bud}")
+
+    return redirect(f"/trip_details/{trip_id}")
 
 
 ###-------------------------------NEW-TRIP----------------------------------###

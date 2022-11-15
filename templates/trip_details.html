@@ -3,9 +3,7 @@
 
 {% block head %}
 <style>
-    #date-tables {
-        border: 1px solid black;
-    }
+    
     td,tr, tbody {
         border: 1px solid black;
     }
@@ -13,8 +11,19 @@
         border: 1px solid black;
         border-bottom: 1px solid black;
     }
-    #travel-ohana-list {
-        display: none;
+
+    #itin-cards {
+        display: grid;
+        width: 350px;
+        height: 85px;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        background-size: cover !important;
+        color: white;
+        position: relative;
+        border-radius: 35px;
+        margin-bottom: 20px;
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));
+        background-image: url('/static/img/cards/suitcase-banner.png');
     }
 </style>
 {% endblock %}
@@ -60,18 +69,22 @@
         <div id="trip-users">
             <h3>
                 'Ohana Traveling Lōkahi:
-                FRIENDS GO HERE
+                <div id="ohana-lokahi">
+                    {% for person in trip.users %}
+                    <img src="{{ person.profile_img }}">
+                    {% endfor %}
             </h3>
         </div>
         <div id="add-friends">
-            <form action="/add_friends_to_trip", method="POST" id="add-friend-button">
+            <form action="/add_friends_to_trip/{{ trip.trip_id }}", method="POST" id="add-friend-to-trip">
                 Traveling with Friends?
-                <input type="submit" id="add-ohana-button" value="Add From 'Ohana">
-                <select id="travel-ohana-list">
+                <select id="travel-ohana-list" name="trip-buds">
+                    <option value="">Add From 'Ohana</option>
                     {% for friend in user.following %}
-                    <option value="{{ friend.fname }}">{{ friend.fname }}</option>
+                    <option value="{{ friend.user_id }}">{{ friend.fname }}</option>
                     {% endfor %}
                 </select>
+                <input type="submit" id="add-ohana-button" value="Add 'Em">
             </form>
         </div>
     </div>
@@ -99,29 +112,32 @@
         <div class="row">
             {% for date in travel_dates %}
             <div class="col">
-            <table class="table  table-hover" id="date-tables">
-                <thead>
-                    <tr>
-                        <th scope="col">
-                            {{ date }}
-                        </th>
-                    </tr> 
-                </thead>
-                <tbody>
-                    {% if date in places_by_day %}
-                        {% for place in places_by_day[date] %}   
-                                <tr>
-                                    <td>
-                                        {{ place.place_name }}
-                                    </td>
-                                </tr>
-                        {% endfor %}   
-                    {% endif %}       
-                </tbody>                               
-            </table>
+                <div class="table-cards" id="itin-cards">
+                    <table class="table  table-hover" id="date-tables">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    {{ date }}
+                                </th>
+                            </tr> 
+                        </thead>
+                        <tbody>
+                            {% if date in places_by_day %}
+                                {% for place in places_by_day[date] %}   
+                                        <tr>
+                                            <td>
+                                                {{ place.place_name }}
+                                            </td>
+                                        </tr>
+                                {% endfor %}   
+                            {% endif %}       
+                        </tbody>                               
+                    </table>
+                    </div>
+                    {% endfor %}
             </div>
-            {% endfor %}
         </div>
+    </div>
 
         <div class="col">
             <!-- SAVED PLACES TABLE -->
@@ -159,7 +175,5 @@
 
 
 <!-- JS SCRIPT TAGS -->
-<script src="trip_details.js">
 
-</script>
 {% endblock %}

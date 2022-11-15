@@ -12,6 +12,9 @@
         width: 100px;
         height: 100px;
     }
+    #friend-search-box {
+        display: none;
+    }
     .card {
         display: grid;
         width: 350px;
@@ -211,9 +214,9 @@
                 <input type="submit" id="submit-friend-search" value="Find 'Em"> 
             </form>
 
-            <form>
-                <input type="submit" id="add-ohana-button" value="Add someone to your Travel 'Ohana">
-            </form>
+          
+            <button type="button" id="add-ohana-button">Add someone to your Travel 'Ohana</button>
+            
 
         </div>
     </div>
@@ -229,5 +232,5 @@
 </div>
 
 <!-- JS SCRIPT TAGS -->
-
+<script src="/static/js/user_profile.js"></script>
 {% endblock %}
