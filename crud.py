@@ -74,16 +74,14 @@ def save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, new_ps_itin, ps_lat,
 
     return saved_place
 
-###-------------------------------GET-PLACE-FROM-DB----------------------------###
-# def get_itinerary_activity(trip_id):
+###-------------------------------GET-FRIEND-BY-EMAIL--------------------------###
+def get_friend_by_email(email):
+    return User.query.filter(User.email == email).first()
 
-#     # trip_id = Place.query.filter(Place.trip_id == trip_id).first()
-#     # it_datetime = Place.query.filter(Place.itinerary_dt == it_datetime).first()
-#     # name = Place.query.filter(Place.place_name == name).first()
+###-----------------------------GET-ALL-FRIENDS-FROM-OHANA---------------------###
+def get_all_friends_from_ohana(user_id):
+    return User.query.filter(User.user_id == user_id, User.following).order_by(User.following.fname).all()
 
-#     activity = Place(trip_id=trip_id, place_name=place_name, itinerary_dt=itinerary_dt)
-
-#     return activity
 
 ###-------------------------------GET-PLACES-BY-TRIP----------------------------###
 def get_places_by_trip(trip_id):

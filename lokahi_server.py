@@ -53,6 +53,7 @@ def login_user():
         return redirect("/login")
     else:
         session["user_id"]=match.user_id
+        flash("Aloha 🤙")
         return redirect(f"/user_profile")
 
 
@@ -74,7 +75,6 @@ def show_user_profile():
     """Return render template to user_profile.html"""
 
     if "user_id" in session:
-        flash("Aloha 🤙")
         user = crud.get_user_by_id(session["user_id"])
         user_trips = crud.get_trips_by_user_id(user.user_id)
 
@@ -137,6 +137,36 @@ def create_new_user():
     
         return render_template("user_profile.html", first_name=fname)
 
+ ###---------------------------ADDING-FRIEND-TO-DB---------------------------###
+@app.route('/find_friends', methods=['POST'])
+def find_friends_of_user():
+
+    user = crud.get_user_by_id(session["user_id"])
+
+    friend_email = request.form.get("friend-search")
+    friend_user = crud.get_friend_by_email(friend_email)
+
+    if friend_user:
+        user.following.append(friend_user)
+        db.session.add(friend_user)
+        db.session.commit()
+        flash(f"{friend_user.fname} added to your Travel 'Ohana")
+    else:
+        flash("User not found")
+
+    return redirect("/user_profile")
+
+###---------------------------ADDING-FRIEND-TO-TRIP--------------------------###
+@app.route('/add_friends_to_trip', methods=['POST'])
+def add_friends_to_trip():
+
+    user = crud.get_user_by_id(session["user_id"])
+    friends_in_ohana = crud.get_all_friends_from_ohana(user.user_id)
+
+    print(f"***THESE ARE ALL THE FRIENDS IN THE OHANA {friends_in_ohana}")
+
+    redirect("/trip_details")
+
 
 ###-------------------------------NEW-TRIP----------------------------------###
 @app.route('/new_trip')
@@ -160,6 +190,7 @@ def create_new_trip():
 
     trip = crud.create_trip(trip_name, trip_country, trip_city, 
     start_date, end_date, trip_img, session['user_id'])
+
     db.session.add(trip)
     db.session.commit()
     
@@ -240,10 +271,13 @@ def show_trip_details(trip_id):
             places_by_category[category].append(place)
         else:
             places_by_category[category] = [place]
+
+    user = crud.get_user_by_id(session["user_id"])
     
     return render_template('trip_details.html', trip=trip, 
     upcoming=upcoming, travel_dates=travel_dates, 
-    places_by_day=places_by_day, places_by_category=places_by_category)
+    places_by_day=places_by_day, places_by_category=places_by_category,
+    user=user)
 
 
 ###-----------------------------PLACE-SEARCH----------------------------###

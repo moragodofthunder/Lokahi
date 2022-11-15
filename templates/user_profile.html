@@ -7,6 +7,11 @@
         width: 200px;
         height: 200px; 
     }
+    #friend-profile-pic {
+        border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
+        width: 100px;
+        height: 100px;
+    }
     .card {
         display: grid;
         width: 350px;
@@ -82,6 +87,10 @@
         font-family: 'Casty Demo';
         font-size: 24px;
     }
+    .travel-ohana {
+        display: grid;
+    }
+    
 </style>
 {% endblock %}
 
@@ -92,22 +101,84 @@
 {% block body %}
 <div class="container-fluid">
 
-    <!-- WELCOME AND PROFILE PIC     -->
+    <!-- WELCOME AND PROFILE PIC -->
     <div class="row">
-        <div class="col">
-            <div class="welcome">
-                <h1>
-                    Welcome, {{ user.fname }}!
-                </h1>
+        <div class="welcome">
+            <h1>
+                Welcome, {{ user.fname }}!
+            </h1>
+        </div>
+    </div>
+        <!-- NEW TRIP LINK --> 
+    <div class="row">
+        <div>
+            <a href="/new_trip">Create new trip</a>
+        </div>
+    </div>
+
+    <!-- UPCOMING TRIPS LIST -->
+    <div class="row">
+        <h2>Upcoming Trips:</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                {% for trip in upcoming %}
+                <div class="col-xs-12 col-sm-4">
+                    <a href="/trip_details/{{ trip.trip_id }}">
+                    <div class="card">
+                        <div class="card-city">
+                                {{ trip.trip_name }}
+                        </div>
+                        <div class="card-dates">
+                            <p>
+                                {{ trip.start_date.strftime('%b %d') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+                            </p> 
+                        </div>
+                        <div class="user-avatar">
+                            <img class="card-user" src="{{ user.profile_img }}" id="trip-profile-img">
+                        </div>
+                        <div class="card-link">
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div> 
+                <!-- PAST TRIPS LIST -->
+            <div class="row">
+                <h2>Past Trips:</h2>
             </div>
-            <!-- NEW TRIP LINK --> 
-            <div>
-                <a href="/new_trip">Create new trip</a>
+
+            <div class="row">
+            {% for trip in past %} 
+                <div class="col-xs-12 col-sm-4">
+                    <a href="/trip_details/{{ trip.trip_id }}">
+                    <div class="card">
+                        <div class="card-city">
+                                {{ trip.trip_name }}
+                        </div>
+                        <div class="card-dates">
+                            <p>
+                                {{ trip.start_date.strftime('%b %d') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+                            </p> 
+                        </div>
+                        <div class="user-avatar">
+                            <img class="card-user" src="{{ user.profile_img }}" id="trip-profile-img">
+                        </div>
+                        <div class="card-link">
+            
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+
             </div>
         </div>
-
         <!-- PROFILE PICTURE AND UPLOAD PHOTO BUTTON -->
-        <div class="col">
+        <div class="col-2">
             
             <h3>Your Profile Picture</h3>
             <img src="{{ user.profile_img }}" id="profile-pic">
@@ -115,79 +186,48 @@
             <form action="/api/profile_img" method="post" enctype="multipart/form-data">
                 <h5>New pic?</h5>
                 <input type="file" id="profile-img-upload" name="profile-img">
-                <input type="submit" value="Upload">
+                <input type="submit" value="Upload 📷">
             </form>
         </div>
 
-        <div class="col">
+        <div class="col-2">
             <h3>Your Travel 'Ohana</h3>
-
-
-        </div>
-    </div>
-    
-    <!-- UPCOMING TRIPS LIST -->
-    <div class="row">
-        <h2>Upcoming Trips:</h2>
-    </div>
-
-    <div class="row">
-        {% for trip in upcoming %} 
-        <div class="col-xs-12 col-sm-4">
-            <a href="/trip_details/{{ trip.trip_id }}">
-            <div class="card">
-                <div class="card-city">
-                        {{ trip.trip_name }}
-                </div>
-                <div class="card-dates">
-                    <p>
-                        {{ trip.start_date.strftime('%b %d') }} - {{ trip.end_date.strftime('%b %d %Y') }}
-                    </p> 
-                </div>
-                <div class="user-avatar">
-                    <img class="card-user" src="{{ user.profile_img }}" id="trip-profile-img">
-                </div>
-                <div class="card-link">
-    
+            <div class="row">
+                <div class="travel-ohana">
+                    {% for friend in user.following %}
+                    <div class="col">
+                        <h5>
+                            {{ friend.fname }} 
+                        </h5>
+                        <img src="{{ friend.profile_img }}" id="friend-profile-pic"> 
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            </a>
-        </div>
-        {% endfor %}
-    </div>
-    
-    <!-- PAST TRIPS LIST -->
-    <div class="row">
-        <h2>Past Trips:</h2>
-    </div>
 
-    <div class="row">
-        {% for trip in past %} 
-        <div class="col-xs-12 col-sm-4">
-            <a href="/trip_details/{{ trip.trip_id }}">
-            <div class="card">
-                <div class="card-city">
-                        {{ trip.trip_name }}
-                </div>
-                <div class="card-dates">
-                    <p>
-                        {{ trip.start_date.strftime('%b %d') }} - {{ trip.end_date.strftime('%b %d %Y') }}
-                    </p> 
-                </div>
-                <div class="user-avatar">
-                    <img class="card-user" src="{{ user.profile_img }}" id="trip-profile-img">
-                </div>
-                <div class="card-link">
-    
-                </div>
-            </div>
-            </a>
+            <form action="/find_friends" id="friend-search-box" method="POST">
+                <h5>Find someone by email:</h5>
+                <input type="text" id="friend-search" name="friend-search">
+                <input type="submit" id="submit-friend-search" value="Find 'Em"> 
+            </form>
+
+            <form>
+                <input type="submit" id="add-ohana-button" value="Add someone to your Travel 'Ohana">
+            </form>
+
         </div>
-        {% endfor %}
     </div>
+</div>
+
+
+    
+
+<!-- HIDDEN VALUE -->
+<input type="hidden" id="user-id" value="{{ user.user_id }}">
    
 <!-- END FLUID CONTAINER --> 
 </div>
 
 <!-- JS SCRIPT TAGS -->
+
 {% endblock %}

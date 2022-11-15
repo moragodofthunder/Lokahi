@@ -13,6 +13,9 @@
         border: 1px solid black;
         border-bottom: 1px solid black;
     }
+    #travel-ohana-list {
+        display: none;
+    }
 </style>
 {% endblock %}
 
@@ -49,6 +52,27 @@
             <h3>
                 {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
             </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- TRAVEL OHANA -->
+        <div id="trip-users">
+            <h3>
+                'Ohana Traveling Lōkahi:
+                FRIENDS GO HERE
+            </h3>
+        </div>
+        <div id="add-friends">
+            <form action="/add_friends_to_trip", method="POST" id="add-friend-button">
+                Traveling with Friends?
+                <input type="submit" id="add-ohana-button" value="Add From 'Ohana">
+                <select id="travel-ohana-list">
+                    {% for friend in user.following %}
+                    <option value="{{ friend.fname }}">{{ friend.fname }}</option>
+                    {% endfor %}
+                </select>
+            </form>
         </div>
     </div>
 
@@ -127,10 +151,15 @@
         </div>
     </div>
 
+<!-- HIDDEN VALUE -->
+<input type="hidden" id="user-id" value="{{ user.user_id }}">
+
 <!-- END FLUID CONTAINER     -->
 </div>
 
 
 <!-- JS SCRIPT TAGS -->
+<script src="trip_details.js">
 
+</script>
 {% endblock %}
