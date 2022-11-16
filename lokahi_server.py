@@ -162,14 +162,13 @@ def add_friends_to_trip(trip_id):
 
     user = crud.get_user_by_id(session["user_id"])
     trip_bud = request.form.get("trip-buds")
+    trip_friend = crud.get_user_by_id(int(trip_bud))
     trip = crud.get_trip_by_id(trip_id)
 
-    trip.users.append(trip_bud)
-    db.session.add(trip_bud)
+    trip.users.append(trip_friend)
+    db.session.add(trip)
     db.session.commit()
-    flash(f"{trip_bud.fname} was added to your 'Ohana Traveling Lōkahi")
-
-    print(f"++++++THIS IS YOUR TRIP BUUUUUUUUDDDD: {trip_bud}")
+    flash(f"{trip_friend.fname} was added to your 'Ohana Traveling Lōkahi")
 
     return redirect(f"/trip_details/{trip_id}")
 
@@ -365,6 +364,12 @@ def save_place_data():
     db.session.commit()
 
     return "Success"
+
+###---------------------------MAP-OF-SAVED-PLACES-----------------------###
+@app.route("/saved_places_map")
+def show_sp_map():
+    
+    return render_template("saved_places_map.html")
 
 ###-----------------------------OTHER-STUFF----------------------------###
 

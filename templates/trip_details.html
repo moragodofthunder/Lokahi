@@ -4,16 +4,12 @@
 {% block head %}
 <style>
     
-    td,tr, tbody {
+    td {
         border: 1px solid black;
-    }
-    #place-name {
-        border: 1px solid black;
-        border-bottom: 1px solid black;
     }
 
     #itin-cards {
-        display: grid;
+        display: flex;
         width: 350px;
         height: 85px;
         text-shadow: 0 1px 3px rgba(0,0,0,0.6);
@@ -24,6 +20,19 @@
         margin-bottom: 20px;
         background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));
         background-image: url('/static/img/cards/suitcase-banner.png');
+    }
+    #ohana-lokahi-img {
+        border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
+        width: 100px;
+        height: 100px;
+    }
+    #itin-date {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 25px;
+        font-family: 'Casty Demo';
+        color: #e6ffcc;
     }
 </style>
 {% endblock %}
@@ -71,7 +80,8 @@
                 'Ohana Traveling Lōkahi:
                 <div id="ohana-lokahi">
                     {% for person in trip.users %}
-                    <img src="{{ person.profile_img }}">
+                    <img src="{{ person.profile_img }}" id="ohana-lokahi-img">
+                    <h5>{{ person.fname }}</h5>
                     {% endfor %}
             </h3>
         </div>
@@ -97,15 +107,24 @@
         </div>
         {% endif %}
     </div>
+
+    <div class="row">
+        <!-- LINK TO MAP OF SAVED PLACES -->
+        <div id="go-to-sp-map">
+            <a href="/saved_places_map">Go to Map of Your Saved Places</a>
+        </div>
+    </div>
   
 
     <div class="row">
         <div class="col">
-            <!-- ITINERARY TABLES -->
-            <div id="itinerary">
-                <h4>
-                    Itinerary
-                </h4>    
+            <div class="row">
+               <!-- ITINERARY TABLES -->
+                <div id="itinerary">
+                    <h4>
+                        Itinerary
+                    </h4>    
+                </div> 
             </div>
         </div>
 
@@ -116,7 +135,7 @@
                     <table class="table  table-hover" id="date-tables">
                         <thead>
                             <tr>
-                                <th scope="col">
+                                <th scope="col" id="itin-date">
                                     {{ date }}
                                 </th>
                             </tr> 
@@ -133,8 +152,8 @@
                             {% endif %}       
                         </tbody>                               
                     </table>
-                    </div>
-                    {% endfor %}
+                </div>
+            {% endfor %}
             </div>
         </div>
     </div>

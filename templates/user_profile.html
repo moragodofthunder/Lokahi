@@ -32,6 +32,7 @@
         width: 30px;
         height: auto;
         border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
+        display: inline-block;
     }
     .card-user {
         position: absolute;
@@ -140,7 +141,9 @@
                             </p> 
                         </div>
                         <div class="user-avatar">
-                            <img class="card-user" src="{{ user.profile_img }}" id="trip-profile-img">
+                            {% for friend in trip.users %}
+                            <img class="card-user" src="{{ friend.profile_img }}" id="trip-profile-img">
+                            {% endfor %}
                         </div>
                         <div class="card-link">
                         </div>
