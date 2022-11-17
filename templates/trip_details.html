@@ -42,7 +42,7 @@
         font-size: 47px;
     }
     h3 {
-        font-family: 'Casty Demo';
+        font-family: 'Deserved';
         font-size: 36px;
     }
     h4 {
@@ -93,7 +93,7 @@
     </div>
 
     <div class="row">
-        <div class="col-3">
+        <div class="col-6">
             <!-- TRAVEL OHANA -->
         <div id="trip-users">
             <h4>'Ohana Going On Trip:</h4>
@@ -117,7 +117,7 @@
         </div>
         
 
-        <div class="col-3">
+        <div class="col-6">
             <div class="planner-link">
                 <!-- LINK TO TRIP PLANNER FOR TRIP IF TRIP IS 'UPCOMING' -->
                 {% if upcoming == True %}
@@ -130,7 +130,7 @@
             <div class="sp-map-link">
                 <!-- LINK TO MAP OF SAVED PLACES -->
                 <div id="go-to-sp-map">
-                    <a href="/saved_places_map">Go to Map of Your Saved Places</a>
+                    <a href="/saved_places_map/{{ trip.trip_id }}">Go to Map of Your Saved Places</a>
                 </div>
             </div>
           

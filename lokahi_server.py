@@ -193,8 +193,16 @@ def create_new_trip():
     end_date = request.form.get("end-date")
     trip_img = "/static/img/cards/suitcase.png"
 
+    address = f"{trip_city}, {trip_country}"
+    api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+    api_response_dict = api_response.json()
+
+    if api_response_dict['status'] == 'OK':
+        trip_lat = api_response_dict['results'][0]['geometry']['location']['lat']
+        trip_lng = api_response_dict['results'][0]['geometry']['location']['lng']
+
     trip = crud.create_trip(trip_name, trip_country, trip_city, 
-    start_date, end_date, trip_img, session['user_id'])
+    start_date, end_date, trip_img, trip_lat, trip_lng, session['user_id'])
 
     db.session.add(trip)
     db.session.commit()
@@ -364,12 +372,49 @@ def save_place_data():
     db.session.commit()
 
     return "Success"
+###---------------------------ALL-SAVED-PLACES-----------------------###
+@app.route("/api/all_places")
+def places_info():
+    """JSON info about user's saved places"""
+
+    user = crud.get_user_by_id(session["user_id"])
+    # trip = crud.get_trip_by_id(trip_id)
+    places = crud.get_places_by_user(user.user_id)
+    # trip_places = crud.get_places_by_trip(trip)
+
+    all_places = []
+
+    for place in places:
+    
+        all_places.append({"id": place.place_id,
+        "user": place.user_id,
+        "trip": place.trip_id,
+        "name": place.place_name,
+        "placeCountry": place.place_country,
+        "placeCity": place.place_city,
+        "inItin": place.in_itinerary,
+        "itinDT": place.itinerary_dt,
+        "category": place.category,
+        "placeLat": place.latitude,
+        "placeLng": place.longitude,})
+        
+
+    return jsonify(all_places)
 
 ###---------------------------MAP-OF-SAVED-PLACES-----------------------###
-@app.route("/saved_places_map")
-def show_sp_map():
-    
-    return render_template("saved_places_map.html")
+@app.route("/saved_places_map/<trip_id>")
+def show_sp_map(trip_id):
+    """Shows map of places user has saved for trip"""
+
+    trip = crud.get_trip_by_id(trip_id)
+
+    if trip.start_date >= date.today():
+        upcoming = True
+    else:
+        upcoming = False
+
+    return render_template("saved_places_map.html", trip=trip, 
+    upcoming=upcoming, YOUR_API_KEY=api_key)
 
 ###-----------------------------OTHER-STUFF----------------------------###
 

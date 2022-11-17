@@ -34,12 +34,13 @@ def get_user_by_id(user_id):
 
 ###--------------------------------CREATE-TRIP-------------------------------###
 def create_trip(trip_name, trip_country, trip_city, start_date, 
-                end_date, trip_img, user_id):
+                end_date, trip_img, trip_lat, trip_lng, user_id):
     """Create trip and return trip."""
 
     trip = Trip(trip_name=trip_name, trip_country=trip_country,
             trip_city=trip_city, start_date=start_date, 
-            end_date=end_date, trip_img=trip_img, user_id=user_id)
+            end_date=end_date, trip_img=trip_img, trip_lat=trip_lat,
+            trip_lng=trip_lng, user_id=user_id)
 
     return trip
 
@@ -90,6 +91,10 @@ def get_places_by_trip(trip_id):
 ###-------------------------------GET-PLACES-BY-CATEGORY-------------------------###
 def get_places_by_cat(trip_id):
     return Place.query.filter(Place.trip == trip_id).order_by(Place.category).all()
+
+###-------------------------------GET-PLACES-BY-USER-ID------------------------###
+def get_places_by_user(user_id):
+    return Place.query.filter(Place.user_id == user_id).order_by(Place.place_country).all()
 
 ###----------------------------------OTHER-STUFF---------------------------------###
 if __name__ == '__main__':

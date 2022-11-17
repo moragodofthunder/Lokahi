@@ -60,6 +60,8 @@ class Trip(db.Model):
     start_date = db.Column(db.Date, nullable= False)
     end_date = db.Column(db.Date, nullable= False)
     trip_img = db.Column(db.String, nullable= True)
+    trip_lat = db.Column(db.String, nullable= True)
+    trip_lng = db.Column(db.String, nullable= True)
 
     users = db.relationship("User", secondary="trip_users", back_populates="trips")
     places = db.relationship("Place", back_populates="trip")

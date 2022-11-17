@@ -29,15 +29,19 @@ f_names = []
 
 f_names = list(names.keys())
 
+profile_pics = ["/static/img/avatars/purple-profile.png", "https://res.cloudinary.com/lokahi-cloud/image/upload/v1668557833/n6bjegtzrb3c1fkhttzz.png",
+ "https://res.cloudinary.com/lokahi-cloud/image/upload/v1668558178/ndoe39a4bboawu0bo5du.png", "https://res.cloudinary.com/lokahi-cloud/image/upload/v1668558217/vykblvhfizwomd6fqgzr.png",
+ "https://res.cloudinary.com/lokahi-cloud/image/upload/v1668558257/y1vbha6vo7njtzpduxta.png"]
+
 #Create 5 fake users
 for n in range(5):
-    i = randint(0, 6)
+    # i = randint(0, 6)
     email = f"user{n}@test.com"
     password = "1234"
-    fname = f_names[i]
+    fname = choice(f_names)
     print(f"THIS IS THE FIRST NAAAAAME: {fname}")
     lname = names[fname]
-    profile_img = "/static/img/avatars/purple-profile.png"
+    profile_img = choice(profile_pics)  
 
     user = crud.create_user(email, password, fname, lname, profile_img)
     model.db.session.add(user)
@@ -58,5 +62,17 @@ for n in range(5):
         trip = crud.create_trip(trip_name, trip_country, 
         trip_city, start_date, end_date, trip_img, user.user_id)
         model.db.session.add(trip)
+
+if user.user_id == 2:
+    user.profile_img = "https://res.cloudinary.com/lokahi-cloud/image/upload/v1668557833/n6bjegtzrb3c1fkhttzz.png"
+
+elif user.user_id == 1:
+    user.profile_img = "https://res.cloudinary.com/lokahi-cloud/image/upload/v1668558178/ndoe39a4bboawu0bo5du.png"
+
+elif user.user_id == 4:
+    user.profile_img = "https://res.cloudinary.com/lokahi-cloud/image/upload/v1668558217/vykblvhfizwomd6fqgzr.png"
+
+elif user.user_id == 5:
+    user.profile_img = "https://res.cloudinary.com/lokahi-cloud/image/upload/v1668558257/y1vbha6vo7njtzpduxta.png"    
 
 model.db.session.commit()

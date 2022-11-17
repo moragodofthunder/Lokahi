@@ -43,7 +43,7 @@ function initMap() {
     
         for(const result of data.results) {
             if (result.photo_url === undefined) {
-                result.photo_url = "/static/img/green_pin.png";
+                result.photo_url = "/static/img/cards/suitcase.png";
             }
 
             const placeLatLng = {lat: result.lat, lng: result.lng}

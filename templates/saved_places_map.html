@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Saved Places Map{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<link href="/static/css/maps.css" rel="stylesheet">
+{% endblock %}
 
 <!-- NAVBAR -->
 {% include 'navbar.html' %}
@@ -10,12 +12,61 @@
 {% block body %}
 <div class="container-fluid">
 
-    THIS WILL BE THE MAP OF SAVED PLACES
+    <!-- TITLE/TRIP NAME -->
+    <div class="row">
+        <div id="planner-title">
+            <h1>Saved Places Map for: <span class="trip-name">{{ trip.trip_name }} </span></h1>
+        </div> 
+    </div>
+
+    <!-- TRIP CITY, COUNTRY -->
+    <div class="row">
+        <div id="trip-place">
+            <h3>
+                <span id="trip-city">
+                    {{ trip.trip_city }}
+                </span>, <span id="trip-country">
+                    {{ trip.trip_country }}
+                </span>
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <a href="/trip_details/{{ trip.trip_id }}">Back to Trip Details</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="planner-link">
+            <!-- LINK TO TRIP PLANNER FOR TRIP IF TRIP IS 'UPCOMING' -->
+            {% if upcoming == True %}
+            <h5>Want to save more places?</h5>
+            <span id="edit-trip">
+                <a href="/trip_planner/{{ trip.trip_id }}">Find more places in Trip Planner</a>
+            </span>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- MAP OF SAVED PLACES -->
+    <div class="sp-map" id="sp-map"></div>
+
+<!-- HIDDEN VALUE -->
+<input type="hidden" id="trip-id" value="{{ trip.trip_id }}">
+<input type="hidden" id="trip-lat" value="{{ trip.trip_lat }}">
+<input type="hidden" id="trip-lng" value="{{ trip.trip_lng }}">
+
 
 <!-- END FLUID CONTAINER -->
 </div>
 
 <!-- JS SCRIPT TAGS -->
+<script src="/static/js/sp-map.js"></script>
+<script async 
+src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&libraries=places&callback=initMap&v=beta&libraries=marker">
+</script>
 
 {% endblock %}
 
