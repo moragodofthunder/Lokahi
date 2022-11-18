@@ -7,6 +7,9 @@ from datetime import datetime
 import model
 import lokahi_server
 import crud
+import requests
+
+api_key = os.environ['YOUR_API_KEY']
 
 os.system("dropdb lokahi")
 os.system("createdb lokahi")
@@ -52,6 +55,15 @@ for n in range(5):
         get_city = sample(cities, 1)
         trip_city = "".join(get_city)
         trip_country = places[trip_city]
+
+        address = f"{trip_city}, {trip_country}"
+        api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+        api_response_dict = api_response.json()
+
+        if api_response_dict['status'] == 'OK':
+            trip_lat = api_response_dict['results'][0]['geometry']['location']['lat']
+            trip_lng = api_response_dict['results'][0]['geometry']['location']['lng']
+
         random_start = randint(14, 20)
         start_date = f"2022-11-{random_start}"
         random_end = random_start + 5
@@ -60,7 +72,7 @@ for n in range(5):
         trip_img = "/static/img/cards/suitcase.png"
 
         trip = crud.create_trip(trip_name, trip_country, 
-        trip_city, start_date, end_date, trip_img, user.user_id)
+        trip_city, start_date, end_date, trip_img, trip_lat, trip_lng, user.user_id)
         model.db.session.add(trip)
 
 if user.user_id == 2:

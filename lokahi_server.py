@@ -77,17 +77,28 @@ def show_user_profile():
     if "user_id" in session:
         user = crud.get_user_by_id(session["user_id"])
         user_trips = crud.get_trips_by_user_id(user.user_id)
+        shared_trips = user.trips
 
+        shared_upcoming = []
+        shared_past = []
         upcoming = []
         past = []
+
         for trip in user_trips:
             if trip.start_date >= date.today():
                 upcoming.append(trip)
             else:
                 past.append(trip)
 
+        for trip in shared_trips:
+            if trip.start_date >= date.today():
+                shared_upcoming.append(trip)
+            else:
+                shared_past.append(trip)
+
         return render_template('user_profile.html', user=user, 
-        user_trips=user_trips, upcoming=upcoming, past=past)
+        user_trips=user_trips, upcoming=upcoming, past=past, 
+        shared_upcoming=shared_upcoming, shared_past=shared_past)
 
     else:
         flash("Please log in or create new account.")
@@ -272,6 +283,8 @@ def show_trip_details(trip_id):
     places_by_category= {}
 
     for place in places_by_trip:
+        if place.itinerary_dt == None:
+            continue
         new_dt = place.itinerary_dt.strftime('%A, %b %d %Y')
         if new_dt in places_by_day:
             places_by_day[new_dt].append(place)
@@ -286,11 +299,12 @@ def show_trip_details(trip_id):
             places_by_category[category] = [place]
 
     user = crud.get_user_by_id(session["user_id"])
+    trip_maker = crud.get_user_by_id(trip.user_id)
     
     return render_template('trip_details.html', trip=trip, 
     upcoming=upcoming, travel_dates=travel_dates, 
     places_by_day=places_by_day, places_by_category=places_by_category,
-    user=user)
+    user=user, trip_maker=trip_maker)
 
 
 ###-----------------------------PLACE-SEARCH----------------------------###
@@ -349,27 +363,104 @@ def get_place_info():
 ###-----------------------------SAVE-PLACE-TO-DB----------------------------###
 @app.route('/save-place', methods=['POST'])
 def save_place_data():
+
+    place_pins = {
+    'Breakfast': '/static/img/pins/1-breakfast-pin.png',
+    'Lunch': '/static/img/pins/2-lunch-pin.png',
+    'Dinner': '/static/img/pins/3-dinner-pin.png',
+    'Streetfood': '/static/img/pins/4-streetfood-pin.png',
+    'Dessert': '/static/img/pins/5-dessert-pin.png',
+    'Cafe': '/static/img/pins/6-cafe-pin.png',
+    'Nightlife': '/static/img/pins/7-nightlife-pin.png',
+    'Bar/Pub': '/static/img/pins/8-bar-pin.png',
+    'Shopping': '/static/img/pins/9-shopping-pin.png',
+    'Groceries': '/static/img/pins/10-grocery-pin.png',
+    'Convenience Store': '/static/img/pins/11-kombini-pin.png',
+    'Outdoor Market': '/static/img/pins/12-farmers-market-pin.png',
+    'Covered Market': '/static/img/pins/13-bazaar-pin.png',
+    'Bookstore/Library': '/static/img/pins/14-bookstore-pin.png',
+    'Train Station': '/static/img/pins/15-train-pin.png',
+    'Museum': '/static/img/pins/16-museum-pin.png',
+    'Landmark': '/static/img/pins/17-landmark-pin.png',
+    'Photo Spot': '/static/img/pins/18-photo-pin.png',
+    'Temple/Shrine/Worship': '/static/img/pins/19-shrine-pin.png',
+    'Entertainment': '/static/img/pins/20-entertain-pin.png',
+    'Music': '/static/img/pins/21-music-pin.png',
+    'Hot Spring': '/static/img/pins/22-onsen-pin.png',
+    'Beach': '/static/img/pins/23-beach-pin.png',
+    'Park': '/static/img/pins/24-park-pin.png',
+    'Hiking': '/static/img/pins/25-hiking-pin.png',
+    'Surfing': '/static/img/pins/26-surf-pin.png',
+    'Workspace': '/static/img/pins/27-work-pin.png',
+    'COVID Testing': '/static/img/pins/28-covid-pin.png',
+    'Miscellaneous': '/static/img/pins/29-misc-pin.png'}
+
+    cat_emojis = {
+    'Breakfast': '/static/img/emojis/1-breakfast-emoji.png',
+    'Lunch': '/static/img/emojis/2-lunch-emoji.png',
+    'Dinner': '/static/img/emojis/3-dinner-emoji.png',
+    'Streetfood': '/static/img/emojis/4-streetfood-emoji.png',
+    'Dessert': '/static/img/emojis/5-dessert-emoji.png',
+    'Cafe': '/static/img/emojis/6-cafe-emoji.png',
+    'Nightlife': '/static/img/emojis/7-nightlife-emoji.png',
+    'Bar/Pub': '/static/img/emojis/8-bar-emoji.png',
+    'Shopping': '/static/img/emojis/9-shopping-emoji.png',
+    'Groceries': '/static/img/emojis/10-grocery-emoji.png',
+    'Convenience Store': '/static/img/emojis/11-kombini-emoji.png',
+    'Outdoor Market': '/static/img/emojis/12-farmers-market-emoji.png',
+    'Covered Market': '/static/img/emojis/13-bazaar-emoji.png',
+    'Bookstore/Library': '/static/img/emojis/14-bookstore-emoji.png',
+    'Train Station': '/static/img/emojis/15-train-emoji.png',
+    'Museum': '/static/img/emojis/16-museum-emoji.png',
+    'Landmark': '/static/img/emojis/17-landmark-emoji.png',
+    'Photo Spot': '/static/img/emojis/18-photo-emoji.png',
+    'Temple/Shrine/Worship': '/static/img/emojis/19-shrine-emoji.png',
+    'Entertainment': '/static/img/pins/20-entertain-pin.png',
+    'Music': '/static/img/pins/21-music-pin.png',
+    'Hot Spring': '/static/img/pins/22-onsen-pin.png',
+    'Beach': '/static/img/pins/23-beach-pin.png',
+    'Park': '/static/img/pins/24-park-pin.png',
+    'Hiking': '/static/img/pins/25-hiking-pin.png',
+    'Surfing': '/static/img/pins/26-surf-pin.png',
+    'Workspace': '/static/img/pins/27-work-pin.png',
+    'COVID Testing': '/static/img/pins/28-covid-pin.png',
+    'Miscellaneous': '/static/img/pins/29-misc-pin.png'}
     
     ps_cat = request.json["psCategory"]
     ps_notes = request.json["psNotes"]
     ps_itinerary = request.json["psItinerary"]
+    print(f"THIS IS PS_ITINERARYYYYYYY: {type(ps_itinerary)}")
     ps_city = request.json["psCity"]
     ps_country = request.json["psCountry"]
     trip_id = request.json["psTripId"]
+    trip_id = int(trip_id)
 
     ps_name = session['ps-name']
     ps_lat = session['ps-lat']
     ps_lng = session['ps-lng']
+    # place_img = session['place-img']
+
+    cat_pin = place_pins[ps_cat]
+    cat_emoji = cat_emojis[ps_cat]
 
     user_id = session['user_id']
 
-    new_ps_itin = datetime.strptime(ps_itinerary,'%A, %b %d %Y')
-    new_ps_itin = new_ps_itin.strftime('%Y-%m-%d')
+    if ps_itinerary == "":
+        new_ps_itin = None
+        in_itinerary = False
+    else:
+        new_ps_itin = datetime.strptime(ps_itinerary,'%A, %b %d %Y')
+        new_ps_itin = new_ps_itin.strftime('%Y-%m-%d')
+        in_itinerary = True
     
-    saved_place = crud.save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, 
-    new_ps_itin, ps_lat, ps_lng, ps_city, ps_country)
+    saved_place = crud.save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, in_itinerary,
+    new_ps_itin, ps_lat, ps_lng, ps_city, ps_country, cat_pin, cat_emoji)
     db.session.add(saved_place)
     db.session.commit()
+    flash(f"{ps_name} saved")
+
+    if new_ps_itin is not None:
+        flash(f"{ps_name} saved to your itinerary for {new_ps_itin}")
 
     return "Success"
 ###---------------------------ALL-SAVED-PLACES-----------------------###
@@ -385,6 +476,11 @@ def places_info():
     all_places = []
 
     for place in places:
+
+        if place.in_itinerary == True:
+            place.in_itinerary = "Yes"
+        else:
+            place.in_itinerary = "No"
     
         all_places.append({"id": place.place_id,
         "user": place.user_id,
@@ -395,6 +491,8 @@ def places_info():
         "inItin": place.in_itinerary,
         "itinDT": place.itinerary_dt,
         "category": place.category,
+        "catPin": place.cat_pin,
+        "catEmoji": place.cat_emoji,
         "placeLat": place.latitude,
         "placeLng": place.longitude,})
         

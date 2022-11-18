@@ -20,7 +20,7 @@
         background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));
         background-image: url('/static/img/cards/suitcase-banner.png');
     }
-    #ohana-lokahi-img {
+    #ohana-lokahi-img, #organizer-img {
         border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
         width: 100px;
         height: 100px;
@@ -89,6 +89,19 @@
             <h3>
                 {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
             </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <!-- TRIP ORGANIZER -->
+        <div id="trip-users">
+            <h4>Trip Organizer:</h4>
+                <div id="trip-organizer">
+                    <img src="{{ trip_maker.profile_img }}" id="organizer-img">
+                    <h5>{{ trip_maker.fname }}</h5>
+                </div>
+            </div>
         </div>
     </div>
 

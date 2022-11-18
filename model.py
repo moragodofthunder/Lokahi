@@ -97,9 +97,12 @@ class Place(db.Model):
     place_name = db.Column(db.String(50), nullable= False)
     place_country = db.Column(db.String(30), nullable= False)
     place_city = db.Column(db.String(30), nullable= False)
+    place_img = db.Column(db.String, nullable=True)
     in_itinerary = db.Column(db.Boolean, nullable= False)
     itinerary_dt = db.Column(db.DateTime)
     category = db.Column(db.String(30), nullable= False)
+    cat_pin = db.Column(db.String, nullable=True)
+    cat_emoji = db.Column(db.String, nullable=True)
     latitude = db.Column(db.Float, nullable= False)
     longitude = db.Column(db.Float, nullable= False)
 

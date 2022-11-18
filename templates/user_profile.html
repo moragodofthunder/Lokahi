@@ -16,7 +16,7 @@
         display: none;
     }
     .card {
-        display: grid;
+        display: flex;
         width: 350px;
         height: 350px;
         text-shadow: 0 1px 3px rgba(0,0,0,0.6);
@@ -44,6 +44,7 @@
         height: auto;
         border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;    
     }
+
     .card-city {
         position: absolute;
         top: 10px;
@@ -122,7 +123,7 @@
 
     <!-- UPCOMING TRIPS LIST -->
     <div class="row">
-        <h2>Upcoming Trips:</h2>
+        <h2>Your Upcoming Trips:</h2>
     </div>
 
     <div class="row">
@@ -154,7 +155,7 @@
             </div> 
                 <!-- PAST TRIPS LIST -->
             <div class="row">
-                <h2>Past Trips:</h2>
+                <h2>Your Past Trips:</h2>
             </div>
 
             <div class="row">
@@ -171,7 +172,73 @@
                             </p> 
                         </div>
                         <div class="user-avatar">
+                            {% for friend in trip.users %}
+                            <img class="card-user" src="{{ friend.profile_img }}" id="trip-profile-img">
+                            {% endfor %}
+                        </div>
+                        <div class="card-link">
+            
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <!-- SHARED UPCOMING TRIPS LIST -->
+    <div class="row">
+        <h2>Your Shared Upcoming Trips:</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                {% for trip in shared_upcoming %}
+                <div class="col-xs-12 col-sm-4">
+                    <a href="/trip_details/{{ trip.trip_id }}">
+                    <div class="card">
+                        <div class="card-city">
+                                {{ trip.trip_name }}
+                        </div>
+                        <div class="card-dates">
+                            <p>
+                                {{ trip.start_date.strftime('%b %d') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+                            </p> 
+                        </div>
+                        <div class="user-avatar">
                             <img class="card-user" src="{{ user.profile_img }}" id="trip-profile-img">
+                        </div>
+                        <div class="card-link">
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div> 
+                <!-- SHARED PAST TRIPS LIST -->
+            <div class="row">
+                <h2>Your Shared Past Trips:</h2>
+            </div>
+
+            <div class="row">
+            {% for trip in shared_past %} 
+                <div class="col-xs-12 col-sm-4">
+                    <a href="/trip_details/{{ trip.trip_id }}">
+                    <div class="card">
+                        <div class="card-city">
+                                {{ trip.trip_name }}
+                        </div>
+                        <div class="card-dates">
+                            <p>
+                                {{ trip.start_date.strftime('%b %d') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+                            </p> 
+                        </div>
+                        <div class="user-avatar">
+                            {% for friend in trip.users %}
+                            <img class="card-user" src="{{ friend.profile_img }}" id="trip-profile-img">
+                            {% endfor %}
                         </div>
                         <div class="card-link">
             

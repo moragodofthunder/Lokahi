@@ -77,7 +77,7 @@ function initMap() {
                 <h5 id="google-cat">${result.types.replace("_", " ")}</h5>
                 <h6 id="google-rating">Rating: ${result.rating} stars</h6>
                 <h6 id="ps-latlng">(lat: ${result.lat}, lng: ${result.lng})</h6>
-                <img id="place-img" src="${result.photo_url}"> 
+                <img id="place-img" src="${result.photo_url}" value="${result.photo_url}"> 
                 `
                 
                 const placeMarker = new google.maps.Marker({
