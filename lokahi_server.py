@@ -313,7 +313,7 @@ def get_place_info():
     """Get place info for place user searches for from Places API"""
 
     user_place = request.args.get('userSearch')
-    user_loc = request.args.get('userLocation')
+    user_loc = request.args.get('tripLocation')
 
     url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
 
@@ -460,7 +460,7 @@ def save_place_data():
     flash(f"{ps_name} saved")
 
     if new_ps_itin is not None:
-        flash(f"{ps_name} saved to your itinerary for {new_ps_itin}")
+        flash(f"{ps_name} saved to your itinerary for {ps_itinerary}")
 
     return "Success"
 ###---------------------------ALL-SAVED-PLACES-----------------------###
@@ -479,8 +479,10 @@ def places_info():
 
         if place.in_itinerary == True:
             place.in_itinerary = "Yes"
+            place.itinerary_dt = place.itinerary_dt.strftime('%b %d, %Y')
         else:
             place.in_itinerary = "No"
+            place.itinerary_dt = "N/A"
     
         all_places.append({"id": place.place_id,
         "user": place.user_id,
