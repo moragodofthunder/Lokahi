@@ -3,9 +3,15 @@
 
 {% block head %}
 <style>
-    
-    td, tr, th, thead, table, tbody, #date-tables {
+    #date-tables {
+        border: 1px solid black;  
+    }
+    td, tr, tbody {
         border: 1px solid black;
+    }
+    
+    #itin-date-back {
+        background-image: "/static/img/cards/suitcase-banner-2.png";
     }
 
     #ohana-lokahi-img, #organizer-img {
@@ -14,9 +20,6 @@
         height: 100px;
     }
     #itin-date {
-        position: absolute;
-        top: 10px;
-        left: 10px;
         font-size: 25px;
         font-family: 'Casty Demo';
         color: black;
@@ -139,7 +142,7 @@
                 <!-- LINK TO TRIP PLANNER FOR TRIP IF TRIP IS 'UPCOMING' -->
                 {% if upcoming == True %}
                 <div id="edit-trip">
-                    <a href="/trip_planner/{{ trip.trip_id }}">Edit trip in Trip Planner</a>
+                    <a href="/trip_planner/{{ trip.trip_id }}">Find Places to Save in Trip Planner</a>
                 </div>
                 {% endif %}
             </div>
@@ -161,31 +164,31 @@
                 </div> 
             </div>
 
-            <div class="itin-table-cards">
+            <div class="row">
                 {% for date in travel_dates %}
-                <div class="col">
-                    <div class="table-cards" id="itin-cards">
-                        <table class="table  table-hover" id="date-tables">
-                            <thead>
-                                <tr>
-                                    <th scope="col" id="itin-date">
-                                        {{ date }}
-                                    </th>
-                                </tr> 
-                            </thead>
-                            <tbody>
-                                {% if date in places_by_day %}
-                                    {% for place in places_by_day[date] %}   
-                                            <tr>
-                                                <td>
-                                                    {{ place.place_name }}
-                                                </td>
-                                            </tr>
-                                    {% endfor %}   
-                                {% endif %}       
-                            </tbody>                               
-                        </table>
-                    </div>
+                <div class="col-6">
+                    
+                    <table class="table  table-hover" id="date-tables">
+                        <thead>
+                            <tr id="itin-date-back">
+                                <th scope="col" id="itin-date">
+                                    {{ date }}
+                                </th>
+                            </tr> 
+                        </thead>
+                        <tbody>
+                            {% if date in places_by_day %}
+                                {% for place in places_by_day[date] %}   
+                                        <tr>
+                                            <td>
+                                                {{ place.place_name }}
+                                            </td>
+                                        </tr>
+                                {% endfor %}   
+                            {% endif %}       
+                        </tbody>                               
+                    </table>
+                    
                 {% endfor %}
                 </div>
             </div>
@@ -195,7 +198,7 @@
             </div>
         </div>
 
-        <div class="col-3">
+        <div class="col-6">
             <!-- SAVED PLACES TABLE -->
             <div id="saved-places">
                 <h4>

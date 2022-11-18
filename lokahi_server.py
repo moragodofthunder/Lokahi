@@ -315,7 +315,7 @@ def upload_trip_img(trip_id):
 
     result = cloudinary.uploader.upload(trip_img, api_key=CLOUDINARY_KEY,
     api_secret=CLOUDINARY_SECRET, cloud_name=CLOUD_NAME, gravity="auto", 
-    height=300, width=300, crop="fill")
+    height=300, width=300, crop="fill", radius="max")
 
     img_url = result['secure_url']
 
@@ -326,6 +326,40 @@ def upload_trip_img(trip_id):
     flash("Trip image changed")
 
     return redirect(f"/trip_details/{trip_id}")
+
+###---------------------------ITINERARY-EDITOR--------------------------###
+@app.route('/itinerary_editor/<trip_id>')
+def edit_itinerary(trip_id):
+    """Let's users edit itinerary on page"""
+
+    trip = crud.get_trip_by_id(trip_id)
+    start = trip.start_date
+    end = trip.end_date
+    travel_dates = [start.strftime('%A, %b %d %Y')]
+
+    delta = timedelta(days = 1)
+    while start <= end:
+        timedelta(days = 1)
+        start += delta
+        formatted_date = start.strftime('%A, %b %d %Y')
+        travel_dates.append(formatted_date)
+
+    travel_dates.pop()
+
+    places_by_trip = crud.get_places_by_trip(trip)
+    places_by_day= {}
+
+    for place in places_by_trip:
+        if place.itinerary_dt == None:
+            continue
+        new_dt = place.itinerary_dt.strftime('%A, %b %d %Y')
+        if new_dt in places_by_day:
+            places_by_day[new_dt].append(place)
+        else:
+            places_by_day[new_dt] = [place]
+
+    return render_template("edit-itin.html", trip=trip, travel_dates=travel_dates, 
+    places_by_day=places_by_day)
 
 
 ###-----------------------------PLACE-SEARCH----------------------------###
@@ -505,7 +539,8 @@ def places_info():
             place.in_itinerary = "No"
             place.itinerary_dt = "N/A"
     
-        all_places.append({"id": place.place_id,
+        all_places.append({
+        "id": place.place_id,
         "user": place.user_id,
         "trip": place.trip_id,
         "name": place.place_name,
