@@ -42,8 +42,8 @@
         <div class="planner-link">
             <!-- LINK TO TRIP PLANNER FOR TRIP IF TRIP IS 'UPCOMING' -->
             {% if upcoming == True %}
-            <h5>Want to save more places?</h5>
             <span id="edit-trip">
+                <h5>Want to save more places?</h5>
                 <a href="/trip_planner/{{ trip.trip_id }}">Find more places in Trip Planner</a>
             </span>
             {% endif %}

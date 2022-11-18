@@ -306,6 +306,27 @@ def show_trip_details(trip_id):
     places_by_day=places_by_day, places_by_category=places_by_category,
     user=user, trip_maker=trip_maker)
 
+###----------------------------USER-TRIP-IMG---------------------------###
+@app.route('/api/trip_img/<trip_id>', methods=['POST'])
+def upload_trip_img(trip_id):
+    """Let users upload a photo for their profile image"""
+
+    trip_img = request.files['trip-img']
+
+    result = cloudinary.uploader.upload(trip_img, api_key=CLOUDINARY_KEY,
+    api_secret=CLOUDINARY_SECRET, cloud_name=CLOUD_NAME, gravity="auto", 
+    height=300, width=300, crop="fill")
+
+    img_url = result['secure_url']
+
+    trip = crud.get_trip_by_id(trip_id)
+    trip.trip_img = img_url
+    db.session.commit()
+
+    flash("Trip image changed")
+
+    return redirect(f"/trip_details/{trip_id}")
+
 
 ###-----------------------------PLACE-SEARCH----------------------------###
 @app.route('/api/place-search')
@@ -415,9 +436,9 @@ def save_place_data():
     'Landmark': '/static/img/emojis/17-landmark-emoji.png',
     'Photo Spot': '/static/img/emojis/18-photo-emoji.png',
     'Temple/Shrine/Worship': '/static/img/emojis/19-shrine-emoji.png',
-    'Entertainment': '/static/img/pins/20-entertain-pin.png',
+    'Entertainment': '/static/img/emojis/20-entertain-emoji.png',
     'Music': '/static/img/pins/21-music-pin.png',
-    'Hot Spring': '/static/img/pins/22-onsen-pin.png',
+    'Hot Spring': '/static/img/emojis/22-onsen-emoji.png',
     'Beach': '/static/img/pins/23-beach-pin.png',
     'Park': '/static/img/pins/24-park-pin.png',
     'Hiking': '/static/img/pins/25-hiking-pin.png',
