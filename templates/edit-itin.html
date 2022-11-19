@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}Trip Details{% endblock %}
+
+{% block head %}
+<style>
+#date-tables {
+    border: 1px solid black;  
+}
+td, tr, tbody {
+    border: 1px solid black;
+}
+
+#itin-date-back {
+    background-image: "/static/img/cards/suitcase-banner-2.png";
+}
+#itin-date {
+    font-size: 25px;
+    font-family: 'Casty Demo';
+    color: black;
+}
+</style>
+{% endblock %}
+
+<!-- NAVBAR -->
+{% include 'navbar.html' %}
+
+<!-- START BODY/FLUID CONTAINER -->
+{% block body %}
+<div class="container-fluid">
+
+    <!-- TITLE/TRIP NAME -->
+    <div class="row">
+        <div id="itin-editor-header">
+            <h1>
+                Itinerary Editor: <span class="trip-name">{{ trip.trip_name }}</span>
+            </h1>
+        </div>
+    </div>
+   
+    
+    <div class="row">
+        <!-- TRIP CITY, COUNTRY -->
+        <div id="trip-place">
+            <h2>
+                {{ trip.trip_city }} , {{ trip.trip_country }}
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- TRAVEL DATES -->
+        <div id="trip-dates">
+            <h3>
+                {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- ITINERARY TABLES -->
+        <h4>
+            Itinerary
+        </h4>
+        {% for date in travel_dates %}
+                <div class="col">
+                    
+                    <table class="table  table-hover" id="date-tables">
+                        <thead>
+                            <tr id="itin-date-back">
+                                <th scope="col" id="itin-date">
+                                    {{ date }}
+                                </th>
+                            </tr> 
+                        </thead>
+                        <tbody>
+                            {% if date in places_by_day %}
+                                {% for place in places_by_day[date] %}   
+                                        <tr>
+                                            <td>
+                                                {{ place.place_name }}
+                                            </td>
+                                        </tr>
+                                {% endfor %}   
+                            {% endif %}       
+                        </tbody>                               
+                    </table>
+                    
+                {% endfor %}
+                </div>
+    </div>
+
+ <!-- END FLUID CONTAINER     -->   
+</div>
+
+<!-- JS SCRIPT TAGS -->
+
+{% endblock %}

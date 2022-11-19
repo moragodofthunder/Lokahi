@@ -315,7 +315,7 @@ def upload_trip_img(trip_id):
 
     result = cloudinary.uploader.upload(trip_img, api_key=CLOUDINARY_KEY,
     api_secret=CLOUDINARY_SECRET, cloud_name=CLOUD_NAME, gravity="auto", 
-    height=300, width=300, crop="fill", radius="max")
+    height=300, width=300, crop="fill")
 
     img_url = result['secure_url']
 
@@ -519,24 +519,22 @@ def save_place_data():
 
     return "Success"
 ###---------------------------ALL-SAVED-PLACES-----------------------###
-@app.route("/api/all_places")
-def places_info():
+@app.route("/api/all_places/<trip_id>")
+def places_info(trip_id):
     """JSON info about user's saved places"""
 
-    user = crud.get_user_by_id(session["user_id"])
-    # trip = crud.get_trip_by_id(trip_id)
-    places = crud.get_places_by_user(user.user_id)
-    # trip_places = crud.get_places_by_trip(trip)
+    trip = crud.get_trip_by_id(int(trip_id))
+    places = crud.get_all_places_by_trip(int(trip.trip_id))
 
     all_places = []
 
     for place in places:
 
         if place.in_itinerary == True:
-            place.in_itinerary = "Yes"
+            # place.in_itinerary = "Yes"
             place.itinerary_dt = place.itinerary_dt.strftime('%b %d, %Y')
         else:
-            place.in_itinerary = "No"
+            # place.in_itinerary = "No"
             place.itinerary_dt = "N/A"
     
         all_places.append({
@@ -552,7 +550,9 @@ def places_info():
         "catPin": place.cat_pin,
         "catEmoji": place.cat_emoji,
         "placeLat": place.latitude,
-        "placeLng": place.longitude,})
+        "placeLng": place.longitude,
+        "userName": place.user.fname,
+        "userImg": place.user.profile_img})
         
 
     return jsonify(all_places)

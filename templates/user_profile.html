@@ -162,7 +162,7 @@
             {% for trip in past %} 
                 <div class="col-xs-12 col-sm-4">
                     <a href="/trip_details/{{ trip.trip_id }}">
-                    <div class="card">
+                    <div class="card" style="background-image: url({{ trip.trip_img }})">
                         <div class="card-city">
                                 {{ trip.trip_name }}
                         </div>
@@ -198,7 +198,7 @@
                 {% for trip in shared_upcoming %}
                 <div class="col-xs-12 col-sm-4">
                     <a href="/trip_details/{{ trip.trip_id }}">
-                    <div class="card">
+                    <div class="card" style="background-image: url({{ trip.trip_img }})">
                         <div class="card-city">
                                 {{ trip.trip_name }}
                         </div>
@@ -226,7 +226,7 @@
             {% for trip in shared_past %} 
                 <div class="col-xs-12 col-sm-4">
                     <a href="/trip_details/{{ trip.trip_id }}">
-                    <div class="card">
+                    <div class="card" style="background-image: url({{ trip.trip_img }})">
                         <div class="card-city">
                                 {{ trip.trip_name }}
                         </div>

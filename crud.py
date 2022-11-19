@@ -84,6 +84,10 @@ def get_all_friends_from_ohana(user_id):
 def get_places_by_trip(trip_id):
     return Place.query.filter(Place.trip == trip_id).order_by(Place.itinerary_dt).all()
 
+###-------------------------------GET-ALL-PLACES-BY-TRIP----------------------------###
+def get_all_places_by_trip(trip_id):
+    return Place.query.filter(Place.trip_id == trip_id).order_by(Place.category).all()
+
 ###-------------------------------GET-PLACES-BY-CATEGORY-------------------------###
 def get_places_by_cat(trip_id):
     return Place.query.filter(Place.trip == trip_id).order_by(Place.category).all()

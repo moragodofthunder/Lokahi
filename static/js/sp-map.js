@@ -2,9 +2,11 @@
 
 let tripLat = document.querySelector('#trip-lat').value;
 let tripLng = document.querySelector('#trip-lng').value;
+let tripID = document.querySelector('#trip-id').value;
 
 tripLat = Number(tripLat)
 tripLng = Number(tripLng)
+tripID = Number(tripID)
 
 function initMap() {
 
@@ -19,7 +21,7 @@ function initMap() {
     
     const placeInfo = new google.maps.InfoWindow();
 
-    fetch('/api/all_places')
+    fetch(`/api/all_places/${tripID}`)
         .then((response) => response.json())
         .then((places) => {
             for (const place of places) {
@@ -29,6 +31,10 @@ function initMap() {
                    width: 200px,
                    height: auto, 
                 }
+                #place-user-pic {
+                    width: 200px,
+                    border-radius: 50%,
+                  }
                 </style>
 
                 <div class="place-image></div>
@@ -37,11 +43,12 @@ function initMap() {
         
                 <ul class="place-info">
                     <li><b>Place: </b>${place.name}</li>
-                    <li><b>In Itinerary: </b>${place.inItin}</li>
-                    <li><b>Date: </b>${place.itinDT}</li>
+                    <li><b>Itinerary Day: </b>${place.itinDT}</li>
                     <li><b>Location: </b>${place.placeLat}, ${place.placeLng}</li>
+                    <li><b>Saved By: </b>${place.userName}</li>
                     <li><b>Category: </b>${place.category}</li>
                     <img class="place-cat" src=${place.catEmoji} width="100">
+                    <img class="place-user-pic" src=${place.userImg} width="100">
                     
                 </ul>
                 </div>
