@@ -67,7 +67,7 @@ cat_pin, cat_emoji):
 
     saved_place = Place(user_id=user_id, trip_id=trip_id, category=ps_cat, place_name=ps_name, 
     latitude=ps_lat, longitude=ps_lng, in_itinerary=in_itinerary, itinerary_dt=new_ps_itin, place_city=ps_city, 
-    place_country=ps_country, cat_pin=cat_pin, cat_emoji=cat_emoji)
+    place_country=ps_country, cat_pin=cat_pin, cat_emoji=cat_emoji, cat_banner=cat_banner, cat_td=cat_td)
 
     return saved_place
 

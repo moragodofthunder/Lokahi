@@ -281,6 +281,7 @@ def show_trip_details(trip_id):
 
     places_by_day= {}
     places_by_category= {}
+    banners_by_cat = {}
 
     for place in places_by_trip:
         if place.itinerary_dt == None:
@@ -473,13 +474,77 @@ def save_place_data():
     'Entertainment': '/static/img/emojis/20-entertain-emoji.png',
     'Music': '/static/img/pins/21-music-pin.png',
     'Hot Spring': '/static/img/emojis/22-onsen-emoji.png',
-    'Beach': '/static/img/pins/23-beach-pin.png',
-    'Park': '/static/img/pins/24-park-pin.png',
-    'Hiking': '/static/img/pins/25-hiking-pin.png',
-    'Surfing': '/static/img/pins/26-surf-pin.png',
-    'Workspace': '/static/img/pins/27-work-pin.png',
-    'COVID Testing': '/static/img/pins/28-covid-pin.png',
-    'Miscellaneous': '/static/img/pins/29-misc-pin.png'}
+    'Beach': '/static/img/emojis/23-beach-emoji.png',
+    'Park': '/static/img/emojis/24-park-emoji.png',
+    'Hiking': '/static/img/emojis/25-hiking-emoji.png',
+    'Surfing': '/static/img/emojis/26-surf-emoji.png',
+    'Workspace': '/static/img/emojis/27-work-emoji.png',
+    'COVID Testing': '/static/img/emojis/28-covid-emoji.png',
+    'Miscellaneous': '/static/img/emojis/29-misc-emoji.png'}
+
+    cat_banners = {
+    'Breakfast': '/static/img/cat_banners/1-breakfast-banner.png',
+    'Lunch': '/static/img/cat_banners/2-lunch-banner.png',
+    'Dinner': '/static/img/cat_banners/3-dinner-banner.png',
+    'Streetfood': '/static/img/cat_banners/4-streetfood-banner.png',
+    'Dessert': '/static/img/cat_banners/5-dessert-banner.png',
+    'Cafe': '/static/img/cat_banners/6-cafe-banner.png',
+    'Nightlife': '/static/img/cat_banners/7-nightlife-banner.png',
+    'Bar/Pub': '/static/img/cat_banners/8-bar-banner.png',
+    'Shopping': '/static/img/cat_banners/9-shopping-banner.png',
+    'Groceries': '/static/img/cat_banners/10-grocery-banner.png',
+    'Convenience Store': '/static/img/cat_banners/11-kombini-banner.png',
+    'Outdoor Market': '/static/img/cat_banners/12-farmers-market-banner.png',
+    'Covered Market': '/static/img/cat_banners/13-bazaar-banner.png',
+    'Bookstore/Library': '/static/img/cat_banners/14-bookstore-banner.png',
+    'Train Station': '/static/img/cat_banners/15-train-banner.png',
+    'Museum': '/static/img/cat_banners/16-museum-banner.png',
+    'Landmark': '/static/img/cat_banners/17-landmark-banner.png',
+    'Photo Spot': '/static/img/cat_banners/18-photo-banner.png',
+    'Temple/Shrine/Worship': '/static/img/cat_banners/19-shrine-banner.png',
+    'Entertainment': '/static/img/cat_banners/20-entertain-banner.png',
+    'Music': '/static/img/cat_banners/21-music-banner.png',
+    'Hot Spring': '/static/img/cat_banners/22-onsen-banner.png',
+    'Beach': '/static/img/cat_banners/23-beach-banner.png',
+    'Park': '/static/img/cat_banners/24-park-banner.png',
+    'Hiking': '/static/img/cat_banners/25-hiking-banner.png',
+    'Surfing': '/static/img/cat_banners/26-surf-banner.png',
+    'Workspace': '/static/img/cat_banners/27-work-banner.png',
+    'COVID Testing': '/static/img/cat_banners/28-covid-banner.png',
+    'Miscellaneous': '/static/img/cat_banners/29-misc-banner.png'
+    }
+
+    cat_tds = {
+    'Breakfast': '/static/img/cat_td/1-breakfast-td.png',
+    'Lunch': '/static/img/cat_td/2-lunch-td.png',
+    'Dinner': '/static/img/cat_td/3-dinner-td.png',
+    'Streetfood': '/static/img/cat_td/4-streetfood-td.png',
+    'Dessert': '/static/img/cat_td/5-dessert-td.png',
+    'Cafe': '/static/img/cat_td/6-cafe-td.png',
+    'Nightlife': '/static/img/cat_td/7-nightlife-td.png',
+    'Bar/Pub': '/static/img/cat_td/8-bar-td.png',
+    'Shopping': '/static/img/cat_td/9-shopping-td.png',
+    'Groceries': '/static/img/cat_td/10-grocery-td.png',
+    'Convenience Store': '/static/img/cat_td/11-kombini-td.png',
+    'Outdoor Market': '/static/img/cat_td/12-farmers-market-td.png',
+    'Covered Market': '/static/img/cat_td/13-bazaar-td.png',
+    'Bookstore/Library': '/static/img/cat_td/14-bookstore-td.png',
+    'Train Station': '/static/img/cat_td/15-train-td.png',
+    'Museum': '/static/img/cat_td/16-museum-td.png',
+    'Landmark': '/static/img/cat_td/17-landmark-td.png',
+    'Photo Spot': '/static/img/cat_td/18-photo-td.png',
+    'Temple/Shrine/Worship': '/static/img/cat_td/19-shrine-td.png',
+    'Entertainment': '/static/img/cat_td/20-entertain-td.png',
+    'Music': '/static/img/cat_td/21-music-td.png',
+    'Hot Spring': '/static/img/cat_td/22-onsen-td.png',
+    'Beach': '/static/img/cat_td/23-beach-td.png',
+    'Park': '/static/img/cat_td/24-park-td.png',
+    'Hiking': '/static/img/cat_td/25-hiking-td.png',
+    'Surfing': '/static/img/cat_td/26-surf-td.png',
+    'Workspace': '/static/img/cat_td/27-work-td.png',
+    'COVID Testing': '/static/img/cat_td/28-covid-td.png',
+    'Miscellaneous': '/static/img/cat_td/29-misc-td.png'  
+    }
     
     ps_cat = request.json["psCategory"]
     ps_notes = request.json["psNotes"]
@@ -497,6 +562,8 @@ def save_place_data():
 
     cat_pin = place_pins[ps_cat]
     cat_emoji = cat_emojis[ps_cat]
+    cat_banner = cat_banners[ps_cat]
+    cat_td = cat_tds[ps_cat]
 
     user_id = session['user_id']
 
@@ -509,7 +576,8 @@ def save_place_data():
         in_itinerary = True
     
     saved_place = crud.save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, in_itinerary,
-    new_ps_itin, ps_lat, ps_lng, ps_city, ps_country, cat_pin, cat_emoji)
+    new_ps_itin, ps_lat, ps_lng, ps_city, ps_country, cat_pin, cat_emoji, cat_banner,
+    cat_td)
     db.session.add(saved_place)
     db.session.commit()
     flash(f"{ps_name} saved")

@@ -103,6 +103,8 @@ class Place(db.Model):
     category = db.Column(db.String(30), nullable= False)
     cat_pin = db.Column(db.String, nullable=True)
     cat_emoji = db.Column(db.String, nullable=True)
+    cat_banner = db.Column(db.String, nullable=True)
+    cat_td = db.Column(db.String, nullable=True)
     latitude = db.Column(db.Float, nullable= False)
     longitude = db.Column(db.Float, nullable= False)
 
