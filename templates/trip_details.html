@@ -3,27 +3,78 @@
 
 {% block head %}
 <style>
-    #date-tables {
-        border: 1px solid black;  
-    }
-    td, tr, tbody {
-        border: 1px solid black;
-    }
-    
-    #itin-date-back {
-        background-image: "/static/img/cards/suitcase-banner-2.png";
+
+    .date-tables {
+        display: flex;
+        padding: 1.5rem;
+        overflow-x: scroll;
     }
 
-    #ohana-lokahi-img, #organizer-img {
-        border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
-        width: 100px;
-        height: 100px;
+    .date-tables::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
     }
-    #itin-date {
+    .date-tables::-webkit-scrollbar-thumb {
+        background: purple;
+        border-radius: 10px;
+        box-shadow: inset 2px 2px 2px #990099 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+    }
+
+    .date-tables::-webkit-scrollbar-track {
+        background: linear-gradient(90deg,#990099,#f39303 1px,#f9f905 0,#5505f5);
+    }
+
+    .itin-by-day {
+        background: white;
+        width: 800px;
+        height: 600px;
+        border-radius: 16px;
+        padding: 1rem;
+        box-shadow: -1rem 0 3rem #732673;
+        display: flex;
+        flex-direction: column;
+        transition: .2s;
+    }
+
+    .itin-by-day:focus-within~.card, .card:hover~.card {
+    transform: translateX(200px);
+    }
+
+    .itin-by-day:hover {
+        transform: translateY(-1rem);
+    }
+
+    .itin-by-day:not(:first-child) {
+        margin-left: -200px;
+    }
+
+    .place-name {
+        padding: 5px; 
+        background-size: 559px 112px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 87px;
+        width: 433px;
+
+    }
+    
+    .itin-date {
+        background-image: url("/static/img/cards/suitcase-banner-4.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 87px;
+        width: 433px;
         font-size: 25px;
         font-family: 'Casty Demo';
         color: black;
     }
+
+    #ohana-lokahi-img, #organizer-img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+    
     h1 {
         font-family: 'Deserved';
         font-size: 58px;
@@ -135,6 +186,7 @@
                 <input type="submit" id="add-ohana-button" value="Add 'Em">
             </form>
         </div>
+        </div>
         
 
         <div class="col-6">
@@ -163,34 +215,26 @@
                     </h4>    
                 </div> 
             </div>
+        </div>
+    </div>
 
-            <div class="row">
-                {% for date in travel_dates %}
-                <div class="col-6">
-                    
-                    <table class="table  table-hover" id="date-tables">
-                        <thead>
-                            <tr id="itin-date-back">
-                                <th scope="col" id="itin-date">
-                                    {{ date }}
-                                </th>
-                            </tr> 
-                        </thead>
-                        <tbody>
+            <div scope="row-12" class="all-itin">
+                <section class="date-tables" id="date-tables"> 
+                    {% for date in travel_dates %}                      
+                    <article class="itin-by-day">
+                        <header scope="col" class="itin-date">
+                            {{ date }}
+                        </header>
+                        <div id="places-by-day">
                             {% if date in places_by_day %}
-                                {% for place in places_by_day[date] %}   
-                                        <tr>
-                                            <td>
-                                                {{ place.place_name }}
-                                            </td>
-                                        </tr>
-                                {% endfor %}   
-                            {% endif %}       
-                        </tbody>                               
-                    </table>
-                    
-                {% endfor %}
-                </div>
+                                {% for place in places_by_day[date] %}
+                                    <div class="place-name" style="background-image: url({{ place.cat_banner}})">{{ place.place_name }}</div>
+                                {% endfor %} 
+                            {% endif %} 
+                        </div>
+                    </article>
+                    {% endfor %}
+                </section>                     
             </div>
             
         
@@ -198,7 +242,7 @@
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="row">
             <!-- SAVED PLACES TABLE -->
             <div id="saved-places">
                 <h4>

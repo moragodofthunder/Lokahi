@@ -47,6 +47,7 @@ function initMap() {
                     <li><b>Location: </b>${place.placeLat}, ${place.placeLng}</li>
                     <li><b>Saved By: </b>${place.userName}</li>
                     <li><b>Category: </b>${place.category}</li>
+                    <li><b>Notes: </b>${place.notes}</li>
                     <img class="place-cat" src=${place.catEmoji} width="100">
                     <img class="place-user-pic" src=${place.userImg} width="100">
                     

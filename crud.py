@@ -60,12 +60,12 @@ def get_trips_by_user_id(user_id):
 
 ###-------------------------------SAVE-PLACE-TO-DB----------------------------###
 def save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, in_itinerary, new_ps_itin, ps_lat, ps_lng, ps_city, ps_country,
-cat_pin, cat_emoji):
+cat_pin, cat_emoji, cat_banner, cat_td):
 
     if not ps_notes:
         ps_notes = ""
 
-    saved_place = Place(user_id=user_id, trip_id=trip_id, category=ps_cat, place_name=ps_name, 
+    saved_place = Place(user_id=user_id, trip_id=trip_id, place_name=ps_name, category=ps_cat, place_notes=ps_notes, 
     latitude=ps_lat, longitude=ps_lng, in_itinerary=in_itinerary, itinerary_dt=new_ps_itin, place_city=ps_city, 
     place_country=ps_country, cat_pin=cat_pin, cat_emoji=cat_emoji, cat_banner=cat_banner, cat_td=cat_td)
 
@@ -95,6 +95,15 @@ def get_places_by_cat(trip_id):
 ###-------------------------------GET-PLACES-BY-USER-ID------------------------###
 def get_places_by_user(user_id):
     return Place.query.filter(Place.user_id == user_id).order_by(Place.place_country).all()
+
+# ###--------------------------------GET-BANNERS-BY-PLACE-------------------------###
+# def get_banners_by_place(trip_id):
+#     return Place.query.filter(Place.trip_id == trip_id).order_by(Place.cat_banner).all()
+
+
+# ###--------------------------------GET-TD-IMG-BY-PLACE-------------------------###
+# def get_td_img_by_place(trip_id):
+#     return Place.query.filter(Place.trip_id == trip_id).order_by(Place.cat_td).all()     
 
 ###----------------------------------OTHER-STUFF---------------------------------###
 if __name__ == '__main__':

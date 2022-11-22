@@ -107,6 +107,7 @@ class Place(db.Model):
     cat_td = db.Column(db.String, nullable=True)
     latitude = db.Column(db.Float, nullable= False)
     longitude = db.Column(db.Float, nullable= False)
+    place_notes = db.Column(db.String, nullable=True)
 
     user = db.relationship("User", back_populates="places")
     trip = db.relationship("Trip", back_populates="places")

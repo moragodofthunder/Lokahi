@@ -281,7 +281,6 @@ def show_trip_details(trip_id):
 
     places_by_day= {}
     places_by_category= {}
-    banners_by_cat = {}
 
     for place in places_by_trip:
         if place.itinerary_dt == None:
@@ -298,6 +297,21 @@ def show_trip_details(trip_id):
             places_by_category[category].append(place)
         else:
             places_by_category[category] = [place]
+
+    # for banner in place_banners:
+    #     category = place.category
+    #     if category in banners_by_cat:
+    #         banners_by_cat[category].append(banner)
+    #     else:
+    #         banners_by_cat[category] = [banner]
+
+    # for td_img in place_td_imgs:
+    #     category = place.category
+    #     if category in tds_by_cat:
+    #         tds_by_cat[category].append(td_img)
+    #     else:
+    #         tds_by_cat[category] = [td_img]
+
 
     user = crud.get_user_by_id(session["user_id"])
     trip_maker = crud.get_user_by_id(trip.user_id)
@@ -601,6 +615,8 @@ def places_info(trip_id):
         if place.in_itinerary == True:
             # place.in_itinerary = "Yes"
             place.itinerary_dt = place.itinerary_dt.strftime('%b %d, %Y')
+        elif place.place_notes is None:
+            place.place_notes = "N/A"
         else:
             # place.in_itinerary = "No"
             place.itinerary_dt = "N/A"
@@ -620,7 +636,8 @@ def places_info(trip_id):
         "placeLat": place.latitude,
         "placeLng": place.longitude,
         "userName": place.user.fname,
-        "userImg": place.user.profile_img})
+        "userImg": place.user.profile_img,
+        "notes": place.place_notes})
         
 
     return jsonify(all_places)

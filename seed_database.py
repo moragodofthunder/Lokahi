@@ -64,10 +64,10 @@ for n in range(5):
             trip_lat = api_response_dict['results'][0]['geometry']['location']['lat']
             trip_lng = api_response_dict['results'][0]['geometry']['location']['lng']
 
-        random_start = randint(14, 20)
-        start_date = f"2022-11-{random_start}"
+        random_start = randint(1, 20)
+        start_date = f"2022-12-{random_start}"
         random_end = random_start + 5
-        end_date = f"2022-11-{random_end}"
+        end_date = f"2022-12-{random_end}"
         trip_name = f"Trip #{i + 1}: {trip_city}, {trip_country}"
         trip_img = "/static/img/cards/suitcase.png"
 
