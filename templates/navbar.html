@@ -2,6 +2,11 @@
 <html>
     <head>
         <style>
+            #lokahi-logo-rg {
+                position: relative;
+                top: -80px;
+                left: 90px;
+            }
             .menu-btn {
                 position: relative;
                 display: flex;
@@ -54,22 +59,24 @@
                 margin: 0;
                 padding: 0;
             }
-            main {
-                margin-left: 5rem;
-                padding: 1rem;
-            }
             .nav-menu {
                 height: 100vh;
-                width: 15%;
+                width: 25%;
                 position: fixed;
                 top: 0;
-                right: -15%;
+                right: -25%;
                 background-image: linear-gradient(#ffff99, #ff99cc, #66ccff);
                 transition: right .5s;
+                justify-content: center;
+                align-items: center;
+                
             }
             .nav-menu.active {
                 right: 0;
+                justify-content: center;
+                align-items: center;
             }
+            
 
         </style>
     </head>
@@ -77,29 +84,31 @@
     <body>
 
      <!-- LOG IN/LOG OUT BUTTON --> 
-     <div class="main">
-        <div class="burger">
-                <div class="menu-btn">
-                <div class="menu-burger"></div>
-                </div>
-                <span><a href="/"><img src="/static/img/logos/lokahi-logo-rg.png" alt="Lōkahi" style="width:300px;height:auto;"></a></span>
-        </div>
+     
         
-        <div class="nav-menu">
+    <div class="menu-btn">
+        <div class="menu-burger"></div>
+    </div>
+    
+    <a href="/" id="lokahi-logo-rg"><img src="/static/img/logos/lokahi-logo-rg.png" alt="Lōkahi" style="width:300px;height:auto;"></a>
+                
+        
+        
+    <div class="nav-menu">
             {% if 'user_id' in session %}
             <form action="/logout">
-                <input type="submit" value="Log Out" id="log-out"/>
+                <input type="image" src="/static/img/buttons/log-out-1.png" alt="Log Out" id="log-out" width="184" height="97"/>
             </form>
             {% else %}
             <form action="/login">
-                <input type="submit" value="Log In" id="log-in"/>
+                <input type="image" src="/static/img/buttons/log-in-1.png" alt="Log In" id="log-in" width="184" height="97"/>
             </form>
             {% endif %}
 
             <!-- PROFILE AND CREATE NEW TRIP LINKS -->
             <ul>
-                <li><a href="/user_profile">My Profile</a></li>
-                <li><a href="/new_trip">Create New Trip</a></li>   
+                <a href="/user_profile"><img src="/static/img/buttons/my-profile-btn.png" alt="My Profile" id="my-prof-btn" width="290" height="290"></a><br>
+                <a href="/new_trip"><img src="/static/img/buttons/new-trip-btn.png" alt="Create New Trip" id="new-trip-btn" width="250" height="250"></a>   
             </ul> 
         </div>
      </div>

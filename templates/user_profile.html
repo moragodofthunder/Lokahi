@@ -292,28 +292,6 @@
         </div>
     {% endfor %}
     </div>
-                
-   
-
-    <div class="row">
-        <h3>Your Travel 'Ohana</h3>
-        
-            <div class="travel-ohana">
-                {% for friend in user.following %}
-                    <h5>
-                        {{ friend.fname }} 
-                    </h5>
-                    <img src="{{ friend.profile_img }}" id="friend-profile-pic"> 
-                {% endfor %}
-            </div>
-        </div>
-        <form action="/find_friends" id="friend-search-box" method="POST">
-            <h5>Find someone by email:</h5>
-            <input type="text" id="friend-search" name="friend-search">
-            <input type="submit" id="submit-friend-search" value="Find 'Em"> 
-        </form>
-        <button type="button" id="add-ohana-button">Add someone to your Travel 'Ohana</button>
-    </div>
 
 
 
