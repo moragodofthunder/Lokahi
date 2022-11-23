@@ -95,7 +95,13 @@
         font-family: 'Casty Demo';
         font-size: 24px;
     }
-    #trip-pic{
+    h6 {
+        font-size: 25px;
+        font-family: 'Deserved';
+        color: black;
+    }
+    
+    #trip-pic {
         width: 300px;
         border-radius: 35px;
     }
@@ -229,7 +235,14 @@
                             {% if date in places_by_day %}
                                 {% for place in places_by_day[date] %}
                                     <div class="place-name" style="background-image: url({{ place.cat_banner}})">{{ place.place_name }}</div>
-                                {% endfor %} 
+                                {% endfor %}
+                            {% else %}
+                           <h6>
+                            No plans yet
+                           </h6>
+                           <h6>
+                            Find places to go in Trip Planner
+                           </h6>
                             {% endif %} 
                         </div>
                     </article>
