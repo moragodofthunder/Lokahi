@@ -2,6 +2,7 @@
 <html>
     <head>
         <style>
+
             #lokahi-logo-rg {
                 position: relative;
                 top: -80px;
@@ -61,11 +62,12 @@
             }
             .nav-menu {
                 height: 100vh;
-                width: 25%;
+                width: 20%;
                 position: fixed;
+                z-index: 100;
                 top: 0;
-                right: -25%;
-                background-image: linear-gradient(#ffff99, #ff99cc, #66ccff);
+                right: -20%;
+                background-image: linear-gradient(#779867, #158a8b, #ee89d8, #fea484, #f2fc45);
                 transition: right .5s;
                 justify-content: center;
                 align-items: center;
@@ -76,6 +78,10 @@
                 justify-content: center;
                 align-items: center;
             }
+            #bar-for-navbar {
+                background-image: linear-gradient(to right, #779867, #158a8b, #ee89d8, #fea484, #f2fc45);
+                height: 90px;
+            }
             
 
         </style>
@@ -85,13 +91,15 @@
 
      <!-- LOG IN/LOG OUT BUTTON --> 
      
+    <div id="bar-for-navbar">
+
         
-    <div class="menu-btn">
-        <div class="menu-burger"></div>
-    </div>
-    
-    <a href="/" id="lokahi-logo-rg"><img src="/static/img/logos/lokahi-logo-rg.png" alt="Lōkahi" style="width:300px;height:auto;"></a>
-                
+        <div class="menu-btn">
+            <div class="menu-burger"></div>
+        </div>
+        
+        <a href="/" id="lokahi-logo-rg"><img src="/static/img/logos/lokahi-logo-rg.png" alt="Lōkahi" style="width:300px;height:auto;"></a>
+    </div>            
         
         
     <div class="nav-menu">

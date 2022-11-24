@@ -15,6 +15,7 @@ function initMap() {
         lng: tripLng,
       },
       zoom: 12,
+      mapId: 'c1d0a22c02735113',
     });
 
       const tripLocation = `(${tripLat}, ${tripLng})`

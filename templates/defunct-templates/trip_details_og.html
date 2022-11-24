@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% block title %}Trip Details{% endblock %}
+
+{% block head %}
+<style>
+    #date-tables {
+        border: 1px solid black;  
+    }
+    td, tr, tbody {
+        border: 1px solid black;
+    }
+    
+    #itin-date-back {
+        background-image: "/static/img/cards/suitcase-banner-2.png";
+    }
+
+    #ohana-lokahi-img, #organizer-img {
+        border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
+        width: 100px;
+        height: 100px;
+    }
+    #itin-date {
+        font-size: 25px;
+        font-family: 'Casty Demo';
+        color: black;
+    }
+    h1 {
+        font-family: 'Deserved';
+        font-size: 58px;
+    }
+    h2 {
+        font-family: 'Deserved';
+        font-size: 47px;
+    }
+    h3 {
+        font-family: 'Deserved';
+        font-size: 36px;
+    }
+    h4 {
+        font-family: 'Casty Demo';
+        font-size: 30px; 
+    }
+    h5 {
+        font-family: 'Casty Demo';
+        font-size: 24px;
+    }
+    #trip-pic{
+        width: 300px;
+        border-radius: 35px;
+    }
+</style>
+{% endblock %}
+
+<!-- NAVBAR -->
+{% include 'navbar.html' %}
+
+
+<!-- START BODY/FLUID CONTAINER -->
+{% block body %}
+<div class="container-fluid">
+
+    <!-- TITLE/TRIP NAME -->
+    <div class="row">
+        <div id="trip-details-header">
+            <h1>
+                Trip Details: <span class="trip-name">{{ trip.trip_name }}</span>
+            </h1>
+        </div>
+    </div>
+   
+    
+    <div class="row">
+        <!-- TRIP CITY, COUNTRY -->
+        <div id="trip-place">
+            <h2>
+                {{ trip.trip_city }} , {{ trip.trip_country }}
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- TRAVEL DATES -->
+        <div id="trip-dates">
+            <h3>
+                {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+            
+        <h3>Trip Image</h3>
+        <img src="{{ trip.trip_img }}" id="trip-pic">
+        <p></p>
+        <form action="/api/trip_img/{{ trip.trip_id }}" method="post" enctype="multipart/form-data">
+            <h5>New pic?</h5>
+            <input type="file" id="trip-img-upload" name="trip-img">
+            <input type="submit" value="Upload 📷">
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <!-- TRIP ORGANIZER -->
+        <div id="trip-users">
+            <h4>Trip Organizer:</h4>
+                <div id="trip-organizer">
+                    <img src="{{ trip_maker.profile_img }}" id="organizer-img">
+                    <h5>{{ trip_maker.fname }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <!-- TRAVEL OHANA -->
+        <div id="trip-users">
+            <h4>'Ohana Going On Trip:</h4>
+                <div id="ohana-lokahi">
+                    {% for person in trip.users %}
+                    <img src="{{ person.profile_img }}" id="ohana-lokahi-img">
+                    <h5>{{ person.fname }}</h5>
+                    {% endfor %}
+        </div>
+        <div id="add-friends">
+            <form action="/add_friends_to_trip/{{ trip.trip_id }}", method="POST" id="add-friend-to-trip">
+                <h4>Traveling with Friends?</h4>
+                <select id="travel-ohana-list" name="trip-buds">
+                    <option value="">Add From 'Ohana</option>
+                    {% for friend in user.following %}
+                    <option value="{{ friend.user_id }}">{{ friend.fname }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" id="add-ohana-button" value="Add 'Em">
+            </form>
+        </div>
+        
+
+        <div class="col-6">
+            <div class="planner-link">
+                <!-- LINK TO TRIP PLANNER FOR TRIP IF TRIP IS 'UPCOMING' -->
+                {% if upcoming == True %}
+                <div id="edit-trip">
+                    <a href="/trip_planner/{{ trip.trip_id }}">Find Places to Save in Trip Planner</a>
+                </div>
+                {% endif %}
+            </div>
+        
+            <div class="sp-map-link">
+                <!-- LINK TO MAP OF SAVED PLACES -->
+                <div id="go-to-sp-map">
+                    <a href="/saved_places_map/{{ trip.trip_id }}">Go to Map of Your Saved Places</a>
+                </div>
+            </div>
+          
+        
+            <div class="itin-title">
+                <!-- ITINERARY TABLES -->
+                <div id="itinerary">
+                    <h4>
+                        Itinerary
+                    </h4>    
+                </div> 
+            </div>
+
+            <div class="row">
+                {% for date in travel_dates %}
+                <div class="col-6">
+                    
+                    <table class="table  table-hover" id="date-tables">
+                        <thead>
+                            <tr id="itin-date-back">
+                                <th scope="col" id="itin-date">
+                                    {{ date }}
+                                </th>
+                            </tr> 
+                        </thead>
+                        <tbody>
+                            {% if date in places_by_day %}
+                                {% for place in places_by_day[date] %}   
+                                        <tr>
+                                            <td>
+                                                {{ place.place_name }}
+                                            </td>
+                                        </tr>
+                                {% endfor %}   
+                            {% endif %}       
+                        </tbody>                               
+                    </table>
+                    
+                {% endfor %}
+                </div>
+            </div>
+            
+        
+                
+            </div>
+        </div>
+
+        <div class="col-6">
+            <!-- SAVED PLACES TABLE -->
+            <div id="saved-places">
+                <h4>
+                    Saved Places for {{ trip.trip_city }}
+                </h4>
+                <table id="saved-places-by-trip">
+                    {% for category in places_by_category %}
+                    <tr>
+                        
+                        <th>
+                            {{ category }}
+                        </th>
+                        
+                    </tr>
+                        {% for place in places_by_category[category] %}
+                        <tr>
+                            <td>
+                                {{ place.place_name }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+<!-- HIDDEN VALUE -->
+<input type="hidden" id="user-id" value="{{ user.user_id }}">
+
+<!-- END FLUID CONTAINER     -->
+</div>
+
+
+<!-- JS SCRIPT TAGS -->
+
+{% endblock %}

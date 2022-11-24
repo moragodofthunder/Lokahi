@@ -17,6 +17,7 @@ function initMap() {
         },
 
         zoom: 12,
+        mapId: 'fc7bdcfd7dbdeed0',
         });
     
     const placeInfo = new google.maps.InfoWindow();
