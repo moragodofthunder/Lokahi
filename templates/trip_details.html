@@ -3,10 +3,10 @@
 
 {% block head %}
 <style>
-
+   
     .date-tables {
         display: flex;
-        padding: 1.5rem;
+        padding: 2rem;
         overflow-x: scroll;
     }
 
@@ -21,19 +21,33 @@
     }
 
     .date-tables::-webkit-scrollbar-track {
-        background: linear-gradient(90deg,#990099,#f39303 1px,#f9f905 0,#5505f5);
+        background-image: linear-gradient(to right, #779867, #158a8b, #ee89d8, #fea484, #f2fc45);
     }
 
     .itin-by-day {
         background: white;
-        width: 800px;
+        width: 400px;
         height: 600px;
         border-radius: 16px;
         padding: 1rem;
-        box-shadow: -1rem 0 3rem #732673;
+        box-shadow: -1rem 0 3rem #158a8b;
         display: flex;
         flex-direction: column;
         transition: .2s;
+        overflow-x: hidden;
+    }
+        
+    #saved-places-by-trip {
+        background: white;
+        width: 400px;
+        height: 600px;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: -1rem 0 3rem #ee89d8;
+        display: flex;
+        flex-direction: column;
+        transition: .2s;
+        overflow-x: hidden;
     }
 
     .itin-by-day:focus-within~.card, .card:hover~.card {
@@ -45,28 +59,42 @@
     }
 
     .itin-by-day:not(:first-child) {
-        margin-left: -200px;
+        margin-left: -300px;
     }
 
     .place-name {
         padding: 5px; 
-        background-size: 559px 112px;
+        background-size: 362px 73px;
         background-size: cover;
         background-repeat: no-repeat;
-        height: 87px;
-        width: 433px;
+        height: 73px;
+        width: 362px;
 
     }
     
     .itin-date {
-        background-image: url("/static/img/cards/suitcase-banner-4.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 87px;
-        width: 433px;
-        font-size: 25px;
-        font-family: 'Casty Demo';
+        font-size: 30px;
+        font-family: 'Deserved';
         color: black;
+    }
+    .itin-date-back {
+        background-image: url("/static/img/cards/suitcase-banner-4.png");
+        background-size: 362px, 73px;
+        background-repeat: no-repeat;
+        height: 73px;
+        width: 362px;
+    }
+    .category-back {
+        background-size: 362px, 73px;
+        background-repeat: no-repeat;
+        height: 73px;
+        width: 362px;
+    }
+    .place-back {
+        background-size: 362px, 73px;
+        background-repeat: no-repeat;
+        height: 73px;
+        width: 362px; 
     }
 
     #ohana-lokahi-img, #organizer-img {
@@ -78,38 +106,76 @@
     h1 {
         font-family: 'Deserved';
         font-size: 58px;
+        background-image: linear-gradient(#779867, #158a8b, #ee89d8, #fea484, #f2fc45);
+        background-clip: text;
+        color: transparent;
     }
     h2 {
-        font-family: 'Deserved';
-        font-size: 47px;
+        font-family: 'Edu SA Beginner', cursive;
+        font-size: 35px;
     }
     h3 {
-        font-family: 'Deserved';
-        font-size: 36px;
+        font-family: 'Edu SA Beginner', cursive;
+        font-size: 25px;
     }
     h4 {
-        font-family: 'Casty Demo';
-        font-size: 30px; 
+        font-family: 'Deserved';
+        font-size: 35px; 
     }
     h5 {
-        font-family: 'Casty Demo';
-        font-size: 24px;
+        font-family: 'Edu SA Beginner', cursive;
+        font-size: 22px;
     }
     h6 {
         font-size: 25px;
-        font-family: 'Deserved';
+        font-family: 'Edu SA Beginner', cursive;
         color: black;
+    }
+    #new-pic, .smaller-h4 {
+        font-family: 'Deserved';
+        font-size: 30px; 
     }
     
     #trip-pic {
-        width: 300px;
+        width: 200px;
         border-radius: 35px;
+    }
+    #people-stuff {
+        display: flex;
+        background-image: linear-gradient(to right, #779867, #158a8b, #ee89d8, #fea484, #f2fc45);
+        border-radius: 16px;
+        padding: 20px
+    }
+    #top-col-1, #top-col-2, #top-col-3 {
+        background-color: rgb(255, 255, 255, 0.5);
+        border-radius: 16px;
+        padding: 20px;
+        padding-right: 10px;
+        padding-left: 10px;
+        align-content: center;
+    }
+    #top-col-2 {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    .trip-user-list {
+        display: flex;
+    }
+    .category {
+        font-size: 30px;
+        font-family: 'Deserved';
+        color: black;
+    }
+    .sp-title {
+        font-family: 'Deserved';
+        font-size: 40px; 
     }
 </style>
 {% endblock %}
 
 <!-- NAVBAR -->
-{% include 'navbar.html' %}
+{% include 'navbar-trip.html' %}
 
 
 <!-- START BODY/FLUID CONTAINER -->
@@ -144,140 +210,118 @@
         </div>
     </div>
 
-    <div class="row">
-            
-        <h3>Trip Image</h3>
-        <img src="{{ trip.trip_img }}" id="trip-pic">
-        <p></p>
-        <form action="/api/trip_img/{{ trip.trip_id }}" method="post" enctype="multipart/form-data">
-            <h5>New pic?</h5>
-            <input type="file" id="trip-img-upload" name="trip-img">
-            <input type="submit" value="Upload 📷">
-        </form>
-    </div>
-
-    <div class="row">
-        <div class="col-6">
-            <!-- TRIP ORGANIZER -->
-        <div id="trip-users">
-            <h4>Trip Organizer:</h4>
-                <div id="trip-organizer">
-                    <img src="{{ trip_maker.profile_img }}" id="organizer-img">
-                    <h5>{{ trip_maker.fname }}</h5>
-                </div>
+    <div class="row" id="people-stuff">
+        
+            <div class="col" id="top-col-1">    
+                <h4>Trip Image</h4>
+                <img src="{{ trip.trip_img }}" id="trip-pic">
+                <p></p>
+                <form action="/api/trip_img/{{ trip.trip_id }}" method="post" enctype="multipart/form-data">
+                    <h4 id="new-pic">New pic?</h4>
+                    <input type="file" id="trip-img-upload" name="trip-img">
+                    <input type="submit" value="Upload 📷">
+                </form>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-6">
-            <!-- TRAVEL OHANA -->
-        <div id="trip-users">
-            <h4>'Ohana Going On Trip:</h4>
-                <div id="ohana-lokahi">
+    
+            <div class="col" id="top-col-2">
+                <!-- TRAVEL OHANA -->
+                {% if trip.users %}
+                <h4>'Ohana Going On Trip:</h4>
+                <div class="trip-user-list">
                     {% for person in trip.users %}
-                    <img src="{{ person.profile_img }}" id="ohana-lokahi-img">
-                    <h5>{{ person.fname }}</h5>
+                        <img src="{{ person.profile_img }}" id="ohana-lokahi-img">
+                        <h5>{{ person.fname }}</h5>
                     {% endfor %}
-        </div>
-        <div id="add-friends">
-            <form action="/add_friends_to_trip/{{ trip.trip_id }}", method="POST" id="add-friend-to-trip">
-                <h4>Traveling with Friends?</h4>
-                <select id="travel-ohana-list" name="trip-buds">
-                    <option value="">Add From 'Ohana</option>
-                    {% for friend in user.following %}
-                    <option value="{{ friend.user_id }}">{{ friend.fname }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" id="add-ohana-button" value="Add 'Em">
-            </form>
-        </div>
-        </div>
-        
-
-        <div class="col-6">
-            <div class="planner-link">
-                <!-- LINK TO TRIP PLANNER FOR TRIP IF TRIP IS 'UPCOMING' -->
-                {% if upcoming == True %}
-                <div id="edit-trip">
-                    <a href="/trip_planner/{{ trip.trip_id }}">Find Places to Save in Trip Planner</a>
                 </div>
-                {% endif %}
+                {% endif %}     
+                <br>
+                <form action="/add_friends_to_trip/{{ trip.trip_id }}", method="POST" id="add-friend-to-trip">
+                    {% if not trip.users %}
+                    <h4 class="smaller-h4">Traveling with Friends?</h4>
+                    {% else %}
+                    <h4 class="smaller-h4">Want to add more Friends?</h4>
+                    {% endif %}
+                    <select id="travel-ohana-list" name="trip-buds">
+                        <option value="">Add From 'Ohana</option>
+                        {% for friend in user.following %}
+                        <option value="{{ friend.user_id }}">{{ friend.fname }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" id="add-ohana-button" value="Add 'Em">
+                </form>    
             </div>
-        
-            <div class="sp-map-link">
-                <!-- LINK TO MAP OF SAVED PLACES -->
-                <div id="go-to-sp-map">
-                    <a href="/saved_places_map/{{ trip.trip_id }}">Go to Map of Your Saved Places</a>
-                </div>
-            </div>
-          
-        
-            <div class="itin-title">
-                <!-- ITINERARY TABLES -->
-                <div id="itinerary">
-                    <h4>
-                        Itinerary
-                    </h4>    
-                </div> 
-            </div>
-        </div>
-    </div>
 
-            <div scope="row-12" class="all-itin">
-                <section class="date-tables" id="date-tables"> 
-                    {% for date in travel_dates %}                      
-                    <article class="itin-by-day">
-                        <header scope="col" class="itin-date">
-                            {{ date }}
-                        </header>
-                        <div id="places-by-day">
-                            {% if date in places_by_day %}
-                                {% for place in places_by_day[date] %}
-                                    <div class="place-name" style="background-image: url({{ place.cat_banner}})">{{ place.place_name }}</div>
-                                {% endfor %}
-                            {% else %}
-                           <h6>
-                            No plans yet
-                           </h6>
-                           <h6>
-                            Find places to go in Trip Planner
-                           </h6>
-                            {% endif %} 
+            <div class="col" id="top-col-3">
+                <!-- TRIP ORGANIZER -->
+                <div id="trip-users">
+                    <h4>Trip Organizer:</h4>
+                    <div id="trip-organizer">
+                        <img src="{{ trip_maker.profile_img }}" id="organizer-img">
+                        <h5>{{ trip_maker.fname }}</h5>
+                    </div>
+                </div>
+        
+            </div>
+        
+    </div>      
+    
+    <div class="row">
+        <div class="col">
+            <!-- ITINERARY TABLES -->    
+            <h1 class="sp-title">
+                Itinerary
+            </h1>    
+                 
+            <section class="date-tables" id="date-tables"> 
+                {% for date in travel_dates %}                      
+                <article class="itin-by-day">
+                    <header scope="col" class="itin-date">
+                        <div class="itin-date-back">
+                        {{ date }}
                         </div>
-                    </article>
-                    {% endfor %}
-                </section>                     
-            </div>
-            
-        
-                
-            </div>
+                    </header>
+                    <div id="places-by-day">
+                        {% if date in places_by_day %}
+                            {% for place in places_by_day[date] %}
+                                <div class="place-name" style="background-image: url({{ place.cat_banner}})"><h5>{{ place.place_name }}</h5></div>
+                            {% endfor %}
+                        {% else %}
+                        <h6>
+                        (No plans yet for this day)
+                        </h6>
+                        <h6>
+                        Find places in <a href="/trip_planner/{{ trip.trip_id }}">Trip Planner</a>
+                        </h6>
+                        {% endif %} 
+                    </div>
+                </article>
+                {% endfor %}
+            </section>                     
         </div>
+            
 
-        <div class="row">
+
+        <div class="col-4">
             <!-- SAVED PLACES TABLE -->
             <div id="saved-places">
-                <h4>
+                <h1 class="sp-title">
                     Saved Places for {{ trip.trip_city }}
-                </h4>
-                <table id="saved-places-by-trip">
-                    {% for category in places_by_category %}
-                    <tr>
+                </h1>
+                <article id="saved-places-by-trip">
+                    {% for place in places_by_cat %}
+                    <div class="place-category-sections">
+                        {% if place.category not in places_by_cat %}
+                        <header class="category-back" style="background-image: url({{ place.cat_banner}})">
+                            <div class="category">{{ place.category }}</div>
+                        </header>
+                        {% endif %}
                         
-                        <th>
-                            {{ category }}
-                        </th>
-                        
-                    </tr>
-                        {% for place in places_by_category[category] %}
-                        <tr>
-                            <td>
-                                {{ place.place_name }}
-                            </td>
-                        </tr>
-                        {% endfor %}
+                        <div class="place-name" style="background-image: url({{ place.cat_td}})">
+                            <h5>{{ place.place_name }}</h5>
+                        </div>
+                    </div>
                     {% endfor %}
+                    </div>
                 </table>
             </div>
         </div>

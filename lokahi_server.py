@@ -135,18 +135,39 @@ def create_new_user():
     password = request.form.get("password")
     fname = request.form.get("first-name")
     lname = request.form.get("last-name")
+    fav_color=request.form.get("user-color")
+
+    if fav_color == "blue":
+        profile_img = "/static/img/avatars/0-blue-profile.png"
+    elif fav_color == "purple":
+        profile_img = "/static/img/avatars/1-purple-profile.png"
+    elif fav_color == "pink":
+        profile_img = "/static/img/avatars/2-pink-profile.png"
+    elif fav_color == "red":
+        profile_img = "/static/img/avatars/3-red-profile.png"
+    elif fav_color == "orange":
+        profile_img = "/static/img/avatars/4-orange-profile.png"
+    elif fav_color == "yellow":
+        profile_img = "/static/img/avatars/5-yellow-profile.png"
+    elif fav_color == "green":
+        profile_img = "/static/img/avatars/6-green-profile.png"
+    elif fav_color == "aqua":
+        profile_img = "/static/img/avatars/7-aqua-profile.png"
+    else:
+        profile_img = "/static/img/avatars/8-black-profile.png"
+
 
     user = crud.get_user_by_email(email)
 
     if user:
         flash("An account with this email already exists.")
     else:
-        user = crud.create_user(email, password, fname, lname)
+        user = crud.create_user(email, password, fname, lname, profile_img)
         db.session.add(user)
         db.session.commit()
         flash("Account created successfully. Please log in.")
     
-        return render_template("user_profile.html", first_name=fname)
+        return redirect("/login")
 
  ###---------------------------ADDING-FRIEND-TO-DB---------------------------###
 @app.route('/find_friends', methods=['POST'])
@@ -171,7 +192,6 @@ def find_friends_of_user():
 @app.route('/add_friends_to_trip/<trip_id>', methods=['POST'])
 def add_friends_to_trip(trip_id):
 
-    user = crud.get_user_by_id(session["user_id"])
     trip_bud = request.form.get("trip-buds")
     trip_friend = crud.get_user_by_id(int(trip_bud))
     trip = crud.get_trip_by_id(trip_id)
@@ -279,6 +299,8 @@ def show_trip_details(trip_id):
     places_by_trip = crud.get_places_by_trip(trip)
     places_by_cat = crud.get_places_by_cat(trip)
 
+    print(f"PLACES BY CAT: {places_by_cat}")
+
     places_by_day= {}
     places_by_category= {}
 
@@ -298,19 +320,7 @@ def show_trip_details(trip_id):
         else:
             places_by_category[category] = [place]
 
-    # for banner in place_banners:
-    #     category = place.category
-    #     if category in banners_by_cat:
-    #         banners_by_cat[category].append(banner)
-    #     else:
-    #         banners_by_cat[category] = [banner]
-
-    # for td_img in place_td_imgs:
-    #     category = place.category
-    #     if category in tds_by_cat:
-    #         tds_by_cat[category].append(td_img)
-    #     else:
-    #         tds_by_cat[category] = [td_img]
+    print(f"THESE ARE THE PLACES BY CATEGORY: {places_by_category}")
 
 
     user = crud.get_user_by_id(session["user_id"])
@@ -318,8 +328,8 @@ def show_trip_details(trip_id):
     
     return render_template('trip_details.html', trip=trip, 
     upcoming=upcoming, travel_dates=travel_dates, 
-    places_by_day=places_by_day, places_by_category=places_by_category,
-    user=user, trip_maker=trip_maker)
+    places_by_day=places_by_day, places_by_category=places_by_category, 
+    places_by_cat=places_by_cat, user=user, trip_maker=trip_maker)
 
 ###----------------------------USER-TRIP-IMG---------------------------###
 @app.route('/api/trip_img/<trip_id>', methods=['POST'])

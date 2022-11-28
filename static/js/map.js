@@ -113,16 +113,23 @@ function initMap() {
                   border-left: 2px solid black;
                   border-right: 2px solid black;
                   border-top: 2px solid black;
+                  border-top-left-radius: 16px;
+                  border-top-right-radius: 16px;
+                  padding: 5px;
                 }
                 #place-info-menu {
                   display: block;
                   border-bottom: 2px solid black;
+                  border-bottom-left-radius: 16px;
+                  border-bottom-right-radius: 16px;
                   border-left: 2px solid black;
                   border-right: 2px solid black;
+                  padding: 5px;
                 }
                 #place-img {
-                  border-radius: 60% 40% 64% 36% / 56% 58% 42% 44%;
+                  border-radius: 50%;
                   width: 100%;
+                  padding: 20px;
                 } 
                 </style>
                 <h3 id="ps-name">${result.name}</h3>
