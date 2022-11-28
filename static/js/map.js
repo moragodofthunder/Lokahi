@@ -110,33 +110,52 @@ function initMap() {
                 document.querySelector("#place-data").innerHTML += `
                 <style>
                 #place-data {
-                  border-left: 2px solid black;
-                  border-right: 2px solid black;
-                  border-top: 2px solid black;
                   border-top-left-radius: 16px;
                   border-top-right-radius: 16px;
                   padding: 5px;
+                  background-image: linear-gradient(#779867, #158a8b, #ee89d8, #fea484, #f2fc45);
                 }
                 #place-info-menu {
                   display: block;
-                  border-bottom: 2px solid black;
                   border-bottom-left-radius: 16px;
                   border-bottom-right-radius: 16px;
-                  border-left: 2px solid black;
-                  border-right: 2px solid black;
                   padding: 5px;
                 }
                 #place-img {
                   border-radius: 50%;
                   width: 100%;
                   padding: 20px;
+                }
+                #ps-name {
+                  font-family: 'Deserved';
+                  font-size: 35px;
+                }
+                #ps-address {
+                  font-family: 'Edu SA Beginner', cursive;
+                  font-size: 30px;
+                }
+                #google-cat {
+                  font-family: 'Edu SA Beginner', cursive;
+                  font-size: 25px;
+                }
+                #google-rating, #ps-latlng {
+                  font-family: 'Edu SA Beginner', cursive;
+                  font-size: 20px;
+                }
+                .white-space {
+                  background-color: rgb(255, 255, 255, 0.5);
+                  border-radius: 16px;
+                  padding: 10px;
+                  padding-right: 5px;
+                  padding-left: 5px;
                 } 
                 </style>
+                <div class="white-space">
                 <h3 id="ps-name">${result.name}</h3>
                 <h5 id="ps-address">${result.vicinity}</h5>
-                <h5 id="google-cat">${result.types.replace("_", " ")}</h5>
                 <h6 id="google-rating">Rating: ${result.rating} stars</h6>
                 <h6 id="ps-latlng">(lat: ${result.lat}, lng: ${result.lng})</h6>
+                </div>
                 <img id="place-img" src="${result.photo_url}" value="${result.photo_url}"> 
                 `
                 

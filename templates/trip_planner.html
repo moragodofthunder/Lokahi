@@ -5,12 +5,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link href="/static/css/maps.css" rel="stylesheet">
 <style>
-    .place-img {
-        width: 100%;
-    }
-    #place-info-menu {
-        display: none;
-    }
+
 </style>
 {% endblock %}
 
@@ -23,53 +18,34 @@
 
     <!-- TITLE/TRIP NAME -->
     <div class="row">
-        <div id="planner-title">
-            <h1>Trip Planner: <span class="trip-name">{{ trip.trip_name }} </span></h1>
-        </div> 
-    </div>
-    
-    <!-- TRIP CITY, COUNTRY -->
-    <div class="row">
-        <div id="trip-place">
-            <h3>
-                <span id="trip-city">
-                    {{ trip.trip_city }}
-                </span>, <span id="trip-country">
-                    {{ trip.trip_country }}
-                </span>
-            </h3>
-        </div>
-    </div>
-
-
-    <!-- TRAVEL DATES -->
-    <div class="row">
-        <div class="col">
+        <div class="welcome">
+            <div id="planner-title">
+                <h1 class="sp-h1">Trip Planner: <span class="trip-name">{{ trip.trip_name }} </span></h1>
+            </div>
+              <!-- TRIP CITY, COUNTRY -->
+            <div id="trip-place">
+                <h2>
+                    <span id="trip-city">
+                        {{ trip.trip_city }}
+                    </span>, <span id="trip-country">
+                        {{ trip.trip_country }}
+                    </span>
+                </h2>
+            </div>
+            <!-- TRAVEL DATES -->
             <div id="trip-dates">
-                <h4>
+                <h3>
                     {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
-                </h4>
-            </div> 
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-4">
-            <a href="/trip_details/{{ trip.trip_id }}">Back to Trip Details</a>
-        </div>
-        <div>
-            <a href="/saved_places_map/{{ trip.trip_id }}">See Map of all Saved Places</a>
-        </div>
-        <div class="col-6">
+                </h3>
+            </div>
             <div id="search-bar">
-                <label for="search-bar">Search for a place:</label>
+                <label for="search-bar" id="search-title">Search for a place:</label>
                 <input type="text" id="place-search" name="place-search">
                 <input type="submit" id="submit-search" value="Search">   
-            </div>
+            </div> 
         </div> 
     </div>
-
-    
+       
     <!-- HIDDEN VALUE -->
     <input type="hidden" id="trip-id" value="{{ trip.trip_id }}">
     
@@ -119,7 +95,7 @@
                     </select> 
                     <br>
                     <!-- SPECIAL NOTES -->
-                    <label for="notes">Notes:</label>
+                    <label for="notes" id="notes-title">Notes:</label>
                     <input type="text" id="notes" name="notes">
 
                     <p>

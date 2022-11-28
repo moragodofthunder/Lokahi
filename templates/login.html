@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Sign Up | Log In{% endblock %}
-<!-- {% block head %}<link rel="stylesheet" href="stylesheet.css">{% endblock %} -->
+{% block head %}<link rel="stylesheet" href="static/css/login.css">
+{% endblock %}
 
 <!-- NAVBAR -->
 {% include 'navbar-noprof.html' %}
@@ -14,7 +15,7 @@
     <!-- SIGN UP -->
     <div class="col-6">
       <div class="sign-up">
-        <h2>Sign Up (if you're new)</h2>
+        <h1>Sign Up (if you're new)</h1>
         <form action="/user_profile" method="POST">
             <p>
               Email <input type="text" name="email">
@@ -33,16 +34,16 @@
             </p>
 
             <select id="fav-color-picker" name="user-color">
-              <option value="">Choose your favorite color</option>
-              <option value="blue">Blue</option>
-              <option value="purple">Purple</option>
-              <option value="pink">Pink</option>
-              <option value="red">Red</option>
-              <option value="orange">Orange</option>
-              <option value="yellow">Yellow</option>
-              <option value="green">Green</option>
-              <option value="aqua">Aqua</option>
-              <option value="black">None of these</option>
+              <option value="" class="no-color">Choose your favorite color</option>
+              <option value="blue" class="blue">Blue</option>
+              <option value="purple" class="purple">Purple</option>
+              <option value="pink" class="pink">Pink</option>
+              <option value="red" class="red">Red</option>
+              <option value="orange" class="orange">Orange</option>
+              <option value="yellow" class="yellow">Yellow</option>
+              <option value="green" class="green">Green</option>
+              <option value="aqua" class="aqua">Aqua</option>
+              <option value="black" class="black">None of these</option>
             </select>
           
             <p>
@@ -55,7 +56,7 @@
   <div class="col-6">
     <div class="sign-up">
       <div class="log-in">
-      <h2>Log In (if you've been here before)</h2>
+      <h1>Log In (if you've been here before)</h1>
       <form action="/login" method="POST">
           <p>
               Email <input type="text" name="email">

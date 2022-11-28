@@ -273,6 +273,70 @@ def show_trip_planner_with_trip(trip_id):
 def show_trip_details(trip_id):
     """Return render template to trip_planner.html for specific trip"""
 
+    cat_banners = {
+    'Breakfast': '/static/img/cat_banners/1-breakfast-banner.png',
+    'Lunch': '/static/img/cat_banners/2-lunch-banner.png',
+    'Dinner': '/static/img/cat_banners/3-dinner-banner.png',
+    'Streetfood': '/static/img/cat_banners/4-streetfood-banner.png',
+    'Dessert': '/static/img/cat_banners/5-dessert-banner.png',
+    'Cafe': '/static/img/cat_banners/6-cafe-banner.png',
+    'Nightlife': '/static/img/cat_banners/7-nightlife-banner.png',
+    'Bar/Pub': '/static/img/cat_banners/8-bar-banner.png',
+    'Shopping': '/static/img/cat_banners/9-shopping-banner.png',
+    'Groceries': '/static/img/cat_banners/10-grocery-banner.png',
+    'Convenience Store': '/static/img/cat_banners/11-kombini-banner.png',
+    'Outdoor Market': '/static/img/cat_banners/12-farmers-market-banner.png',
+    'Covered Market': '/static/img/cat_banners/13-bazaar-banner.png',
+    'Bookstore/Library': '/static/img/cat_banners/14-bookstore-banner.png',
+    'Train Station': '/static/img/cat_banners/15-train-banner.png',
+    'Museum': '/static/img/cat_banners/16-museum-banner.png',
+    'Landmark': '/static/img/cat_banners/17-landmark-banner.png',
+    'Photo Spot': '/static/img/cat_banners/18-photo-banner.png',
+    'Temple/Shrine/Worship': '/static/img/cat_banners/19-shrine-banner.png',
+    'Entertainment': '/static/img/cat_banners/20-entertain-banner.png',
+    'Music': '/static/img/cat_banners/21-music-banner.png',
+    'Hot Spring': '/static/img/cat_banners/22-onsen-banner.png',
+    'Beach': '/static/img/cat_banners/23-beach-banner.png',
+    'Park': '/static/img/cat_banners/24-park-banner.png',
+    'Hiking': '/static/img/cat_banners/25-hiking-banner.png',
+    'Surfing': '/static/img/cat_banners/26-surf-banner.png',
+    'Workspace': '/static/img/cat_banners/27-work-banner.png',
+    'COVID Testing': '/static/img/cat_banners/28-covid-banner.png',
+    'Miscellaneous': '/static/img/cat_banners/29-misc-banner.png'
+    }
+
+    cat_ban_lts = {
+    'Breakfast': '/static/img/cat_ban_lt/1-breakfast-ban-lt.png',
+    'Lunch': '/static/img/cat_ban_lt/2-lunch-ban-lt.png',
+    'Dinner': '/static/img/cat_ban_lt/3-dinner-ban-lt.png',
+    'Streetfood': '/static/img/cat_ban_lt/4-streetfood-ban-lt.png',
+    'Dessert': '/static/img/cat_ban_lt/5-dessert-ban-lt.png',
+    'Cafe': '/static/img/cat_ban_lt/6-cafe-ban-lt.png',
+    'Nightlife': '/static/img/cat_ban_lt/7-nightlife-ban-lt.png',
+    'Bar/Pub': '/static/img/cat_ban_lt/8-bar-ban-lt.png',
+    'Shopping': '/static/img/cat_ban_lt/9-shopping-ban-lt.png',
+    'Groceries': '/static/img/cat_ban_lt/10-grocery-ban-lt.png',
+    'Convenience Store': '/static/img/cat_ban_lt/11-kombini-ban-lt.png',
+    'Outdoor Market': '/static/img/cat_ban_lt/12-farmers-market-ban-lt.png',
+    'Covered Market': '/static/img/cat_ban_lt/13-bazaar-ban-lt.png',
+    'Bookstore/Library': '/static/img/cat_ban_lt/14-bookstore-ban-lt.png',
+    'Train Station': '/static/img/cat_ban_lt/15-train-ban-lt.png',
+    'Museum': '/static/img/cat_ban_lt/16-museum-ban-lt.png',
+    'Landmark': '/static/img/cat_ban_lt/17-landmark-ban-lt.png',
+    'Photo Spot': '/static/img/cat_ban_lt/18-photo-ban-lt.png',
+    'Temple/Shrine/Worship': '/static/img/cat_ban_lt/19-shrine-ban-lt.png',
+    'Entertainment': '/static/img/cat_ban_lt/20-entertain-ban-lt.png',
+    'Music': '/static/img/cat_ban_lt/21-music-ban-lt.png',
+    'Hot Spring': '/static/img/cat_ban_lt/22-onsen-ban-lt.png',
+    'Beach': '/static/img/cat_ban_lt/23-beach-ban-lt.png',
+    'Park': '/static/img/cat_ban_lt/24-park-ban-lt.png',
+    'Hiking': '/static/img/cat_ban_lt/25-hiking-ban-lt.png',
+    'Surfing': '/static/img/cat_ban_lt/26-surf-ban-lt.png',
+    'Workspace': '/static/img/cat_ban_lt/27-work-ban-lt.png',
+    'COVID Testing': '/static/img/cat_ban_lt/28-covid-ban-lt.png',
+    'Miscellaneous': '/static/img/cat_ban_lt/29-misc-ban-lt.png'
+    }
+
     trip = crud.get_trip_by_id(trip_id)
     start = trip.start_date
     end = trip.end_date
@@ -291,7 +355,7 @@ def show_trip_details(trip_id):
     travel_dates.pop()
     unformat_dates.pop()
 
-    if start >= date.today():
+    if end >= date.today():
         upcoming = True
     else:
         upcoming = False
@@ -329,7 +393,8 @@ def show_trip_details(trip_id):
     return render_template('trip_details.html', trip=trip, 
     upcoming=upcoming, travel_dates=travel_dates, 
     places_by_day=places_by_day, places_by_category=places_by_category, 
-    places_by_cat=places_by_cat, user=user, trip_maker=trip_maker)
+    places_by_cat=places_by_cat, user=user, trip_maker=trip_maker, 
+    cat_banners=cat_banners, cat_ban_lts=cat_ban_lts)
 
 ###----------------------------USER-TRIP-IMG---------------------------###
 @app.route('/api/trip_img/<trip_id>', methods=['POST'])

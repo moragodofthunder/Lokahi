@@ -1,0 +1,79 @@
+#lokahi-logo-rg {
+    position: relative;
+    top: -80px;
+    left: 90px;
+}
+.menu-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+.menu-burger {
+    width: 50px;
+    height: 6px;
+    background: #66cc00;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+}
+.menu-burger::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 6px;
+    background: #ff4d88;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+    transform: translateY(-16px);
+}
+.menu-burger::after
+{
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 6px;
+    background: #00ccff;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+    transform: translateY(16px);
+}
+.menu-btn.active .menu-burger {
+    transform: translateX(-50px);
+    background: transparent;
+}
+.menu-btn.active .menu-burger::before {
+    transform: rotate(45deg) translate(35px, -35px);
+}
+.menu-btn.active .menu-burger::after {
+    transform: rotate(-45deg) translate(35px, 35px);
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.nav-menu {
+    height: 100vh;
+    width: 18%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: -18%;
+    background-image: linear-gradient(#779867, #158a8b, #ee89d8, #fea484, #f2fc45);
+    transition: right .5s;
+    justify-content: center;
+    align-items: center;
+    
+}
+.nav-menu.active {
+    right: 0;
+    justify-content: center;
+    align-items: center;
+}
+#bar-for-navbar {
+    background-image: linear-gradient(to right, #779867, #158a8b, #ee89d8, #fea484, #f2fc45);
+    height: 90px;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/static/css/navbar.css" rel="stylesheet">
+        <style>
+            
+            
+        </style>
+    </head>
+
+    <body>
+
+     <!-- LOG IN/LOG OUT BUTTON --> 
+     
+    <div id="bar-for-navbar">
+
+        
+        <div class="menu-btn">
+            <div class="menu-burger"></div>
+        </div>
+        
+        <a href="/" id="lokahi-logo-rg"><img src="/static/img/logos/lokahi-logo-rg.png" alt="Lōkahi" style="width:300px;height:auto;"></a>
+    </div>            
+        
+        
+    <div class="nav-menu">
+            {% if 'user_id' in session %}
+            <form action="/logout">
+                <input type="image" src="/static/img/buttons/log-out-1.png" alt="Log Out" id="log-out" width="130" height="69"/>
+            </form>
+            {% else %}
+            <form action="/login">
+                <input type="image" src="/static/img/buttons/log-in-1.png" alt="Log In" id="log-in" width="130" height="69"/>
+            </form>
+            {% endif %}
+
+            <input type="hidden" id="trip-id" value="{{ trip.trip_id }}">
+
+            <!-- PROFILE AND CREATE NEW TRIP LINKS -->
+            <ul>
+                <a href="/user_profile"><img src="/static/img/buttons/my-profile-btn.png" alt="My Profile" id="my-prof-btn" width="205" height="205"></a><br>
+                <a href="/new_trip"><img src="/static/img/buttons/new-trip-btn.png" alt="Create New Trip" id="new-trip-btn" width="177" height="177"></a>
+                <a href="/saved_places_map/{{ trip.trip_id }}"><img src="/static/img/buttons/sp-map-button.png" alt="Map of Saved Places" id="sp-map-btn" width="205" height="205"></a>   
+            </ul> 
+        </div>
+     </div>
+        
+        
+        <script src="/static/js/navbar.js"></script>
+    </body>
+</html>

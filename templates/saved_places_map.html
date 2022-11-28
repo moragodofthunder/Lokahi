@@ -2,7 +2,10 @@
 {% block title %}Saved Places Map{% endblock %}
 
 {% block head %}
-<link href="/static/css/maps.css" rel="stylesheet">
+<link href="/static/css/sp-maps.css" rel="stylesheet">
+<style>
+   
+</style>
 {% endblock %}
 
 <!-- NAVBAR -->
@@ -14,41 +17,29 @@
 
     <!-- TITLE/TRIP NAME -->
     <div class="row">
-        <div id="planner-title">
-            <h1>Saved Places Map for: <span class="trip-name">{{ trip.trip_name }} </span></h1>
+        <div class="welcome">
+            <div id="planner-title">
+                <h1 class="sp-h1">Saved Places Map for: <span class="trip-name">{{ trip.trip_name }} </span></h1>
+            </div>
+             <!-- TRIP CITY, COUNTRY -->
+             <div id="trip-place">
+                <h2>
+                    <span id="trip-city">
+                        {{ trip.trip_city }}
+                    </span>, <span id="trip-country">
+                        {{ trip.trip_country }}
+                    </span>
+                </h2>
+            </div>
+            <!-- TRAVEL DATES -->
+            <div id="trip-dates">
+                <h3>
+                    {{ trip.start_date.strftime('%b %d %Y') }} - {{ trip.end_date.strftime('%b %d %Y') }}
+                </h3>
+             </div>
         </div> 
     </div>
-
-    <!-- TRIP CITY, COUNTRY -->
-    <div class="row">
-        <div id="trip-place">
-            <h3>
-                <span id="trip-city">
-                    {{ trip.trip_city }}
-                </span>, <span id="trip-country">
-                    {{ trip.trip_country }}
-                </span>
-            </h3>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-4">
-            <a href="/trip_details/{{ trip.trip_id }}">Back to Trip Details</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="planner-link">
-            <!-- LINK TO TRIP PLANNER FOR TRIP IF TRIP IS 'UPCOMING' -->
-            {% if upcoming == True %}
-            <span id="edit-trip">
-                <h5>Want to save more places?</h5>
-                <a href="/trip_planner/{{ trip.trip_id }}">Find more places in Trip Planner</a>
-            </span>
-            {% endif %}
-        </div>
-    </div>
+   
 
     <!-- MAP OF SAVED PLACES -->
     <div class="sp-map" id="sp-map"></div>
