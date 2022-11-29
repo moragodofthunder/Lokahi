@@ -57,11 +57,11 @@ body {
 }
 .nav-menu {
     height: 100vh;
-    width: 18%;
+    width: 15%;
     position: fixed;
     z-index: 100;
     top: 0;
-    right: -18%;
+    right: -15%;
     background-image: linear-gradient(#779867, #158a8b, #ee89d8, #fea484, #f2fc45);
     transition: right .5s;
     justify-content: center;

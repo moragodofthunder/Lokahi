@@ -131,15 +131,15 @@ function initMap() {
                   font-size: 35px;
                 }
                 #ps-address {
-                  font-family: 'Edu SA Beginner', cursive;
+                  font-family: 'Manjari', sans-serif;
                   font-size: 30px;
                 }
                 #google-cat {
-                  font-family: 'Edu SA Beginner', cursive;
+                  font-family: 'Manjari', sans-serif;
                   font-size: 25px;
                 }
                 #google-rating, #ps-latlng {
-                  font-family: 'Edu SA Beginner', cursive;
+                  font-family: 'Manjari', sans-serif;
                   font-size: 20px;
                 }
                 .white-space {

@@ -6,7 +6,7 @@ h1 {
     color: transparent;
 }
 p {
-    font-family: 'Edu SA Beginner', cursive;
+    font-family: 'Manjari', sans-serif;
     font-size: 30px;
 }
 body {
@@ -25,11 +25,12 @@ body {
     padding-right: 10px;
     padding-left: 10px;
     align-items: center;
-    width: 750px;
-    height: 500px;
+    width: 700px;
+    height: 650px;
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 100px;
 }
 .row {
     margin: auto;

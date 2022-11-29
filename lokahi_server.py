@@ -64,7 +64,7 @@ def logout_user():
     
     del session["user_id"]
 
-    flash("A hui hou kākou!")
+    flash("A hui hou!")
 
     return redirect("/login")
 
@@ -669,10 +669,10 @@ def save_place_data():
     cat_td)
     db.session.add(saved_place)
     db.session.commit()
-    flash(f"{ps_name} saved")
+    # flash(f"{ps_name} saved")
 
-    if new_ps_itin is not None:
-        flash(f"{ps_name} saved to your itinerary for {ps_itinerary}")
+    # if new_ps_itin is not None:
+    #     flash(f"{ps_name} saved to your itinerary for {ps_itinerary}")
 
     return "Success"
 ###---------------------------ALL-SAVED-PLACES-----------------------###

@@ -24,15 +24,15 @@ html, body {
     color: transparent;
 }
 h2 {
-    font-family: 'Edu SA Beginner', cursive;
+    font-family: 'Manjari', sans-serif;
     font-size: 35px;
 }
 h3 {
-    font-family: 'Edu SA Beginner', cursive;
+    font-family: 'Manjari', sans-serif;
     font-size: 25px;
 } 
 #search-title {
-  font-family: 'Edu SA Beginner', cursive;
+  font-family: 'Manjari', sans-serif;
   font-size: 22px;
 }
 #place-info-menu {
@@ -40,7 +40,7 @@ h3 {
   background-image: linear-gradient(#f2fc45, #fea484, #ee89d8);
 }
 #notes-title {
-  font-family: 'Edu SA Beginner', cursive;
+  font-family: 'Manjari', sans-serif;
   font-size: 20px; 
 }
 
