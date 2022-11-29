@@ -30,6 +30,64 @@
     background-image: linear-gradient(to right, #779867, #158a8b, #ee89d8, #fea484, #f2fc45);
 }
 
+.all-past-trips {
+    display: flex;
+    padding: 2rem;
+    overflow-x: scroll;
+}
+.all-past-trips::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.all-past-trips::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px #990099 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.all-past-trips::-webkit-scrollbar-track {
+    background-image: linear-gradient(to right, #779867, #158a8b, #ee89d8, #fea484, #f2fc45);
+}
+
+.shared-up {
+    display: flex;
+    padding: 2rem;
+    overflow-x: scroll;
+}
+.shared-up::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.shared-up::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px #990099 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.shared-up::-webkit-scrollbar-track {
+    background-image: linear-gradient(to right, #779867, #158a8b, #ee89d8, #fea484, #f2fc45);
+}
+
+.shared-past {
+    display: flex;
+    padding: 2rem;
+    overflow-x: scroll;
+}
+.shared-past::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.shared-past::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px #990099 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.shared-past::-webkit-scrollbar-track {
+    background-image: linear-gradient(to right, #779867, #158a8b, #ee89d8, #fea484, #f2fc45);
+}
+
+
 .card {
     display: flex;
     flex-direction: row;

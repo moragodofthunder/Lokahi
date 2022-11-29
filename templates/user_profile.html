@@ -70,7 +70,7 @@
         <div class="welcome">
             <h1>Your Upcoming Trips:</h1>  
         </div>
-        <section class="up-trips-list">   
+        <div class="up-trips-list">   
         {% for trip in upcoming %}
             <a href="/trip_details/{{ trip.trip_id }}">
                 <article class="card" style="background-image: url({{ trip.trip_img }})">
@@ -91,7 +91,7 @@
                 </article>
             </a>    
         {% endfor %}
-        </section> 
+        </div> 
     </div>
     {% else %}
     <div class="row">
@@ -101,7 +101,7 @@
         
         <h6>(You don't have any upcoming trips)</h6>
         <div class="add-trip-btn">
-            <a href="/new_trip">Create a new trip</a>
+            <a href="/new_trip"><img src="/static/img/buttons/new-trip-btn.png" alt="Create New Trip" id="new-trip-btn" width="177" height="177"></a> 
         </div>
     </div>
     {% endif %}
@@ -162,7 +162,9 @@
                         </p> 
                     </div>
                     <div class="user-avatar">
-                        <img class="card-user" src="{{ user.profile_img }}" id="trip-profile-img">
+                        {% for friend in trip.users %}
+                        <img class="card-user" src="{{ friend.profile_img }}" id="trip-profile-img">
+                        {% endfor %}
                     </div>
                     <div class="card-link"></div>
                 </article>
