@@ -7,6 +7,7 @@
 .col-5 {
     align-items: center;
 }
+
 .date-tables::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -33,6 +34,20 @@
     transition: .2s;
     overflow-x: hidden;
 }
+
+.itin-by-day::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.itin-by-day::-webkit-scrollbar-thumb {
+    background: #779867;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px #779867 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.itin-by-day::-webkit-scrollbar-track {
+    background-image: linear-gradient(#779867, #158a8b, #ee89d8, #fea484, #f2fc45);
+}
     
 #saved-places-by-trip {
     background: white;
@@ -46,6 +61,20 @@
     transition: .2s;
     overflow-x: hidden;
     margin: 2rem;
+}
+
+.saved-places-by-trip::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.saved-places-by-trip::-webkit-scrollbar-thumb {
+    background: #fea484;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px #fea484 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.saved-places-by-trip::-webkit-scrollbar-track {
+    background-image: linear-gradient(#779867, #158a8b, #ee89d8, #fea484, #f2fc45);
 }
 
 .itin-by-day:focus-within~.card, .card:hover~.card {
