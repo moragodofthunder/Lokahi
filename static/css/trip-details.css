@@ -98,6 +98,10 @@ h1 {
     font-size: 58px;
     background-image: linear-gradient(#779867, #158a8b, #ee89d8, #fea484, #f2fc45);
     background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
     color: transparent;
 }
 h2 {
