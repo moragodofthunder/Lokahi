@@ -23,7 +23,7 @@
 .up-trips-list::-webkit-scrollbar-thumb {
     background: purple;
     border-radius: 10px;
-    box-shadow: inset 2px 2px 2px #990099 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 2px 2px 2px #779867 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .up-trips-list::-webkit-scrollbar-track {
@@ -42,7 +42,7 @@
 .all-past-trips::-webkit-scrollbar-thumb {
     background: purple;
     border-radius: 10px;
-    box-shadow: inset 2px 2px 2px #990099 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 2px 2px 2px #158a8b (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .all-past-trips::-webkit-scrollbar-track {
@@ -61,7 +61,7 @@
 .shared-up::-webkit-scrollbar-thumb {
     background: purple;
     border-radius: 10px;
-    box-shadow: inset 2px 2px 2px #990099 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 2px 2px 2px #ee89d8 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .shared-up::-webkit-scrollbar-track {
@@ -80,7 +80,7 @@
 .shared-past::-webkit-scrollbar-thumb {
     background: purple;
     border-radius: 10px;
-    box-shadow: inset 2px 2px 2px #990099 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 2px 2px 2px #fea484 (0,0%,100%,.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .shared-past::-webkit-scrollbar-track {
