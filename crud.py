@@ -60,14 +60,14 @@ def get_trips_by_user_id(user_id):
 
 ###-------------------------------SAVE-PLACE-TO-DB----------------------------###
 def save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, in_itinerary, new_ps_itin, ps_lat, ps_lng, ps_city, ps_country,
-cat_pin, cat_emoji, cat_banner, cat_td):
+cat_pin, cat_emoji, cat_banner, cat_td, place_img):
 
     if not ps_notes:
         ps_notes = ""
 
     saved_place = Place(user_id=user_id, trip_id=trip_id, place_name=ps_name, category=ps_cat, place_notes=ps_notes, 
     latitude=ps_lat, longitude=ps_lng, in_itinerary=in_itinerary, itinerary_dt=new_ps_itin, place_city=ps_city, 
-    place_country=ps_country, cat_pin=cat_pin, cat_emoji=cat_emoji, cat_banner=cat_banner, cat_td=cat_td)
+    place_country=ps_country, cat_pin=cat_pin, cat_emoji=cat_emoji, cat_banner=cat_banner, cat_td=cat_td, place_img=place_img)
 
     return saved_place
 

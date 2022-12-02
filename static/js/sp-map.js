@@ -50,7 +50,8 @@ function initMap() {
                     <li><b>Category: </b>${place.category}</li>
                     <li><b>Notes: </b>${place.notes}</li>
                     <img class="place-cat" src=${place.catEmoji} width="100">
-                    <img class="place-user-pic" src=${place.userImg} width="100">
+                    <img class="place-user-pic" src=${place.userImg} width="100"><br>
+                    <img class="place-img" src=${place.imgURL} width="200">
                     
                 </ul>
                 </div>

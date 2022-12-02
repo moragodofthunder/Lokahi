@@ -194,7 +194,7 @@ def add_friends_to_trip(trip_id):
 
     trip_bud = request.form.get("trip-buds")
     trip_friend = crud.get_user_by_id(int(trip_bud))
-    trip = crud.get_trip_by_id(trip_id)
+    trip = crud.get_trip_by_id(int(trip_id))
 
     trip.users.append(trip_friend)
     db.session.add(trip)
@@ -223,14 +223,19 @@ def create_new_trip():
     start_date = request.form.get("start-date")
     end_date = request.form.get("end-date")
     trip_img = "/static/img/cards/suitcase.png"
+    print(f"THIS IS THE TRIP ADDRESS: {trip_city}, {trip_country}")
 
     address = f"{trip_city}, {trip_country}"
     api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+    print(f"THIS IS THE API_RESPONSE****{api_response}")
     api_response_dict = api_response.json()
+    print(f"THIS IS THE API RESPONSE DICT ++++ {api_response_dict}")
 
     if api_response_dict['status'] == 'OK':
         trip_lat = api_response_dict['results'][0]['geometry']['location']['lat']
         trip_lng = api_response_dict['results'][0]['geometry']['location']['lng']
+    else:
+        return "There "
 
     trip = crud.create_trip(trip_name, trip_country, trip_city, 
     start_date, end_date, trip_img, trip_lat, trip_lng, session['user_id'])
@@ -250,7 +255,7 @@ def create_new_trip():
 def show_trip_planner_with_trip(trip_id):
     """Return render template to trip_planner.html for specific trip"""
 
-    trip = crud.get_trip_by_id(trip_id)
+    trip = crud.get_trip_by_id(int(trip_id))
     start = trip.start_date
     end = trip.end_date
     travel_dates = [start.strftime('%A, %b %d %Y')]
@@ -337,7 +342,7 @@ def show_trip_details(trip_id):
     'Miscellaneous': '/static/img/cat_ban_lt/29-misc-ban-lt.png'
     }
 
-    trip = crud.get_trip_by_id(trip_id)
+    trip = crud.get_trip_by_id(int(trip_id))
     start = trip.start_date
     end = trip.end_date
     travel_dates = [start.strftime('%A, %b %d %Y')]
@@ -409,7 +414,7 @@ def upload_trip_img(trip_id):
 
     img_url = result['secure_url']
 
-    trip = crud.get_trip_by_id(trip_id)
+    trip = crud.get_trip_by_id(int(trip_id))
     trip.trip_img = img_url
     db.session.commit()
 
@@ -422,7 +427,7 @@ def upload_trip_img(trip_id):
 def edit_itinerary(trip_id):
     """Let's users edit itinerary on page"""
 
-    trip = crud.get_trip_by_id(trip_id)
+    trip = crud.get_trip_by_id(int(trip_id))
     start = trip.start_date
     end = trip.end_date
     travel_dates = [start.strftime('%A, %b %d %Y')]
@@ -643,6 +648,8 @@ def save_place_data():
     ps_country = request.json["psCountry"]
     trip_id = request.json["psTripId"]
     trip_id = int(trip_id)
+    place_img = request.json["placeImg"]
+    print(f"*****THIS IS THE PLACE IMAGE URL {place_img}")
 
     ps_name = session['ps-name']
     ps_lat = session['ps-lat']
@@ -666,7 +673,7 @@ def save_place_data():
     
     saved_place = crud.save_place(user_id, trip_id, ps_name, ps_cat, ps_notes, in_itinerary,
     new_ps_itin, ps_lat, ps_lng, ps_city, ps_country, cat_pin, cat_emoji, cat_banner,
-    cat_td)
+    cat_td, place_img)
     db.session.add(saved_place)
     db.session.commit()
     # flash(f"{ps_name} saved")
@@ -692,6 +699,8 @@ def places_info(trip_id):
             place.itinerary_dt = place.itinerary_dt.strftime('%b %d, %Y')
         elif place.place_notes is None:
             place.place_notes = "N/A"
+        elif place.place_img is None:
+            place.place_img = 'static/img/cards/suitcase.png'
         else:
             # place.in_itinerary = "No"
             place.itinerary_dt = "N/A"
@@ -712,7 +721,8 @@ def places_info(trip_id):
         "placeLng": place.longitude,
         "userName": place.user.fname,
         "userImg": place.user.profile_img,
-        "notes": place.place_notes})
+        "notes": place.place_notes,
+        "imgURL": place.place_img})
         
 
     return jsonify(all_places)
