@@ -742,6 +742,12 @@ def show_sp_map(trip_id):
     return render_template("saved_places_map.html", trip=trip, 
     upcoming=upcoming, YOUR_API_KEY=api_key)
 
+###------------------------------ABOUT-PAGE----------------------------###
+@app.route("/about")
+def show_about_page():
+
+    return render_template("about.html")
+
 ###-----------------------------OTHER-STUFF----------------------------###
 
 if __name__ == "__main__":

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}🌈 About Lōkahi{% endblock %}
+
+{% block head %}
+<link href="/static/css/about.css" rel="stylesheet">
+<style></style>
+{% endblock %}
+
+<!-- NAVBAR -->
+{% include 'navbar.html' %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row" id="about-text">
+        
+            <div id="about-title">
+                <h1>About Us</h1> 
+                
+                <img src="static/img/buttons/flower-suitcase.png" id="flower-suitcase">
+                
+            </div>
+        
+            <p>
+                Aloha, I'm Mora Napoleon and I'd like to introduce you to Lōkahi, 
+            a collaborative travel planning web application for friends who want 
+            to make planning travel together easier. Allow me to welcome you to 
+            the Lōkahi 'Ohana!
+            </p>
+            <p>
+                Building this application combined my love of travel, my Hawaiian and Asian 
+            heritage, my artistic skills, and my newfound passion for software engineering.
+            </p>
+            <p>
+                Lōkahi is the Hawaiian word for "together" and I built features that I hope help
+             bring people together as they plan their trips. 
+            </p>
+            <p>
+                As someone who loves travel, I've learned a lot about what works when it comes to 
+            planning but also found that some things were missing.
+            </p>
+            <p>
+                Before building Lōkahi, if I was going to go to a new city, or if there was a city 
+            I would travel to multiple times, I would use Google Maps to save the places I was interested in checking out that I would hear about through friends, family, YouTube videos, and other online sources.
+            </p>
+            <p>
+                The number of lists I made was vast (one for every city) and I saved thousands of places. But all place pins appeared on the map as the standard blue pin and seeing what type of place I had saved required 
+            clicking through every pin individually. 
+            </p>
+            <p>
+                The only color coding I could do was in a separate app where I would make a spreadsheet with the main places I wanted to visit and then while I was at my destination and out and about I could open my map 
+            to see what was close to me if I was looking for an interesting place to eat or a cafe I could work in.
+            </p>
+            <p>
+                But if I had the option to color code and categorize places ahead of time, I could have saved time while at my destination by already having places ready to go. I could also save backup options of things 
+            like breakfast restaurants if a place ended up being closed or too crowded so I wasn't scrambling to find an alternative in my sea of blue pins. 
+            </p>
+            <p>
+                I also realized that if I wanted to share a list of my saved 
+            places with a friend if we were traveling together, they couldn't see the pins they saved while also comparing my saved places against theirs.  
+            </p>
+            <p>
+                Thus Lōkahi was born! I created 29 different categories based on the types of places I tended to visit while traveling (including 'Miscellaneous' for the odd place and ‘COVID Testing Centers’ to help navigate 
+            modern travel). Each category was given a custom color pin and emoji that I drew myself. Then when I figured out how to make itinerary tables that populated if a place was saved to the itinerary from the map, 
+            I made matching banners so color coding in the itinerary was taken care of. No more time wasted on separate spreadsheets! Huzzah!
+            </p>
+            <p>
+                Since I like to travel with family and friends I wanted users to be able to add other Lōkahi users to their trips and let everyone add to the itinerary and list of saved places. But having lots of pins on a map can
+                get chaotic. So I realized that when each pin is clicked on the map, it would be more powerful to display the user who saved the place, the category, any notes that were input by who saved the place, and any other 
+                helpful place information; that way each pin was more personal, too.
+            </p>
+            <p>
+                Lōkahi is the first full-stack web application I have built and I have lots of features that I am still building as it's my goal to make it the most powerful collaborative travel planning tool it can be. The 
+            standard Lōkahi emojis all represent a piece of my Hawaiian and Japanese culture, but in the future I'd like to make different emoji sets for different countries. Also side note for those who aren't into the 
+            psychedelic style, a 'calm mode' is coming soon!
+            </p>
+            <p>
+                If you have any suggestions for new place categories or features I'd love to hear from you! Your feedback is so important to me as it helps me make Lōkahi the best it can be.
+            </p>
+            <p>
+                Mahalo for spending your time here! 🌈 🤙
+            </p>  
+        
+    </div>
+
+<!-- END FLUID CONTAINER -->     
+</div>
+
+<!-- JS SCRIPT TAGS -->
+
+{% endblock %}
