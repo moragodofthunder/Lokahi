@@ -6,7 +6,7 @@ p {
 }
 h1 {
     font-family: 'Deserved';
-    font-size: 55px;
+    font-size: 85px;
     background-image: linear-gradient(#779867, #158a8b, #ee89d8, #fea484, #f2fc45);
     background-clip: text;
     -webkit-background-clip: text;
@@ -42,9 +42,14 @@ body {
 }
 
 #about-title {
-    display: inline-block;
+    margin: auto;
 }
 #flower-suitcase {
-    width: 177px;
-    height: 177px;
+    width: 250px;
+    height: 250px;
+}
+#ti-leaves-and-pins {
+    width: 200px;
+    height: 200px;
+    float: right;
 }
