@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}📯 Contact Lōkahi{% endblock %}
+
+{% block head %}
+<link href="/static/css/contact.css" rel="stylesheet">
+<style></style>
+{% endblock %}
+
+<!-- NAVBAR -->
+{% include 'navbar.html' %}
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+               <h1>Contact Us</h1> 
+            </div>
+            <div class="col">
+                <img src="/static/img/buttons/10-contact-btn-no-txt.png" id="contact-envelope">
+            </div>
+        </div>
+        
+        <form action="mailto:moragodofthunder@gmail.com" method="post" enctype="text/plain">
+            <select id="reason-for-contact">
+                <option value="">Please choose your reason for contacting us</option>
+                <option value="suggest-category">Suggestion for category</option>
+                <option value="suggest-feature">Suggestion for a feature</option>
+                <option value="feedback">Feedback</option>
+                <option value="bug-report">Report a bug</option>
+            </select>
+
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="Your first name" required>
+            
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lastname" placeholder="Your last name">
+
+            <label for="email">Email Address</label>
+            <input type="text" id="email" name="email" placeholder="yourname@example.com" required>
+            
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+
+            <label for="message">Your message</label>
+            <textarea id="subject" name="subject" placeholder="Write your message here" style="height:200px" required>
+            </textarea>
+
+            <input type="submit" value="Submit">
+
+        </form>
+    </div>
+
+
+<!-- END FLUID CONTAINER -->     
+
+
+<!-- JS SCRIPT TAGS -->
+
+{% endblock %}

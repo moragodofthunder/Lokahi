@@ -748,6 +748,12 @@ def show_about_page():
 
     return render_template("about.html")
 
+###-----------------------------CONTACT-PAGE---------------------------###
+@app.route("/contact")
+def show_contact_page():
+
+    return render_template("contact.html")
+
 ###-----------------------------OTHER-STUFF----------------------------###
 
 if __name__ == "__main__":
