@@ -1,2 +1,2 @@
 ![alt text][logo]
-[logo]: <img src="/static/img/logos/lokahi-logo-rg.png alt="Lōkahi" width="200" />
+[logo]: /static/img/logos/lokahi-logo-rg.png "Lokahi logo"
