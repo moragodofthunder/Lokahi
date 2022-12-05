@@ -21,6 +21,15 @@
             </h1>
         </div>
     </div>
+
+    <div class="row">
+        <div class="welcome">
+            <h1>Featured Place of the Week:</h1>  
+        </div>
+        <div class="test-map" id="test-map">
+
+        </div>
+    </div>
     
     <div class="row" id="profile-stuff">
         <!-- PROFILE PICTURE AND UPLOAD PHOTO BUTTON -->
@@ -220,4 +229,8 @@
 
 <!-- JS SCRIPT TAGS -->
 <script src="/static/js/user_profile.js"></script>
+<script src="/static/js/test_map.js"></script>
+<script async 
+src="https://maps.googleapis.com/maps/api/js?key={{ YOUR_API_KEY }}&libraries=places&callback=initMap&v=beta&libraries=marker">
+</script>
 {% endblock %}

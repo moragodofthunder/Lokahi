@@ -98,7 +98,7 @@ def show_user_profile():
 
         return render_template('user_profile.html', user=user, 
         user_trips=user_trips, upcoming=upcoming, past=past, 
-        shared_upcoming=shared_upcoming, shared_past=shared_past)
+        shared_upcoming=shared_upcoming, shared_past=shared_past, YOUR_API_KEY=api_key)
 
     else:
         flash("Please log in or create new account.")
@@ -235,7 +235,7 @@ def create_new_trip():
         trip_lat = api_response_dict['results'][0]['geometry']['location']['lat']
         trip_lng = api_response_dict['results'][0]['geometry']['location']['lng']
     else:
-        return "There "
+        return "There was an error with the API"
 
     trip = crud.create_trip(trip_name, trip_country, trip_city, 
     start_date, end_date, trip_img, trip_lat, trip_lng, session['user_id'])

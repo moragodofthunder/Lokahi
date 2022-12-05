@@ -29,12 +29,12 @@ function initMap() {
                     const placeInfoContent = `
                       <style>
                       #place-cat {
-                        width: 200px,
-                        height: auto, 
+                        width: 200px;
+                        height: auto; 
                       }
                       #place-user-pic {
-                        width: 200px,
-                        border-radius: 50%,
+                        width: 200px;
+                        border-radius: 50%;
                       }
                       </style>
 

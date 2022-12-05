@@ -322,3 +322,9 @@ body {
     padding: .5rem;
 }
 
+.test-map,
+#test-map {
+    width: 100%;
+    height: 650px; 
+  }
+
