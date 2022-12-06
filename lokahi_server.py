@@ -14,6 +14,7 @@ from datetime import date, timedelta, datetime
 app = Flask(__name__)
 app.secret_key = os.environ['app_secret_key']
 api_key = os.environ['YOUR_API_KEY']
+api_key_2 = os.environ['YOUR_OTHER_API_KEY']
 
 CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
 CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
@@ -226,8 +227,7 @@ def create_new_trip():
     print(f"THIS IS THE TRIP ADDRESS: {trip_city}, {trip_country}")
 
     address = f"{trip_city}, {trip_country}"
-    # api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
-    api_response = request.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&sensor=true')
+    api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key_2))
     print(f"THIS IS THE API_RESPONSE****{api_response}")
     api_response_dict = api_response.json()
     print(f"THIS IS THE API RESPONSE DICT ++++ {api_response_dict}")
