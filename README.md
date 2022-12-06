@@ -39,10 +39,10 @@ Lōkahi is map-based so users can see if their plans to visit certain places are
 On sign up the user is prompted to enter their email address, password, first name, last name, and favorite color from a dropdown menu. They then log in with their email and password after a flash message confirms their successful account creation.
 
 THIS IS FROM FINALCUT
-! [Gif from FinalCut](/static/img/gifs/make-acct.gif)
+![Gif from FinalCut](/static/img/gifs/make-acct.gif)
 
 THIS IS FROM GIFMAKER
-! [Gif from GifMaker](/static/img/gifs/gif-maker.gif)
+![Gif from GifMaker](/static/img/gifs/gif-maker.gif)
 
 ## Profile Page
 The user's default avatar is chosen based on the favorite color they chose at sign up, but they can choose to upload a personal profile image which uses Cloudinary's AI to crop the image to size and automatically zoom in to the most interesting part of the photo.
