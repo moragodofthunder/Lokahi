@@ -9,7 +9,6 @@ by [Mora Napoleon](https://www.linkedin.com/in/moranapoleon/) | <a href="mailto:
 </span>
 
 # Table of Contents
-<ul>
 * [Tech Stack](#tech-stack)
 * [About Lōkahi](#about)
 <li>Features</li>
@@ -19,7 +18,7 @@ by [Mora Napoleon](https://www.linkedin.com/in/moranapoleon/) | <a href="mailto:
 <li>Acknowledgements</li>
 <li>Install Lōkahi</li>
 <li>Licenses</li>
-</ul>
+
 
 # <a name="tech-stack"></a>Tech Stack
 <ul>
