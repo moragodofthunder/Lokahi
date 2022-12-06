@@ -10,14 +10,14 @@ by [Mora Napoleon](https://www.linkedin.com/in/moranapoleon/) | <a href="mailto:
 
 # Table of Contents
 * [Tech Stack](#tech-stack)
-* [About Lōkahi](#about)
-<li>Features</li>
-<li>About the Emojis</li>
-<li>Looking Ahead</li>
-<li>About the Developer</li>
-<li>Acknowledgements</li>
-<li>Install Lōkahi</li>
-<li>Licenses</li>
+* [About Lōkahi](#about-lokahi)
+* [Features](#features)
+* [About the Emojis](#emojis)
+* [Looking Ahead](#future)
+* [About the Developer](#about-mora)
+* [Acknowledgements](#acknowledgements)
+* [Install Lōkahi](#install-lokahi)
+* [Licenses](#licenses)
 
 
 # <a name="tech-stack"></a>Tech Stack
@@ -27,14 +27,14 @@ by [Mora Napoleon](https://www.linkedin.com/in/moranapoleon/) | <a href="mailto:
 <li> <strong>APIs:</strong> Google Maps | Google Geocoding | Google Places | Cloudinary</li>
 </ul>
 
-# <a name="about"></a>About Lōkahi
+# <a name="about-lokahi"></a>About Lōkahi
 Lōkahi is a collaborative travel planning web app for friends who want to make planning travel together easier. Inspired by the Hawaiian word for "together", Lōkahi (pronounced "loh-KAH-hee") allows users to find places on a map, categorize them by type, and add them to their itinerary without ever having to make a separate spreadsheet. 
 
 When a new trip is created, users are routed to a searchable map of their destination city. When a place is saved, the place pin and itinerary table item display with matching emojis and colors. If a user shares a trip with friends, all users can save places, add to the itinerary, or upload an image for the trip card. 
 
 Lōkahi is map-based so users can see if their plans to visit certain places are actually feasible in one day.
 
-# Features
+# <a name="features"></a>Features
 ## Account Creation and Login
 On sign up the user is prompted to enter their email address, password, first name, last name, and favorite color from a dropdown menu. They then log in with their email and password after a flash message confirms their successful account creation.
 
@@ -90,17 +90,17 @@ The pin, itinerary table item, and the saved places table item for each saved pl
 
 <gif of pin to itin to sp list>
 
-# About the Emojis
+# <a name="emojis"></a>About the Emojis
 
 All emojis, map pins, and table banners were digitally drawn by me for the Lōkahi app. The standard Lōkahi emojis each represent a category and a piece of my Hawaiian and Japanese culture.
 
 <gif of emojis or grid image>
 
-# Looking Ahead
+# <a name="future"></a>Looking Ahead
 
 Lōkahi is the first full-stack web application I have built and I have lots of features that I am still building as it’s my goal to make it the most powerful collaborative travel planning tool it can be. A "calm mode" is coming for those who don't like the psychedelic style of the site. In the future users will also have the ability to set their own category colors and send their itineraries to people who aren't traveling with them in case they need to keep anyone in the loop about their whereabouts while they are away. There are also new emoji sets for other countries in the works.
 
-# About the Developer
+# <a name="about-mora"></a>About the Developer
 
 I am very passionate about my Hawaiian and Asian heritage and have worked on many projects that celebrate my culture, including a children's book about Hawaiian pa'u riders. I previously worked in customer service for over ten years everywhere from retail, to startups, to working in veterinary medicine.
 
@@ -112,7 +112,7 @@ I am also artistic and passionate about learning animation and how to bridge the
 
 Please [connect with me](https://www.linkedin.com/in/moranapoleon/) on LinkedIn!
 
-# Acknowledgements
+# <a name="acknowledgements"></a>Acknowledgements
 
 <strong>Advisors:</strong>
 <ul>
@@ -134,7 +134,7 @@ Please [connect with me](https://www.linkedin.com/in/moranapoleon/) on LinkedIn!
 <li>Marshall Byrne</li>
 </ul>
 
-# Install Lōkahi
+# <a name="install-lokahi"></a>Install Lōkahi
 
 1. Clone this repository
 [code]
@@ -149,7 +149,7 @@ Please [connect with me](https://www.linkedin.com/in/moranapoleon/) on LinkedIn!
 5. Run the app on localhost:
 [code]
 
-# Licenses
+# <a name="licenses"></a>Licenses
 
 <put license information here>
 
