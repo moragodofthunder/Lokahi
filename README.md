@@ -95,20 +95,20 @@ The pin, itinerary table item, and the saved places table item for each saved pl
 All emojis, map pins, and table banners were digitally drawn by me for the Lōkahi app. The standard Lōkahi emojis each represent a category and a piece of my Hawaiian and Japanese culture.
 
 <span>
-<img src="/static/img/readme-pins/pins-1.png" alt="rainbow-pins-1" width="270">
-<img src="/static/img/readme-pins/pins-2.png" alt="rainbow-pins-2" width="270">
-<img src="/static/img/readme-pins/pins-3.png" alt="rainbow-pins-3" width="270">
+<img src="/static/img/readme-pins/pins-1-min.png" alt="rainbow-pins-1" width="270">
+<img src="/static/img/readme-pins/pins-2-min.png" alt="rainbow-pins-2" width="270">
+<img src="/static/img/readme-pins/pins-3-min.png" alt="rainbow-pins-3" width="270">
 </span>
 <br>
 <span>
-<img src="/static/img/emojis/12-farmers-market-emoji.png" alt="farmers-market-basket" width="270">
-<img src="/static/img/emojis/22-onsen-emoji.png" alt="japanese-onsen" width="270">
-<img src="/static/img/emojis/21-music-emoji.png" alt="hawaiian-man-singing-with-ukulele" width="270">
+<img src="/static/img/emojis/12-farmers-market-emoji-min.png" alt="farmers-market-basket" width="270">
+<img src="/static/img/emojis/22-onsen-emoji-min.png" alt="japanese-onsen" width="270">
+<img src="/static/img/emojis/21-music-emoji-min.png" alt="hawaiian-man-singing-with-ukulele" width="270">
 </span>
 
 The default trip image of a suitcase has a sticker to represent each of my friends, my cohort-mates from Hackbright Academy, my Hackbright Academy teachers, and myself.
 
-<img src="/static/img/cards/suitcase.png" alt="pink-suitcase-covered-in-stickers">
+<img src="/static/img/cards/suitcase-min.png" alt="green-suitcase-covered-in-stickers">
 
 # <a name="future"></a>Looking Ahead
 
@@ -143,10 +143,11 @@ Please [connect with me](https://www.linkedin.com/in/moranapoleon/) on LinkedIn!
 
 <strong>Special Thanks:</strong>
 <ul>
-<li>Zoe Gotch-Strain</li>
 <li>Jen Brissman</li>
+<li>Zoe Gotch-Strain</li>
 <li>Joe Buckley</li>
 <li>Nazan Aktas</li>
+<li>David Dow</li>
 <li>Marshall Byrne</li>
 </ul>
 
