@@ -235,7 +235,7 @@ def create_new_trip():
         trip_lat = api_response_dict['results'][0]['geometry']['location']['lat']
         trip_lng = api_response_dict['results'][0]['geometry']['location']['lng']
     else:
-        return "There was an error with the API"
+        return api_response_dict
 
     trip = crud.create_trip(trip_name, trip_country, trip_city, 
     start_date, end_date, trip_img, trip_lat, trip_lng, session['user_id'])
