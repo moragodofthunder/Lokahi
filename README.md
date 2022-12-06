@@ -10,8 +10,8 @@ by [Mora Napoleon](https://www.linkedin.com/in/moranapoleon/) | <a href="mailto:
 
 # Table of Contents
 <ul>
-<li>[Tech Stack](#tech-stack)</li>
-<li>About Lōkahi</li>
+* [Tech Stack](#tech-stack)
+* [About Lōkahi](#about)
 <li>Features</li>
 <li>About the Emojis</li>
 <li>Looking Ahead</li>
@@ -28,7 +28,7 @@ by [Mora Napoleon](https://www.linkedin.com/in/moranapoleon/) | <a href="mailto:
 <li> <strong>APIs:</strong> Google Maps | Google Geocoding | Google Places | Cloudinary</li>
 </ul>
 
-# About Lōkahi
+# <a name="about"></a>About Lōkahi
 Lōkahi is a collaborative travel planning web app for friends who want to make planning travel together easier. Inspired by the Hawaiian word for "together", Lōkahi (pronounced "loh-KAH-hee") allows users to find places on a map, categorize them by type, and add them to their itinerary without ever having to make a separate spreadsheet. 
 
 When a new trip is created, users are routed to a searchable map of their destination city. When a place is saved, the place pin and itinerary table item display with matching emojis and colors. If a user shares a trip with friends, all users can save places, add to the itinerary, or upload an image for the trip card. 
