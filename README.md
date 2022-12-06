@@ -95,15 +95,15 @@ The pin, itinerary table item, and the saved places table item for each saved pl
 All emojis, map pins, and table banners were digitally drawn by me for the Lōkahi app. The standard Lōkahi emojis each represent a category and a piece of my Hawaiian and Japanese culture.
 
 <span>
-<img src="/static/img/readme-pins/pins-1.png" alt="rainbow-pins-1" width="250">
-<img src="/static/img/readme-pins/pins-2.png" alt="rainbow-pins-2" width="250">
-<img src="/static/img/readme-pins/pins-3.png" alt="rainbow-pins-3" width="250">
+<img src="/static/img/readme-pins/pins-1.png" alt="rainbow-pins-1" width="270">
+<img src="/static/img/readme-pins/pins-2.png" alt="rainbow-pins-2" width="270">
+<img src="/static/img/readme-pins/pins-3.png" alt="rainbow-pins-3" width="270">
 </span>
 <br>
 <span>
-<img src="/static/img/emojis/12-farmers-market-emoji.png" alt="farmers-market-basket" width="250">
-<img src="/static/img/emojis/22-onsen-emoji.png" alt="japanese-onsen" width="250">
-<img src="/static/img/emojis/21-music-emoji.png" alt="hawaiian-man-singing-with-ukulele" width="250">
+<img src="/static/img/emojis/12-farmers-market-emoji.png" alt="farmers-market-basket" width="270">
+<img src="/static/img/emojis/22-onsen-emoji.png" alt="japanese-onsen" width="270">
+<img src="/static/img/emojis/21-music-emoji.png" alt="hawaiian-man-singing-with-ukulele" width="270">
 </span>
 
 The default trip image of a suitcase has a sticker to represent each of my friends, my cohort-mates from Hackbright Academy, my Hackbright Academy teachers, and myself.
@@ -153,24 +153,36 @@ Please [connect with me](https://www.linkedin.com/in/moranapoleon/) on LinkedIn!
 # <a name="install-lokahi"></a>Install Lōkahi
 
 1. Clone this repository
-'''git clone https://github.com/moragodofthunder/Lokahi.git'''
+```
+git clone https://github.com/moragodofthunder/Lokahi.git
+```
 <em>Optional:</em> Create and activate a virtual environment
-'''pip3 install virtualenv
+```
+pip3 install virtualenv
 virtualenv env
-source env/bin/activate'''
+source env/bin/activate
+```
 2. Install dependencies
-'''pip3 install -r requirements.txt'''
+```
+pip3 install -r requirements.txt
+```
 3. Create environmental variables to hold your API keys in a secrets.sh file. You'll need to create your own Google Maps, Google Places, Google Geocoding, and Cloudinary API keys:
-'''export cloud_name="create your own cloudindary name/account"
+```
+export cloud_name="create your own cloudindary name/account"
 export cloud_api_key="once you do this they will provide you a key which you will put here"
 export cloud_api_secret="use your own secret of course, shhh"
-export google_api_key="create your own google account account and enter your key into your own secrets.sh file'''
+export google_api_key="create your own google account account and enter your key into your own secrets.sh file
+```
 4. Create a database & seed sample data:
-'''createdb my_lokahi
-python3 seed_database.py'''
+```
+createdb my_lokahi
+python3 seed_database.py
+```
 5. Run the app on localhost:
-'''source secrets.sh
-python3 lokahi_server.py'''
+```
+source secrets.sh
+python3 lokahi_server.py
+```
 
 # <a name="licenses"></a>Licenses
 
