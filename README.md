@@ -10,7 +10,7 @@ by [Mora Napoleon](https://www.linkedin.com/in/moranapoleon/) | <a href="mailto:
 
 # Table of Contents
 <ul>
-<li>Tech Stack</li>
+<li>[Tech Stack](#tech-stack)</li>
 <li>About Lōkahi</li>
 <li>Features</li>
 <li>About the Emojis</li>
@@ -21,7 +21,7 @@ by [Mora Napoleon](https://www.linkedin.com/in/moranapoleon/) | <a href="mailto:
 <li>Licenses</li>
 </ul>
 
-# Tech Stack
+# <a name="tech-stack"></a>Tech Stack
 <ul>
 <li> <strong>Frontend:</strong> HTML | JavaScript | CSS | Bootstrap</li>
 <li> <strong>Backend:</strong> Python | Flask | Jinja | SQLAlchemy</li>
