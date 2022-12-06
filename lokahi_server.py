@@ -226,7 +226,8 @@ def create_new_trip():
     print(f"THIS IS THE TRIP ADDRESS: {trip_city}, {trip_country}")
 
     address = f"{trip_city}, {trip_country}"
-    api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+    # api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+    api_response = request.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&sensor=true')
     print(f"THIS IS THE API_RESPONSE****{api_response}")
     api_response_dict = api_response.json()
     print(f"THIS IS THE API RESPONSE DICT ++++ {api_response_dict}")
