@@ -95,15 +95,15 @@ The pin, itinerary table item, and the saved places table item for each saved pl
 All emojis, map pins, and table banners were digitally drawn by me for the Lōkahi app. The standard Lōkahi emojis each represent a category and a piece of my Hawaiian and Japanese culture.
 
 <span>
-<img src="/static/img/readme-pins/pins-1.png" alt="rainbow-pins-1">
-<img src="/static/img/readme-pins/pins-2.png" alt="rainbow-pins-2">
-<img src="/static/img/readme-pins/pins-3.png" alt="rainbow-pins-3">
+<img src="/static/img/readme-pins/pins-1.png" alt="rainbow-pins-1" width="400">
+<img src="/static/img/readme-pins/pins-2.png" alt="rainbow-pins-2" width="400">
+<img src="/static/img/readme-pins/pins-3.png" alt="rainbow-pins-3" width="400">
 </span>
 
 <span>
-<img src="/static/img/emojis/12-farmers-market-emoji.png" alt="farmers-market-basket">
-<img src="/static/img/emojis/22-onsen-emoji.png" alt="japanese-onsen">
-<img src="/static/img/emojis/21-music-emoji.png" alt="hawaiian-man-singing-with-ukulele">
+<img src="/static/img/emojis/12-farmers-market-emoji.png" alt="farmers-market-basket" width="400">
+<img src="/static/img/emojis/22-onsen-emoji.png" alt="japanese-onsen" width="400">
+<img src="/static/img/emojis/21-music-emoji.png" alt="hawaiian-man-singing-with-ukulele" width="400">
 </span>
 
 The default trip image of a suitcase has a sticker to represent each of my friends, my cohort-mates from Hackbright Academy, my Hackbright Academy teachers, and myself.
