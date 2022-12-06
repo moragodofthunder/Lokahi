@@ -4,8 +4,8 @@ by [Mora Napoleon](https://www.linkedin.com/in/moranapoleon/) | <a href="mailto:
 
 <span>
 <img src="/static/img/buttons/pins-and-ti.png" alt="Map Pins and Ti Leaves" width="200">
-<img src="/static/img/favicons/tp-icon.png" alt="Map with Magnifying Glass" width="200">
 <img src="/static/img/favicons/Pink-suitcase-with-flowers.png" alt="Suitcase Full of Flowers" width="200">
+<img src="/static/img/favicons/tp-icon.png" alt="Map with Magnifying Glass" width="200">
 </span>
 
 # Table of Contents
