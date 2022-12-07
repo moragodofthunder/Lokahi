@@ -472,18 +472,22 @@ def get_place_info():
         'location' : user_loc[1:-1],
         'keyword' : f"{user_place}",
         'radius' : 50000,
-        'key' : api_key
+        'key' : api_key_2
         }
     headers = {}
 
     response = requests.get(url, params=payload).json()
     print(jsonify(response))
-
+    print("**************************************")
+    
+    print("**************************************")
     #TO SEE ALL JSON OBJECT DATA:
     # return response
 
     place_data = []
-
+    
+    print(response["results"])
+    
     for item in response["results"]:
         if item["business_status"] == "OPERATIONAL":
             new_place_dict = {}
