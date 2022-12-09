@@ -110,6 +110,7 @@ The default trip image of a suitcase has a sticker to represent each of my frien
 
 <img src="/static/img/cards/suitcase-min.png" alt="green-suitcase-covered-in-stickers">
 
+
 # <a name="future"></a>Looking Ahead
 
 Lōkahi is the first full-stack web application I have built and I have lots of features that I am still building as it’s my goal to make it the most powerful collaborative travel planning tool it can be. A "calm mode" is coming for those who don't like the psychedelic style of the site. In the future users will also have the ability to set their own category colors and send their itineraries to people who aren't traveling with them in case they need to keep anyone in the loop about their whereabouts while they are away. There are also new emoji sets for other countries in the works.
