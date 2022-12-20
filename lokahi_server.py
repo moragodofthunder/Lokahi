@@ -478,9 +478,7 @@ def get_place_info():
 
     response = requests.get(url, params=payload).json()
     print(jsonify(response))
-    print("**************************************")
     
-    print("**************************************")
     #TO SEE ALL JSON OBJECT DATA:
     # return response
 
