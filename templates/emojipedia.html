@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Lōkahi Emojipedia{% endblock %}
+
+{% block head %}
+<link href="/static/css/emojipedia.css" rel="stylesheet">
+<style></style>
+{% endblock %}
+
+<!-- NAVBAR -->
+{% include 'navbar.html' %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="row" id="breaky-emoji">
+        <div class="col">
+            <img src="static/img/emojis/1-breakfast-emoji.png" width="200">
+        </div>
+        <div class="col">
+            <p>
+                <b>
+                   Breakfast: SPAM, Eggs, and Rice (with Furikake) 
+                </b> 
+                    The classic breakfast of Hawai’i! My favorite way to have it 
+                    is to add a bunch of ketchup to the rice too.
+            </p>
+        </div>
+    </div>
+
+    <div class="row" id="lunch-emoji">
+        <div class="col">
+            <img src="static/img/emojis/2-lunch-emoji.png" width="200">
+        </div>
+        <div class="col">
+            <p>
+                <b>
+                    Lunch: Saimin/Ramen
+                </b> 
+                    In Hawa’ii we have our own version of ramen that we call “saimin” 
+                    which originates from the 1800s, the sugarcane era. A soft boiled egg 
+                    is more common in ramen in Japan, but it’s a tasty addition I couldn’t leave out.
+            </p>
+        </div>
+    </div>
+
+<!-- END FLUID CONTAINER -->     
+</div>
+
+<!-- JS SCRIPT TAGS -->
+
+{% endblock %}

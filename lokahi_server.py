@@ -757,6 +757,13 @@ def show_contact_page():
 
     return render_template("contact.html")
 
+###-----------------------------EMOJIPEDIA---------------------------###
+@app.route("/emojipedia")
+def show_emojipedia():
+
+    return render_template("emojipedia.html")
+
+
 ###-----------------------------OTHER-STUFF----------------------------###
 
 if __name__ == "__main__":
