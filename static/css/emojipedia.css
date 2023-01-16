@@ -1,0 +1,17 @@
+body {
+    background-image: url("/static/img/backgrounds/about-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;     
+}
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+#emoji {
+    max-width: 200px;
+    max-height: 200px;
+}
