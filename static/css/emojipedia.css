@@ -15,3 +15,18 @@ body {
     max-width: 200px;
     max-height: 200px;
 }
+
+#emoji-card {
+    justify-content: center;
+    align-items: center;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(255, 255, 255, 0.85);
+    border-radius: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
